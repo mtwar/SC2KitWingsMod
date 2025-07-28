@@ -153,7 +153,7 @@ void libWCUI_gf_DisplayTechConsole (trigger lp_exitTrigger) {
     // Implementation
     libWCUI_gv_wU_TechConsoleExitTrigger = lp_exitTrigger;
     libCamp_gf_HideStoryUI(false, false);
-    Kit_UITechPurchase_Show(libWCUI_gt_WU_ConscriptionOnExit);
+    Kit_UITechPurchase_Show(libWCUI_gt_WU_TechConsoleOnExit);
 }
 
 void libWCUI_gf_DisplayMercenaryConsole (trigger lp_exitTrigger) {
