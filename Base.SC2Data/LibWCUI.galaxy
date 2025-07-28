@@ -1925,9 +1925,6 @@ bool libWCUI_gt_WU_ConscriptionOnExit_Func (bool testConds, bool runActions) {
     }
 
     libCamp_gf_HideStoryUI(true, false);
-    if ((libWoLC_gv_wC_InStoryMode == false)) {
-    }
-
     TriggerExecute(libWCUI_gv_wU_ConscriptionExitTrigger, true, false);
     return true;
 }

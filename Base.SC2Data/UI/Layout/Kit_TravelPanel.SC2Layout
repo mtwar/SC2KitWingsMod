@@ -844,7 +844,7 @@
             <Anchor side="Right" relative="$parent/CloseButton" pos="Max" offset="0"/>
             <Width val="280"/>
             <CollapseLayout val="true"/>
-            <Text val="@UI/WoLTravelPanel/Armory"/>
+            <Text val="@UI/WoLTravelPanel/Conscription"/>
             <Shortcut/>
             <Shortcut val="@UI/WoLTravelPanel/ConscriptionHotkey" priority="0"/>
         </Frame>

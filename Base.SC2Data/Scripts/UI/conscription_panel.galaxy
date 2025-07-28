@@ -4,12 +4,11 @@ include "Scripts/UI/ui_h"
 
 static int dialog = -1;
 static int root;
-static trigger UserTrigger;
 
 void Kit_UIConscription_Show(trigger exit_trigger) {
     dialog = DialogCreate(1600, 900, c_anchorCenter, 0, 0, true);
     DialogSetImageVisible(dialog, false);
-    DialogSetFullscreen(dialog, false);
+    DialogSetFullscreen(dialog, true);
     DialogSetVisible(dialog, PlayerGroupAll(), true);
     
     root = DialogControlCreateFromTemplate(dialog, c_triggerControlTypePanel, "Kit_Conscription/Test");
@@ -17,5 +16,4 @@ void Kit_UIConscription_Show(trigger exit_trigger) {
 
 void Kit_UIConscription_Hide() {
     DialogSetVisible(dialog, PlayerGroupAll(), false);
-    TriggerExecute(UserTrigger, true, true);
 }
