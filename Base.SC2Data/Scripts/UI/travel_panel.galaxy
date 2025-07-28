@@ -48,6 +48,7 @@ static int all_in_pulldown;
 static int launch_button;
 static int close_button;
 
+static int archives_conscription_button;
 static int archives_armory_button;
 static int archives_lab_button;
 static int archives_merc_button;
@@ -68,6 +69,7 @@ static trigger CloseButtonClicked = TriggerCreate("Kit_UITravel_CloseButtonClick
 static trigger LaunchButtonClicked = TriggerCreate("Kit_UITravel_LaunchButtonClicked");
 
 static trigger ArchivesReturn = TriggerCreate("Kit_UITravel_ArchivesReturn");
+static trigger ArchivesConscriptionClicked = TriggerCreate("Kit_UITravel_ArchivesConscriptionClicked");
 static trigger ArchivesArmoryClicked = TriggerCreate("Kit_UITravel_ArchivesArmoryClicked");
 static trigger ArchivesLabClicked = TriggerCreate("Kit_UITravel_ArchivesLabClicked");
 static trigger ArchivesMercClicked = TriggerCreate("Kit_UITravel_ArchivesMercClicked");
@@ -99,6 +101,9 @@ static void Create() {
 
     launch_button = DialogControlHookup(root, c_triggerControlTypeButton, "LaunchButton");
     TriggerAddEventDialogControl(LaunchButtonClicked, 1, launch_button, c_triggerControlEventTypeClick);
+
+    archives_conscription_button = DialogControlHookup(root, c_triggerControlTypeButton, "ArchivesConscriptionButton");
+    TriggerAddEventDialogControl(ArchivesConscriptionClicked, 1, archives_conscription_button, c_triggerControlEventTypeClick);
 
     archives_armory_button = DialogControlHookup(root, c_triggerControlTypeButton, "ArchivesArmoryButton");
     TriggerAddEventDialogControl(ArchivesArmoryClicked, 1, archives_armory_button, c_triggerControlEventTypeClick);
@@ -324,10 +329,12 @@ static void UpdateSelectedPlanet() {
 
     // Archive
     if (libWoLC_gf_StoryInSimulation() && (location != "MarSara")) {
+        DialogControlSetVisible(archives_conscription_button, PlayerGroupAll(), true);
         DialogControlSetVisible(archives_armory_button, PlayerGroupAll(), true);
         DialogControlSetVisible(archives_lab_button, PlayerGroupAll(), true);
         DialogControlSetVisible(archives_merc_button, PlayerGroupAll(), libWoLC_gf_NumberOfMissions(libWoLC_ge_MissionCountOptions_Completed) >= 4);
     } else {
+        DialogControlSetVisible(archives_conscription_button, PlayerGroupAll(), false);
         DialogControlSetVisible(archives_armory_button, PlayerGroupAll(), false);
         DialogControlSetVisible(archives_lab_button, PlayerGroupAll(), false);
         DialogControlSetVisible(archives_merc_button, PlayerGroupAll(), false);
@@ -600,6 +607,19 @@ bool Kit_UITravel_ArchivesReturn(bool check, bool run) {
     if (!run) { return true; }
 
     DialogSetVisible(dialog, PlayerGroupAll(), true);
+
+    return true;
+}
+
+bool Kit_UITravel_ArchivesConscriptionClicked(bool check, bool run) {
+    if (check && !libWoLC_gf_StoryInSimulation()) {
+        return false;
+    }
+
+    if (!run) { return true; }
+
+    DialogSetVisible(dialog, PlayerGroupAll(), false);
+    Kit_UIConscription_Show(ArchivesReturn);
 
     return true;
 }

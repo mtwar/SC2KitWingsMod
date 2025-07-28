@@ -19,4 +19,5 @@
     <Include path="UI/Layout/Kit_ScoreScreenProtoss.SC2Layout"/>
     <Include path="UI/Layout/Kit_DamageStat.SC2Layout"/>
     <Include path="UI/Layout/Kit_TechTreePanel.SC2Layout"/>
+    <Include path="UI/Layout/Kit_Conscription.SC2Layout"/>
 </Desc>

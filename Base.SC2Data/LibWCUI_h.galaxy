@@ -37,6 +37,7 @@ const fixed libWCUI_gv_pUC_HealthWatchThreshold = 0.3;
 const string libWCUI_gv_wUC_VictoryEventClosed = "WUC_VictoryEventClosed";
 
 // Variable Declarations
+trigger libWCUI_gv_wU_ConscriptionExitTrigger;
 trigger libWCUI_gv_wU_TechConsoleExitTrigger;
 trigger libWCUI_gv_wU_MercenaryConsoleExitTrigger;
 trigger libWCUI_gv_wU_ResearchConsoleExitTrigger;
@@ -123,6 +124,7 @@ int libWCUI_gv_wU_CounterWindowTitle;
 int libWCUI_gv_wU_CounterWindowValue;
 
 // Function Declarations
+void libWCUI_gf_DisplayConscription (trigger lp_exitTrigger);
 void libWCUI_gf_DisplayTechConsole (trigger lp_exitTrigger);
 void libWCUI_gf_DisplayMercenaryConsole (trigger lp_exitTrigger);
 void libWCUI_gf_DisplayResearchConsole (trigger lp_exitTrigger);
@@ -211,6 +213,7 @@ void libWCUI_gf_WU_VictoryClosed (trigger t);
 color libWCUI_gf_ProgressColor (int lp_minValue, int lp_maxValue, int lp_progress, color lp_color1, color lp_color2, color lp_color3, int lp_steps);
 
 // Trigger Declarations
+trigger libWCUI_gt_WU_ConscriptionOnExit;
 trigger libWCUI_gt_WU_TechConsoleOnExit;
 trigger libWCUI_gt_WU_MercenaryOnExit;
 trigger libWCUI_gt_WU_ResearchOnExit;

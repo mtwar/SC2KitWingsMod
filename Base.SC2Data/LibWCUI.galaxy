@@ -100,6 +100,11 @@ void libWCUI_InitVariables () {
 include "Scripts/UI/utils"
 
 //--------------------------------------------------------------------------------------------------
+// Custom Script: WU_ConscriptionGalaxy
+//--------------------------------------------------------------------------------------------------
+include "Scripts/UI/conscription_panel.galaxy"
+
+//--------------------------------------------------------------------------------------------------
 // Custom Script: WU_TechConsoleGalaxy
 //--------------------------------------------------------------------------------------------------
 include "Scripts/UI/tech_purchase_panel.galaxy"
@@ -135,12 +140,20 @@ void libWCUI_InitCustomScript () {
 
 // Presets
 // Functions
+void libWCUI_gf_DisplayConscription (trigger lp_exitTrigger) {
+    // Automatic Variable Declarations
+    // Implementation
+    libWCUI_gv_wU_ConscriptionExitTrigger = lp_exitTrigger;
+    libCamp_gf_HideStoryUI(false, false);
+    Kit_UIConscription_Show(libWCUI_gt_WU_ConscriptionOnExit);
+}
+
 void libWCUI_gf_DisplayTechConsole (trigger lp_exitTrigger) {
     // Automatic Variable Declarations
     // Implementation
     libWCUI_gv_wU_TechConsoleExitTrigger = lp_exitTrigger;
     libCamp_gf_HideStoryUI(false, false);
-    Kit_UITechPurchase_Show(libWCUI_gt_WU_TechConsoleOnExit);
+    Kit_UITechPurchase_Show(libWCUI_gt_WU_ConscriptionOnExit);
 }
 
 void libWCUI_gf_DisplayMercenaryConsole (trigger lp_exitTrigger) {
@@ -1902,6 +1915,29 @@ color libWCUI_gf_ProgressColor (int lp_minValue, int lp_maxValue, int lp_progres
 
 // Triggers
 //--------------------------------------------------------------------------------------------------
+// Trigger: WU_ConscriptionOnExit
+//--------------------------------------------------------------------------------------------------
+bool libWCUI_gt_WU_ConscriptionOnExit_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libCamp_gf_HideStoryUI(true, false);
+    if ((libWoLC_gv_wC_InStoryMode == false)) {
+    }
+
+    TriggerExecute(libWCUI_gv_wU_ConscriptionExitTrigger, true, false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libWCUI_gt_WU_ConscriptionOnExit_Init () {
+    libWCUI_gt_WU_ConscriptionOnExit = TriggerCreate("libWCUI_gt_WU_ConscriptionOnExit_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
 // Trigger: WU_TechConsoleOnExit
 //--------------------------------------------------------------------------------------------------
 bool libWCUI_gt_WU_TechConsoleOnExit_Func (bool testConds, bool runActions) {
@@ -2965,6 +3001,7 @@ void libWCUI_gt_WU_TimerWindowLoadUpdate_Init () {
 }
 
 void libWCUI_InitTriggers () {
+    libWCUI_gt_WU_ConscriptionOnExit_Init();
     libWCUI_gt_WU_TechConsoleOnExit_Init();
     libWCUI_gt_WU_MercenaryOnExit_Init();
     libWCUI_gt_WU_ResearchOnExit_Init();

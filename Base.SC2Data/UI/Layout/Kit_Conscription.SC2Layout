@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Desc>
+    <Frame type="Frame" name="Test">
+        <Frame type="AlertPanel" name="HelloGGG" template="AlertPanel/AlertPanelTemplate">
+            <Anchor side="Bottom" relative="$parent/Button" pos="Max" offset="-35"/>
+            <Anchor side="Left" relative="$parent/Button" pos="Min" offset="15"/>
+            <Anchor side="Right" relative="$parent/Button" pos="Max" offset="-15"/>            
+            <Text val="@UI/ConscriptionHelloWorld"/>
+        </Frame>
+    </Frame>
+</Desc>
