@@ -840,7 +840,7 @@
         </Frame>
 
         <Frame type="Button" name="ArchivesConscriptionButton" template="Kit_Templates/NavButtonTemplate">
-            <Anchor side="Top" relative="$parent/CloseButton" pos="Min" offset="-300"/>
+            <Anchor side="Top" relative="$parent/CloseButton" pos="Min" offset="-310"/>
             <Anchor side="Right" relative="$parent/CloseButton" pos="Max" offset="0"/>
             <Width val="280"/>
             <CollapseLayout val="true"/>
