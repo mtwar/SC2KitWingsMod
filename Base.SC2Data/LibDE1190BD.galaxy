@@ -842,7 +842,7 @@ bool libDE1190BD_gt_Raven_Func (bool testConds, bool runActions) {
         for (;; auto641B5307_u -= 1) {
             auto641B5307_var = UnitGroupUnitFromEnd(auto641B5307_g, auto641B5307_u);
             if (auto641B5307_var == null) { break; }
-            if ((UnitGetOwner(auto641B5307_var) != 1) && (UnitGroupCount(UnitGroupAlliance(UnitGetOwner(auto641B5307_var), c_unitAllianceEnemy, RegionCircle(UnitGetPosition(auto641B5307_var), 8.0), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0), c_unitCountAlive) > 2)) {
+            if ((UnitGetOwner(auto641B5307_var) != 1) && (UnitGroupCount(UnitGroupAlliance(UnitGetOwner(auto641B5307_var), c_unitAllianceEnemy, RegionCircle(UnitGetPosition(auto641B5307_var), 8.0), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0), c_unitCountAlive) > 1)) {
                 libDE1190BD_gf_SingleTarget(auto641B5307_var, AbilityCommand("SeekerMissile", 0), c_unitPropLife, 45, 8);
                 UnitIssueOrder(auto641B5307_var, OrderTargetingPoint(AbilityCommand("BuildAutoTurret", 0), libNtve_gf_PointOffsetTowardsPoint(UnitGetPosition(auto641B5307_var), 1.5, UnitGetPosition(UnitGroupRandomUnit(UnitGroupAlliance(UnitGetOwner(auto641B5307_var), c_unitAllianceEnemy, RegionCircle(UnitGetPosition(auto641B5307_var), 8.0), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0), c_unitCountAlive)))), c_orderQueueAddToFront);
             }
