@@ -7254,6 +7254,7 @@ Param/Value/lib_Camp_E15C703B=Researching Hive Mind Emulator will prevent you fr
 Param/Value/lib_Camp_E2496935=Horner05s simulation before completion is true
 Param/Value/lib_Camp_F5EEF511=Change Ambience = 
 Param/Value/lib_Camp_F6EDE668=<s val="Kicker_Minerals">+
+Param/Value/lib_DE1190BD_363FDA0D=<c val="00FF00">Nightmare Difficulty:</c> <c val="FF0000">Detected difficulty lower than Nightmare. Expect drastic difficulty spikes.</c>
 Param/Value/lib_WCMI_075E5731=<c val="FFFFFF">Warp in additional <c val="FF9800">Pylon</c>s to increase your supply.</c><n/><n/>Supply allows you to create more units.
 Param/Value/lib_WCMI_1142C38C=<s val="Swarm_RegularExtendedMedium1">Order a <c val="0088FF">Probe</c> to warp in a <c val="0088FF">Pylon</c> to increase your supply.</s>
 Param/Value/lib_WCMI_155B4F02=Ambush
@@ -7365,6 +7366,7 @@ Terrain/Name/Kit@Redstone=Kit@Redstone
 UI/ArchivePlayCinematic=<h/>PLAY CINEMATIC
 UI/ArchivePlayMission=<h/>REPLAY
 UI/Building=Building
+UI/ConscriptionHelloWorld=Hello World!
 UI/MercenaryPanelNoSelection=Select a Mercenary
 UI/Reset_Control=<h/>RESET
 UI/TeamColor01=Red
@@ -7377,9 +7379,8 @@ UI/TeamColor13=Dark Blue
 UI/TeamColor14=Dark Red
 UI/TeamColor15=Magenta
 UI/TeamColor16=Mengsk
-UI/ConscriptionHelloWorld=Hello World!
-UI/WoLTravelPanel/Conscription=<h/>CONSCRIPTION
 UI/WoLTravelPanel/Armory=<h/>ARMORY
+UI/WoLTravelPanel/Conscription=<h/>CONSCRIPTION
 UI/WoLTravelPanel/Laboratory=LABO<h/>RATORY
 UI/WoLTravelPanel/Mercenary=M<h/>ERCENARY
 Unit/Name/Kit@InfernalFlameThrowerWeapon=Infernal Flame Thrower Weapon
