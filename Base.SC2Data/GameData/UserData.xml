@@ -4,14 +4,18 @@
         <Fields Id="Value" Type="Int" EditorColumn="2"/>
         <Instances Id="[Default]"/>
         <Instances Id="StartCredits"/>
-        <Instances Id="ResearchStartPointProt"/>
+        <Instances Id="ResearchStartPointProt">
+            <Int Int="1">
+                <Field Id="Value"/>
+            </Int>
+        </Instances>
         <Instances Id="ResearchStartPointZerg">
             <Int Int="3">
                 <Field Id="Value"/>
             </Int>
         </Instances>
         <Instances Id="ResearchCap">
-            <Int Int="25">
+            <Int Int="30">
                 <Field Id="Value"/>
             </Int>
         </Instances>
@@ -3723,6 +3727,9 @@
             <Image Image="Assets\Textures\ui_list_battlereports_traynor01.dds">
                 <Field Id="ArchivesIcon"/>
             </Image>
+            <Int Int="20000">
+                <Field Id="RewardCredits"/>
+            </Int>
         </Instances>
         <Instances Id="TRaynor02">
             <GameLink GameLink="TRaynor02_1">
@@ -4363,7 +4370,23 @@
             </Text>
         </Instances>
         <Instances Id="TRaynor01_3">
+            <Int Int="2500">
+                <Field Id="RewardCreditsEach"/>
+            </Int>
             <Text Text="UserData/MissionObjective/TRaynor01_3_Name">
+                <Field Id="Name"/>
+            </Text>
+        </Instances>
+        <Instances Id="TRaynor01_4">
+            <Int Int="2">
+                <Field Id="RewardProtossFinal"/>
+            </Int>
+            <Text Text="UserData/MissionObjective/TRaynor01_4_Name">
+                <Field Id="Name"/>
+            </Text>
+        </Instances>
+        <Instances Id="TRaynor01_5">
+            <Text Text="UserData/MissionObjective/TRaynor01_5_Name">
                 <Field Id="Name"/>
             </Text>
         </Instances>

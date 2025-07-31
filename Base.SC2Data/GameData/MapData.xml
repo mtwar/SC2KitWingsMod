@@ -16,14 +16,16 @@
         <Kind value="Story"/>
     </CMap>
     <CMap id="TRaynor01">
+        <ContactNameText value="Maps/Contact/Adjutant"/>
+        <ContactModelLink value="AdjutantPortrait_L"/>
+        <LoadingImage value="Assets\Textures\loading-marsara.dds"/>
         <ArmyCategory value="Marine"/>
+        <Location value="MarSara"/>
         <ObjectiveArray value="TRaynor01_1"/>
         <ObjectiveArray value="TRaynor01_2"/>
         <ObjectiveArray value="TRaynor01_3"/>
-        <Location value="MarSara"/>
-        <ContactModelLink value="AdjutantPortrait_L"/>
-        <ContactNameText value="Maps/Contact/Adjutant"/>
-        <LoadingImage value="Assets\Textures\loading-marsara.dds"/>
+        <ObjectiveArray value="TRaynor01_4"/>
+        <ObjectiveArray value="TRaynor01_5"/>
     </CMap>
     <CMap id="TRaynor02">
         <ArmyCategory value="Medic"/>

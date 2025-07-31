@@ -5,8 +5,16 @@
         <UserReference value="MissionObjective;##id##"/>
         <Type value="Primary"/>
     </CObjective>
-    <CObjective id="TRaynor01_1"/>
+    <CObjective id="TRaynor01_1">
+        <RequiredCount value="1"/>
+    </CObjective>
     <CObjective id="TRaynor01_2"/>
+    <CObjective id="TRaynor01_4">
+        <Type value="Optional"/>
+    </CObjective>
+    <CObjective id="TRaynor01_5">
+        <Type value="Optional"/>
+    </CObjective>
     <CObjective id="TRaynor01_3">
         <Type value="Optional"/>
         <RequiredCount value="6"/>
