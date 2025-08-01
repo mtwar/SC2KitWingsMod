@@ -295,8 +295,6 @@
         <Instances Id="Valerian01DebriefingDone"/>
         <Instances Id="FirstMissionMercBought"/>
         <Instances Id="FirstMissionLabResearchObjective"/>
-        <Instances Id="ConscriptionOpened"/>
-        <Instances Id="ConscriptionVisited"/>
         <Instances Id="ArmoryOpened"/>
         <Instances Id="ArmoryVisited"/>
         <Instances Id="CantinaOpened"/>
