@@ -6693,7 +6693,7 @@
             </Image>
         </Instances>
     </CUser>
-    <CUser id="UnitConscription">
+    <CUser id="Conscription">
         <Fields Id="UnlockMission" Type="Int"/>
         <Fields Id="Cost" Type="Int"/>
         <Fields Id="Purchased" Type="Int">

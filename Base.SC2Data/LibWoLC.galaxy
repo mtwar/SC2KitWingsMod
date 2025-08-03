@@ -2475,6 +2475,142 @@ void libWoLC_gf_WC_FadeAllSoundsExceptMusic (fixed lp_duration, bool lp_wait) {
 
 }
 
+string libWoLC_gf_GetConscriptionEntryForUnit (string lp_unitType) {
+    // Variable Declarations
+    string lv_unitConscriptionData;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Implementation
+    return null;
+}
+
+string libWoLC_gf_EnableUnit (string lp_unitType) {
+    // Variable Declarations
+    string lv_unitConscriptionData;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Implementation
+    return "";
+}
+
+string libWoLC_gf_DisableUnit (string lp_unitType) {
+    // Automatic Variable Declarations
+    // Implementation
+    return "";
+}
+
+string libWoLC_gf_PurchaseUnit (string lp_unitType) {
+    // Automatic Variable Declarations
+    // Implementation
+    return "";
+}
+
+string libWoLC_gf_RefundUnit (string lp_unitType) {
+    // Automatic Variable Declarations
+    // Implementation
+    return "";
+}
+
+string libWoLC_gf_ExecuteConscriptionAction (int lp_actionType, string lp_unitType) {
+    // Variable Declarations
+    string lv_errorString;
+
+    // Automatic Variable Declarations
+    int auto979691FF_val;
+
+    // Variable Initialization
+    lv_errorString = "";
+
+    // Implementation
+    auto979691FF_val = lp_actionType;
+    if (auto979691FF_val == libWoLC_ge_ConscriptionActionType_EnableUnit) {
+        lv_errorString = libWoLC_gf_EnableUnit(lp_unitType);
+    }
+    else if (auto979691FF_val == libWoLC_ge_ConscriptionActionType_DisableUnit) {
+        lv_errorString = libWoLC_gf_DisableUnit(lp_unitType);
+    }
+    else if (auto979691FF_val == libWoLC_ge_ConscriptionActionType_PurchaseUnit) {
+        lv_errorString = libWoLC_gf_PurchaseUnit(lp_unitType);
+    }
+    else if (auto979691FF_val == libWoLC_ge_ConscriptionActionType_RefundUnit) {
+        lv_errorString = libWoLC_gf_RefundUnit(lp_unitType);
+    }
+    else {
+        return "action type not implemented";
+    }
+    return lv_errorString;
+}
+
+int libWoLC_gf_ParseConscriptionActionType (string lp_actionTypeName) {
+    // Automatic Variable Declarations
+    string auto130814E7_val;
+
+    // Implementation
+    auto130814E7_val = StringCase(lp_actionTypeName, false);
+    if (auto130814E7_val == "enable") {
+        return libWoLC_ge_ConscriptionActionType_EnableUnit;
+    }
+    else if (auto130814E7_val == "disable") {
+        return libWoLC_ge_ConscriptionActionType_DisableUnit;
+    }
+    else if (auto130814E7_val == "purchase") {
+        return libWoLC_ge_ConscriptionActionType_PurchaseUnit;
+    }
+    else if (auto130814E7_val == "refund") {
+        return libWoLC_ge_ConscriptionActionType_RefundUnit;
+    }
+    else {
+        return libWoLC_ge_ConscriptionActionType_None;
+    }
+}
+
+string libWoLC_gf_ParseUnitType (string lp_unitTypeName) {
+    // Variable Declarations
+    string lv_unitType;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Implementation
+    if ((StringEqual(lp_unitTypeName, "", c_stringNoCase) == true)) {
+        return null;
+    }
+    else {
+        lv_unitType = UnitTypeFromString(lp_unitTypeName);
+    }
+    if (((lv_unitType == null) || (lv_unitType == ""))) {
+        return null;
+    }
+
+    return lv_unitType;
+}
+
+string libWoLC_gf_ExecuteConscriptionActionString (string lp_actionTypeName, string lp_unitTypeName) {
+    // Variable Declarations
+    int lv_actionType;
+    string lv_unitType;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Implementation
+    lv_actionType = libWoLC_gf_ParseConscriptionActionType(lp_actionTypeName);
+    if ((lv_actionType == libWoLC_ge_ConscriptionActionType_None)) {
+        return "invalid action type name";
+    }
+
+    lv_unitType = libWoLC_gf_ParseUnitType(lp_unitTypeName);
+    if ((lv_unitType == null)) {
+        return "invalid unit type name";
+    }
+
+    return libWoLC_gf_ExecuteConscriptionAction(lv_actionType, lv_unitType);
+}
+
 bool libWoLC_gf_CampaignMercenaryStateCheck (string lp_mercenary, string lp_state) {
     // Automatic Variable Declarations
     // Implementation
