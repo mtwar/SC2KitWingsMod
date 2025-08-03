@@ -9238,6 +9238,7 @@ User/Name/TechGroup=Campaign Tech Group
 User/Name/TechUnit=Campaign Tech Unit
 User/Name/TechUpgrade=Campaign Tech Upgrade
 User/Name/Timestamps=Scene Timestamps
+User/Name/UnitConscription=Unit Conscription
 Validator/EditorPrefix/Kit@CasterNotMarauderStimmed=Kit@
 Validator/EditorPrefix/Kit@CasterNotMarineStimmed=Kit@
 Validator/EditorPrefix/Kit@HasFortifiedCarapaceNoConstruction=Kit@

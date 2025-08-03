@@ -6693,4 +6693,68 @@
             </Image>
         </Instances>
     </CUser>
+    <CUser id="UnitConscription">
+        <Fields Id="UnlockMission" Type="Int"/>
+        <Fields Id="Cost" Type="Int"/>
+        <Fields Id="Purchased" Type="Int">
+            <Flags index="Modifiable" value="1"/>
+        </Fields>
+        <Fields Id="Unit" Type="Unit"/>
+        <Instances Id="[Default]"/>
+        <Instances Id="Marine">
+            <Int Int="1">
+                <Field Id="Purchased"/>
+            </Int>
+            <Int Int="1">
+                <Field Id="UnlockMission"/>
+            </Int>
+            <Unit Unit="Marine">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="Medic">
+            <Int Int="30000">
+                <Field Id="Cost"/>
+            </Int>
+            <Int Int="1">
+                <Field Id="UnlockMission"/>
+            </Int>
+            <Unit Unit="Medic">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="Vulture">
+            <Int Int="25000">
+                <Field Id="Cost"/>
+            </Int>
+            <Int Int="1">
+                <Field Id="UnlockMission"/>
+            </Int>
+            <Unit Unit="Vulture">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="Firebat">
+            <Int Int="30000">
+                <Field Id="Cost"/>
+            </Int>
+            <Int Int="2">
+                <Field Id="UnlockMission"/>
+            </Int>
+            <Unit Unit="Firebat">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+        <Instances Id="Hellion">
+            <Int Int="30000">
+                <Field Id="Cost"/>
+            </Int>
+            <Int Int="2">
+                <Field Id="UnlockMission"/>
+            </Int>
+            <Unit Unit="Hellion">
+                <Field Id="Unit"/>
+            </Unit>
+        </Instances>
+    </CUser>
 </Catalog>
