@@ -2475,6 +2475,17 @@ void libWoLC_gf_WC_FadeAllSoundsExceptMusic (fixed lp_duration, bool lp_wait) {
 
 }
 
+string libWoLC_gf_GetConscriptionEntryForUnit2 (string lp_unitType) {
+    // Variable Declarations
+    string lv_unitConscriptionData;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Implementation
+    return null;
+}
+
 string libWoLC_gf_GetConscriptionEntryForUnit (string lp_unitType) {
     // Variable Declarations
     string lv_unitConscriptionData;

@@ -6696,14 +6696,14 @@
     <CUser id="Conscription">
         <Fields Id="UnlockMission" Type="Int"/>
         <Fields Id="Cost" Type="Int"/>
-        <Fields Id="Purchased" Type="Int">
+        <Fields Id="Enabled" Type="Int">
             <Flags index="Modifiable" value="1"/>
         </Fields>
         <Fields Id="Unit" Type="Unit"/>
         <Instances Id="[Default]"/>
         <Instances Id="Marine">
             <Int Int="1">
-                <Field Id="Purchased"/>
+                <Field Id="Enabled"/>
             </Int>
             <Int Int="1">
                 <Field Id="UnlockMission"/>
