@@ -7327,6 +7327,7 @@ Param/Value/lib_WCUI_F2711687=Select All Armies (F2)
 Param/Value/lib_WCUI_FB61F536=Warning: Only one Bar may be created per Unit. Original bar has been deleted.
 Param/Value/lib_WoLC_07D42BE8=Enable
 Param/Value/lib_WoLC_0DC23CE3=Load bank data
+Param/Value/lib_WoLC_0E2A86B6=Army Category link missing
 Param/Value/lib_WoLC_0E47903F=Return <h/>to Hyperion
 Param/Value/lib_WoLC_156DB19D=Unlock
 Param/Value/lib_WoLC_1AEBEC50=<c val="ff0000">No Footage Recording callback is registered. Please call trigger action "Register Record Footage" in your map's Map Initialization trigger.</c>

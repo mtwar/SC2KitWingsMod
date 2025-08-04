@@ -6697,11 +6697,15 @@
         <Fields Id="Name" Type="String"/>
         <Fields Id="UnlockWithConscription" Type="Int"/>
         <Fields Id="Price" Type="Int"/>
-        <Fields Id="ConscriptionEnabled" Type="Int">
+        <Fields Id="State" Type="Int">
             <Flags index="Modifiable" value="1"/>
         </Fields>
         <Instances Id="[Default]"/>
-        <Instances Id="Marine"/>
+        <Instances Id="Marine">
+            <Int Int="2">
+                <Field Id="State"/>
+            </Int>
+        </Instances>
         <Instances Id="Medic">
             <Int Int="30000">
                 <Field Id="Price"/>

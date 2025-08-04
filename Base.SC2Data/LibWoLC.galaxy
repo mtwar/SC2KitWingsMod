@@ -2499,6 +2499,53 @@ string libWoLC_gf_ConscriptionCheatHandler (string lp_inputWords) {
     return libWoLC_gf_ExecuteConscriptionActionString(lv_actionTypeName, lv_unitTypeName);
 }
 
+void libWoLC_gf_SetConscriptionStateBank (string lp_conscription, int lp_state) {
+    // Variable Declarations
+    string lv_armyCategory;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_armyCategory = UserDataGetGameLink("Conscription", lp_conscription, "ArmyCategory", 1);
+
+    // Implementation
+    UserDataSetInt("Conscription", lp_conscription, "State", 1, (lp_state));
+    if ((lv_armyCategory == null)) {
+        TriggerDebugOutput(1, StringExternal("Param/Value/lib_WoLC_0E2A86B6"), true);
+    }
+
+    if ((lp_state == libWoLC_ge_ConscriptionUnitState_Purchased)) {
+        libWoLC_gf_EnableCampaignTechUnit(true, libWoLC_gf_WC_TechUnitOfArmyCategory(lv_armyCategory), 1);
+        libWoLC_gf_WC_SetArmyCategoryState(lv_armyCategory, c_armyCategoryStateUnlocked);
+    }
+    else {
+        libWoLC_gf_EnableCampaignTechUnit(false, libWoLC_gf_WC_TechUnitOfArmyCategory(lv_armyCategory), 1);
+        libWoLC_gf_WC_SetArmyCategoryState(lv_armyCategory, c_armyCategoryStateLocked);
+    }
+}
+
+string libWoLC_gf_SetConscriptionState (unit lp_unit, int lp_state) {
+    // Variable Declarations
+    string lv_indexConscription;
+
+    // Automatic Variable Declarations
+    int autoB59F93B0_ai;
+    int autoB59F93B0_ae;
+
+    // Variable Initialization
+
+    // Implementation
+    autoB59F93B0_ai = 1;
+    autoB59F93B0_ae = UserDataInstanceCount("Conscription")+1;
+    while (autoB59F93B0_ai < autoB59F93B0_ae) {
+        lv_indexConscription = UserDataInstance("Conscription", autoB59F93B0_ai);
+        autoB59F93B0_ai = autoB59F93B0_ai+1;
+        if (true) {
+        }
+
+    }
+    return "";
+}
+
 int libWoLC_gf_ParseConscriptionActionType (string lp_actionTypeName) {
     // Automatic Variable Declarations
     string auto130814E7_val;
@@ -2573,13 +2620,8 @@ string libWoLC_gf_ExecuteConscriptionAction (int lp_actionType, string lp_unitTy
     }
 }
 
-string libWoLC_gf_EnableUnit (string lp_unitType) {
-    // Variable Declarations
-    string lv_unitConscriptionData;
-
+string libWoLC_gf_EnableUnit (string lp_unit) {
     // Automatic Variable Declarations
-    // Variable Initialization
-
     // Implementation
     return "";
 }
