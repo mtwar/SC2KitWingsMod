@@ -6694,67 +6694,57 @@
         </Instances>
     </CUser>
     <CUser id="Conscription">
-        <Fields Id="UnlockMission" Type="Int"/>
-        <Fields Id="Cost" Type="Int"/>
-        <Fields Id="Enabled" Type="Int">
+        <Fields Id="Name" Type="String"/>
+        <Fields Id="UnlockWithConscription" Type="Int"/>
+        <Fields Id="Price" Type="Int"/>
+        <Fields Id="ConscriptionEnabled" Type="Int">
             <Flags index="Modifiable" value="1"/>
         </Fields>
-        <Fields Id="Unit" Type="Unit"/>
         <Instances Id="[Default]"/>
-        <Instances Id="Marine">
-            <Int Int="1">
-                <Field Id="Enabled"/>
-            </Int>
-            <Int Int="1">
-                <Field Id="UnlockMission"/>
-            </Int>
-            <Unit Unit="Marine">
-                <Field Id="Unit"/>
-            </Unit>
-        </Instances>
+        <Instances Id="Marine"/>
         <Instances Id="Medic">
             <Int Int="30000">
-                <Field Id="Cost"/>
+                <Field Id="Price"/>
             </Int>
             <Int Int="1">
-                <Field Id="UnlockMission"/>
+                <Field Id="UnlockWithConscription"/>
             </Int>
-            <Unit Unit="Medic">
-                <Field Id="Unit"/>
-            </Unit>
+            <String String="Medic">
+                <Field Id="Name"/>
+            </String>
         </Instances>
         <Instances Id="Vulture">
             <Int Int="25000">
-                <Field Id="Cost"/>
+                <Field Id="Price"/>
             </Int>
             <Int Int="1">
-                <Field Id="UnlockMission"/>
+                <Field Id="UnlockWithConscription"/>
             </Int>
-            <Unit Unit="Vulture">
-                <Field Id="Unit"/>
-            </Unit>
+            <String String="Vulture">
+                <Field Id="Name"/>
+            </String>
         </Instances>
         <Instances Id="Firebat">
             <Int Int="30000">
-                <Field Id="Cost"/>
+                <Field Id="Price"/>
             </Int>
-            <Int Int="2">
-                <Field Id="UnlockMission"/>
+            <Int Int="1">
+                <Field Id="UnlockWithConscription"/>
             </Int>
-            <Unit Unit="Firebat">
-                <Field Id="Unit"/>
-            </Unit>
+            <String String="Firebat">
+                <Field Id="Name"/>
+            </String>
         </Instances>
         <Instances Id="Hellion">
             <Int Int="30000">
-                <Field Id="Cost"/>
+                <Field Id="Price"/>
             </Int>
-            <Int Int="2">
-                <Field Id="UnlockMission"/>
+            <Int Int="1">
+                <Field Id="UnlockWithConscription"/>
             </Int>
-            <Unit Unit="Hellion">
-                <Field Id="Unit"/>
-            </Unit>
+            <String String="Hellion">
+                <Field Id="Name"/>
+            </String>
         </Instances>
     </CUser>
 </Catalog>
