@@ -279,7 +279,7 @@ void libWoLC_gf_CampaignPlayCutscene2 (string lp_file, bool lp_waitDontWait, boo
 void libWoLC_gf_CampaignStopCutscene ();
 void libWoLC_gf_PlayCinematic (string lp_scene, bool lp_animatic);
 void libWoLC_gf_WC_FadeAllSoundsExceptMusic (fixed lp_duration, bool lp_wait);
-string libWoLC_gf_GetConscriptionEntryForUnit2 (string lp_unitType);
+string libWoLC_gf_GetConscriptionEntries (string lp_unitType);
 string libWoLC_gf_GetConscriptionEntryForUnit (string lp_unitType);
 string libWoLC_gf_EnableUnit (string lp_unitType);
 string libWoLC_gf_DisableUnit (string lp_unitType);
