@@ -2557,21 +2557,20 @@ string libWoLC_gf_ExecuteConscriptionAction (int lp_actionType, string lp_unitTy
     // Implementation
     auto979691FF_val = lp_actionType;
     if (auto979691FF_val == libWoLC_ge_ConscriptionActionType_EnableUnit) {
-        lv_errorString = libWoLC_gf_EnableUnit(lp_unitType);
+        return libWoLC_gf_EnableUnit(lp_unitType);
     }
     else if (auto979691FF_val == libWoLC_ge_ConscriptionActionType_DisableUnit) {
-        lv_errorString = libWoLC_gf_DisableUnit(lp_unitType);
+        return libWoLC_gf_DisableUnit(lp_unitType);
     }
     else if (auto979691FF_val == libWoLC_ge_ConscriptionActionType_PurchaseUnit) {
-        lv_errorString = libWoLC_gf_PurchaseUnit(lp_unitType);
+        return libWoLC_gf_PurchaseUnit(lp_unitType);
     }
     else if (auto979691FF_val == libWoLC_ge_ConscriptionActionType_RefundUnit) {
-        lv_errorString = libWoLC_gf_RefundUnit(lp_unitType);
+        return libWoLC_gf_RefundUnit(lp_unitType);
     }
     else {
         return "action type not implemented";
     }
-    return lv_errorString;
 }
 
 string libWoLC_gf_EnableUnit (string lp_unitType) {
