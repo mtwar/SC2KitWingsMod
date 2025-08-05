@@ -6710,6 +6710,9 @@
             <Int Int="1">
                 <Field Id="UnlockMission"/>
             </Int>
+            <Int Int="1">
+                <Field Id="UnlockWithConscription"/>
+            </Int>
         </Instances>
         <Instances Id="Medic">
             <Int Int="30000">
@@ -6717,6 +6720,9 @@
             </Int>
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
+            </Int>
+            <Int Int="1">
+                <Field Id="UnlockMission"/>
             </Int>
             <String String="Medic">
                 <Field Id="Name"/>
@@ -6729,6 +6735,9 @@
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
             </Int>
+            <Int Int="1">
+                <Field Id="UnlockMission"/>
+            </Int>
             <String String="Vulture">
                 <Field Id="Name"/>
             </String>
@@ -6739,6 +6748,9 @@
             </Int>
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
+            </Int>
+            <Int Int="2">
+                <Field Id="UnlockMission"/>
             </Int>
             <String String="Firebat">
                 <Field Id="Name"/>
@@ -6751,7 +6763,281 @@
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
             </Int>
+            <Int Int="2">
+                <Field Id="UnlockMission"/>
+            </Int>
             <String String="Hellion">
+                <Field Id="Name"/>
+            </String>
+        </Instances>
+        <Instances Id="Marauder">
+            <Int Int="35000">
+                <Field Id="Price"/>
+            </Int>
+            <Int Int="3">
+                <Field Id="UnlockMission"/>
+            </Int>
+            <Int Int="1">
+                <Field Id="UnlockWithConscription"/>
+            </Int>
+            <String String="Marauder">
+                <Field Id="Name"/>
+            </String>
+        </Instances>
+        <Instances Id="Reaper">
+            <Int Int="25000">
+                <Field Id="Price"/>
+            </Int>
+            <Int Int="3">
+                <Field Id="UnlockMission"/>
+            </Int>
+            <Int Int="1">
+                <Field Id="UnlockWithConscription"/>
+            </Int>
+        </Instances>
+        <Instances Id="WidowMine">
+            <Int Int="25000">
+                <Field Id="Price"/>
+            </Int>
+            <Int Int="3">
+                <Field Id="UnlockMission"/>
+            </Int>
+            <Int Int="1">
+                <Field Id="UnlockWithConscription"/>
+            </Int>
+            <String String="Widow Mine">
+                <Field Id="Name"/>
+            </String>
+        </Instances>
+        <Instances Id="Predator">
+            <Int Int="25000">
+                <Field Id="Price"/>
+            </Int>
+            <Int Int="4">
+                <Field Id="UnlockMission"/>
+            </Int>
+            <Int Int="1">
+                <Field Id="UnlockWithConscription"/>
+            </Int>
+            <String String="Predator">
+                <Field Id="Name"/>
+            </String>
+        </Instances>
+        <Instances Id="Goliath">
+            <Int Int="40000">
+                <Field Id="Price"/>
+            </Int>
+            <Int Int="4">
+                <Field Id="UnlockMission"/>
+            </Int>
+            <Int Int="1">
+                <Field Id="UnlockWithConscription"/>
+            </Int>
+            <String String="Goliath">
+                <Field Id="Name"/>
+            </String>
+        </Instances>
+        <Instances Id="Diamondback">
+            <Int Int="45000">
+                <Field Id="Price"/>
+            </Int>
+            <Int Int="5">
+                <Field Id="UnlockMission"/>
+            </Int>
+            <Int Int="1">
+                <Field Id="UnlockWithConscription"/>
+            </Int>
+            <String String="Diamondback">
+                <Field Id="Name"/>
+            </String>
+        </Instances>
+        <Instances Id="ScienceVessel">
+            <Int Int="60000">
+                <Field Id="Price"/>
+            </Int>
+            <Int Int="5">
+                <Field Id="UnlockMission"/>
+            </Int>
+            <Int Int="1">
+                <Field Id="UnlockWithConscription"/>
+            </Int>
+            <String String="Science Vessel">
+                <Field Id="Name"/>
+            </String>
+        </Instances>
+        <Instances Id="Cyclone">
+            <Int Int="1">
+                <Field Id="UnlockWithConscription"/>
+            </Int>
+            <Int Int="6">
+                <Field Id="UnlockMission"/>
+            </Int>
+            <Int Int="35000">
+                <Field Id="Price"/>
+            </Int>
+            <String String="Cyclone">
+                <Field Id="Name"/>
+            </String>
+        </Instances>
+        <Instances Id="Raven">
+            <Int Int="60000">
+                <Field Id="Price"/>
+            </Int>
+            <Int Int="6">
+                <Field Id="UnlockMission"/>
+            </Int>
+            <Int Int="1">
+                <Field Id="UnlockWithConscription"/>
+            </Int>
+            <String String="Raven">
+                <Field Id="Name"/>
+            </String>
+        </Instances>
+        <Instances Id="Medivac">
+            <Int Int="40000">
+                <Field Id="Price"/>
+            </Int>
+            <Int Int="6">
+                <Field Id="UnlockMission"/>
+            </Int>
+            <Int Int="1">
+                <Field Id="UnlockWithConscription"/>
+            </Int>
+            <String String="Medivac">
+                <Field Id="Name"/>
+            </String>
+        </Instances>
+        <Instances Id="SiegeTank">
+            <Int Int="1">
+                <Field Id="UnlockWithConscription"/>
+            </Int>
+            <Int Int="70000">
+                <Field Id="Price"/>
+            </Int>
+            <Int Int="7">
+                <Field Id="UnlockMission"/>
+            </Int>
+            <String String="Siege Tank">
+                <Field Id="Name"/>
+            </String>
+        </Instances>
+        <Instances Id="Wraith">
+            <Int Int="1">
+                <Field Id="UnlockWithConscription"/>
+            </Int>
+            <Int Int="7">
+                <Field Id="UnlockMission"/>
+            </Int>
+            <Int Int="40000">
+                <Field Id="Price"/>
+            </Int>
+            <String String="Wraith">
+                <Field Id="Name"/>
+            </String>
+        </Instances>
+        <Instances Id="Liberator">
+            <Int Int="35000">
+                <Field Id="Price"/>
+            </Int>
+            <Int Int="7">
+                <Field Id="UnlockMission"/>
+            </Int>
+            <Int Int="1">
+                <Field Id="UnlockWithConscription"/>
+            </Int>
+            <String String="Liberator">
+                <Field Id="Name"/>
+            </String>
+        </Instances>
+        <Instances Id="Thor">
+            <Int Int="75000">
+                <Field Id="Price"/>
+            </Int>
+            <Int Int="8">
+                <Field Id="UnlockMission"/>
+            </Int>
+            <Int Int="1">
+                <Field Id="UnlockWithConscription"/>
+            </Int>
+            <String String="Thor">
+                <Field Id="Name"/>
+            </String>
+        </Instances>
+        <Instances Id="Banshee">
+            <Int Int="60000">
+                <Field Id="Price"/>
+            </Int>
+            <Int Int="8">
+                <Field Id="UnlockMission"/>
+            </Int>
+            <Int Int="1">
+                <Field Id="UnlockWithConscription"/>
+            </Int>
+            <String String="Banshee">
+                <Field Id="Name"/>
+            </String>
+        </Instances>
+        <Instances Id="Viking">
+            <Int Int="1">
+                <Field Id="UnlockWithConscription"/>
+            </Int>
+            <Int Int="9">
+                <Field Id="UnlockMission"/>
+            </Int>
+            <Int Int="45000">
+                <Field Id="Price"/>
+            </Int>
+            <String String="Viking">
+                <Field Id="Name"/>
+            </String>
+        </Instances>
+        <Instances Id="Hercules">
+            <Int Int="60000">
+                <Field Id="Price"/>
+            </Int>
+            <Int Int="9">
+                <Field Id="UnlockMission"/>
+            </Int>
+            <Int Int="1">
+                <Field Id="UnlockWithConscription"/>
+            </Int>
+            <String String="Hercules">
+                <Field Id="Name"/>
+            </String>
+        </Instances>
+        <Instances Id="Battlecruiser">
+            <Int Int="80000">
+                <Field Id="Price"/>
+            </Int>
+            <Int Int="10">
+                <Field Id="UnlockMission"/>
+            </Int>
+            <Int Int="1">
+                <Field Id="UnlockWithConscription"/>
+            </Int>
+            <String String="Battlecruiser">
+                <Field Id="Name"/>
+            </String>
+        </Instances>
+        <Instances Id="Spectre">
+            <Int Int="75000">
+                <Field Id="Price"/>
+            </Int>
+            <Int Int="1">
+                <Field Id="UnlockWithConscription"/>
+            </Int>
+            <String String="Spectre">
+                <Field Id="Name"/>
+            </String>
+        </Instances>
+        <Instances Id="Ghost">
+            <Int Int="75000">
+                <Field Id="Price"/>
+            </Int>
+            <Int Int="1">
+                <Field Id="UnlockWithConscription"/>
+            </Int>
+            <String String="Ghost">
                 <Field Id="Name"/>
             </String>
         </Instances>
