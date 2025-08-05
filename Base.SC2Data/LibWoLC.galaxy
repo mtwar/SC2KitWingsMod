@@ -2585,7 +2585,7 @@ string libWoLC_gf_EnableConscriptionUnit (string lp_unitType) {
     lv_conscription = libWoLC_gf_GetConscriptionEntryForUnit(lp_unitType);
 
     // Implementation
-    if (lv_conscription) {
+    if (StringEqual(lv_conscription, "", c_stringNoCase) == false) {
         return libWoLC_gf_EnableConscription(lv_conscription);
     }
     return ("conscription not configured for unit type " + lp_unitType);
@@ -2617,7 +2617,7 @@ string libWoLC_gf_DisableConscriptionUnit (string lp_unitType) {
     lv_conscription = libWoLC_gf_GetConscriptionEntryForUnit(lp_unitType);
 
     // Implementation
-    if (lv_conscription) {
+    if (StringEqual(lv_conscription, "", c_stringNoCase) == false) {
         return libWoLC_gf_DisableConscription(lv_conscription);
     }
     return ("conscription not configured for unit type " + lp_unitType);
@@ -2636,7 +2636,7 @@ string libWoLC_gf_DisableConscription (string lp_conscription) {
     // Implementation
     if ((lv_currentState == libWoLC_ge_ConscriptionUnitState_Purchased)) {
         lv_errorString = libWoLC_gf_RefundConscription(lp_conscription);
-        if ((lv_errorString != null)) {
+        if ((StringEqual(lv_errorString, "", c_stringNoCase) == false)) {
             return lv_errorString;
         }
 
@@ -2655,7 +2655,7 @@ string libWoLC_gf_PurchaseConscriptionUnit (string lp_unitType) {
     lv_conscription = libWoLC_gf_GetConscriptionEntryForUnit(lp_unitType);
 
     // Implementation
-    if (lv_conscription) {
+    if (StringEqual(lv_conscription, "", c_stringNoCase) == false) {
         return libWoLC_gf_PurchaseConscription(lv_conscription);
     }
     return ("conscription not configured for unit type " + lp_unitType);
@@ -2678,7 +2678,7 @@ string libWoLC_gf_PurchaseConscription (string lp_conscription) {
 
     if ((lv_currentState == libWoLC_ge_ConscriptionUnitState_Locked)) {
         lv_errorString = libWoLC_gf_EnableConscription(lp_conscription);
-        if ((lv_errorString != null)) {
+        if ((StringEqual(lv_errorString, "", c_stringNoCase) == false)) {
             return lv_errorString;
         }
 
@@ -2697,7 +2697,7 @@ string libWoLC_gf_RefundConscriptionUnit (string lp_unitType) {
     lv_conscription = libWoLC_gf_GetConscriptionEntryForUnit(lp_unitType);
 
     // Implementation
-    if (lv_conscription) {
+    if (StringEqual(lv_conscription, "", c_stringNoCase) == false) {
         return libWoLC_gf_RefundConscription(lv_conscription);
     }
     return ("conscription not configured for unit type " + lp_unitType);
@@ -2735,7 +2735,7 @@ void libWoLC_gf_SetUnitConscriptionState (string lp_unitType, int lp_state) {
     lv_conscription = libWoLC_gf_GetConscriptionEntryForUnit(lp_unitType);
 
     // Implementation
-    if (lv_conscription) {
+    if (StringEqual(lv_conscription, "", c_stringNoCase) == false) {
         libWoLC_gf_SetConscriptionState(lv_conscription, lp_state);
     }
 }
@@ -2855,12 +2855,12 @@ string libWoLC_gf_ConscriptionCheatHandler (string lp_inputWords) {
 
     // Implementation
     lv_actionTypeName = StringWord(lp_inputWords, (libWoLC_ge_ConscriptionCheatToken_ActionTokenIndex));
-    if ((lv_actionTypeName == null)) {
+    if ((StringEqual(lv_unitTypeName, "", c_stringNoCase) == true)) {
         return "Action type name required.<n/>Format: Conscription <action type name> <unit type name><n/>Valid actions: enable, disable, purchase, refund";
     }
 
     lv_unitTypeName = libWoLC_gf_CamelCaseFromSpaceSeparated(lp_inputWords, true, (libWoLC_ge_ConscriptionCheatToken_UnitTokenStartIndex), 0);
-    if (((lv_unitTypeName == null) || (StringEqual(lv_unitTypeName, "", c_stringNoCase) == true))) {
+    if ((StringEqual(lv_unitTypeName, "", c_stringNoCase) == true)) {
         return "Unit type name required.<n/>Format: Conscription <action type name> <unit type name><n/>Valid actions: enable, disable, purchase, refund";
     }
 
