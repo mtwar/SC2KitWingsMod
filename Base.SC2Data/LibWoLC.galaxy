@@ -2591,7 +2591,7 @@ string libWoLC_gf_ExecuteConscriptionActionString (string lp_actionTypeName, str
     }
 
     if ((lv_actionType == libWoLC_ge_ConscriptionActionType_LoadAll)) {
-        return "";
+        return "not implemented";
     }
 
     lv_unitType = libWoLC_gf_ParseUnitType(lp_unitTypeName);
@@ -2815,6 +2815,33 @@ void libWoLC_gf_SetUnitConscriptionState (string lp_unitType, int lp_state) {
 }
 
 void libWoLC_gf_SetConscriptionState (string lp_conscription, int lp_state) {
+    // Automatic Variable Declarations
+    // Implementation
+    UserDataSetInt("Conscription", lp_conscription, "State", 1, (lp_state));
+    libWoLC_gf_ApplyConscriptionToTechTree(lp_conscription);
+}
+
+void libWoLC_gf_ApplyAllConscriptionsToTechTree () {
+    // Variable Declarations
+    string lv_currentConscription;
+
+    // Automatic Variable Declarations
+    int auto9FC9690B_ai;
+    int auto9FC9690B_ae;
+
+    // Variable Initialization
+
+    // Implementation
+    auto9FC9690B_ai = 1;
+    auto9FC9690B_ae = UserDataInstanceCount("Conscription")+1;
+    while (auto9FC9690B_ai < auto9FC9690B_ae) {
+        lv_currentConscription = UserDataInstance("Conscription", auto9FC9690B_ai);
+        auto9FC9690B_ai = auto9FC9690B_ai+1;
+        libWoLC_gf_ApplyAllConscriptionsToTechTree();
+    }
+}
+
+void libWoLC_gf_ApplyConscriptionToTechTree (string lp_conscription) {
     // Variable Declarations
     string lv_armyCategory;
 
@@ -2827,8 +2854,7 @@ void libWoLC_gf_SetConscriptionState (string lp_conscription, int lp_state) {
         TriggerDebugOutput(1, StringExternal("Param/Value/lib_WoLC_363B7E8D"), true);
     }
 
-    UserDataSetInt("Conscription", lp_conscription, "State", 1, (lp_state));
-    if ((lp_state == libWoLC_ge_ConscriptionUnitState_Purchased)) {
+    if ((libWoLC_gf_ParseConscriptionUnitState(UserDataGetInt("Conscription", lp_conscription, "State", 1)) == libWoLC_ge_ConscriptionUnitState_Purchased)) {
         libWoLC_gf_EnableCampaignTechUnit(true, libWoLC_gf_WC_TechUnitOfArmyCategory(lv_armyCategory), 1);
         libWoLC_gf_WC_SetArmyCategoryState(lv_armyCategory, c_armyCategoryStateUnlocked);
     }
@@ -2948,6 +2974,16 @@ string libWoLC_gf_ConscriptionCheatHandler (string lp_inputWords) {
         return "Action type name required.<n/>Format: conscription <action type name> <unit type name><n/>Valid actions: enable, disable, purchase, refund, override";
     }
 
+    if (((StringEqual(lv_actionTypeName, libWoLC_ge_ConscriptionActionType_Ident(libWoLC_ge_ConscriptionActionType_SaveAll), c_stringNoCase) == true) || (StringEqual(lv_actionTypeName, libWoLC_ge_ConscriptionActionType_Ident(libWoLC_ge_ConscriptionActionType_LoadAll), c_stringNoCase) == true))) {
+        if ((libWoLC_gv_wC_CurrentMap == "TStory01")) {
+            lv_sectionName = libWoLC_gf_WC_BankSectionName(libWoLC_gv_wCX_LastMap, "Conscription");
+        }
+        else {
+            lv_sectionName = libWoLC_gf_WC_BankSectionName(libWoLC_gv_wC_CurrentMap, "Conscription");
+        }
+        return libWoLC_gf_ExecuteConscriptionActionString(lv_actionTypeName, lv_unitTypeName, lv_stateName, lv_sectionName);
+    }
+
     if ((StringEqual(lv_actionTypeName, libWoLC_ge_ConscriptionActionType_Ident(libWoLC_ge_ConscriptionActionType_Override), c_stringNoCase) == true)) {
         lv_stateName = StringWord(lp_inputWords, lv_unitTypeNameIndex);
         if ((StringEqual(lv_stateName, "", c_stringNoCase) == true)) {
@@ -2962,12 +2998,6 @@ string libWoLC_gf_ConscriptionCheatHandler (string lp_inputWords) {
         return "Unit type name required.<n/>Format: conscription <action type name> <unit type name><n/>Valid actions: enable, disable, purchase, refund, override";
     }
 
-    if ((libWoLC_gv_wC_CurrentMap == "TStory01")) {
-        lv_sectionName = libWoLC_gf_WC_BankSectionName(libWoLC_gv_wCX_LastMap, "Conscription");
-    }
-    else {
-        lv_sectionName = libWoLC_gf_WC_BankSectionName(libWoLC_gv_wC_CurrentMap, "Conscription");
-    }
     return libWoLC_gf_ExecuteConscriptionActionString(lv_actionTypeName, lv_unitTypeName, lv_stateName, lv_sectionName);
 }
 
@@ -4266,6 +4296,7 @@ void libWoLC_gf_WC_ApplyArmyTech (int lp_player) {
     string lv_indexUpgrade;
     bool lv_categoryEnableDisable;
     bool lv_upgradeEnableDisable;
+    string lv_upgradeEnableDisable2;
 
     // Automatic Variable Declarations
     int auto9EF57A55_ae;
@@ -4290,6 +4321,11 @@ void libWoLC_gf_WC_ApplyArmyTech (int lp_player) {
     auto9EF57A55_ai = 1;
     while (auto9EF57A55_ai <= auto9EF57A55_ae) {
         lv_indexCategory = CatalogEntryGet(c_gameCatalogArmyCategory, auto9EF57A55_ai);
+        lv_upgradeEnableDisable2 = libWoLC_gf_GetConscriptionEntryForUnit(libWoLC_gf_WC_ArmyCategoryUnitType(lv_indexCategory));
+        if ((lv_upgradeEnableDisable2 != null) && (UserDataGetInt("Conscription", lv_upgradeEnableDisable2, "UnlockWithConscription", 1) != 0)) {
+            continue;
+        }
+
         libWoLC_gf_EnableCampaignTechUnit(false, libWoLC_gf_WC_TechUnitOfArmyCategory(lv_indexCategory), lp_player);
         auto7AD1A88C_ae = CatalogFieldValueCount(c_gameCatalogArmyCategory, lv_indexCategory, "ArmyUnitArray", 1);
         auto7AD1A88C_ai = 1;
@@ -4311,6 +4347,11 @@ void libWoLC_gf_WC_ApplyArmyTech (int lp_player) {
     auto1D234705_ai = 1;
     while (auto1D234705_ai <= auto1D234705_ae) {
         lv_indexCategory = CatalogEntryGet(c_gameCatalogArmyCategory, auto1D234705_ai);
+        lv_upgradeEnableDisable2 = libWoLC_gf_GetConscriptionEntryForUnit(libWoLC_gf_WC_ArmyCategoryUnitType(lv_indexCategory));
+        if ((lv_upgradeEnableDisable2 != null) && (UserDataGetInt("Conscription", lv_upgradeEnableDisable2, "UnlockWithConscription", 1) != 0)) {
+            continue;
+        }
+
         if ((libWoLC_gf_ArmyCategoryStateCheck(lv_indexCategory, c_armyCategoryStateUnlocked) == true)) {
             lv_categoryEnableDisable = true;
             autoA7240716_ae = CatalogFieldValueCount(c_gameCatalogArmyCategory, lv_indexCategory, "ArmyUnitArray", 1);
@@ -4859,6 +4900,7 @@ void libWoLC_gf_WC_ApplyTech (int lp_player) {
     libWoLC_gf_WC_ApplyArmyTech(lp_player);
     libWoLC_gf_WC_ApplyPerkTech();
     libWoLC_gf_WC_ApplyMercenaryTech();
+    libWoLC_gf_ApplyAllConscriptionsToTechTree();
     libWoLC_gv_wC_ApplyingCampaignTech = false;
     libWoLC_gv_wC_CampaignTechApplied = true;
     if ((lp_player == 1)) {
@@ -7006,6 +7048,7 @@ void libWoLC_gf_StorySetSimulationMission (string lp_mission) {
     libWoLC_gf_WC_SaveArmyUnitsToBank(libWoLC_gv_pS_StorySimulationOriginalBank, libWoLC_gf_WC_BankSectionName(null, "ArmyUnit"));
     libWoLC_gf_WC_SavePerksToBank(libWoLC_gv_pS_StorySimulationOriginalBank, libWoLC_gf_WC_BankSectionName(null, "Perks"));
     libWoLC_gf_WC_SaveMercenaryToBank(libWoLC_gv_pS_StorySimulationOriginalBank, libWoLC_gf_WC_BankSectionName(null, "Mercenary"));
+    libWoLC_gf_SaveAllConscriptionsToBank(libWoLC_gv_pS_StorySimulationOriginalBank, libWoLC_gf_WC_BankSectionName(null, "Conscription"));
     libWoLC_gf_WC_OpenCampaignBank();
     if ((libWoLC_gf_WC_MissionSectionExists(lp_mission) == true)) {
         if ((libWoLC_gf_WC_CampaignIsComplete() == false)) {
@@ -7016,6 +7059,7 @@ void libWoLC_gf_StorySetSimulationMission (string lp_mission) {
         libWoLC_gf_WC_LoadArmyUpgradesFromBank(libWoLC_gv_wC_CampaignBank, libWoLC_gf_WC_BankSectionName(lp_mission, "ArmyUpgrade"));
         libWoLC_gf_WC_LoadPerksFromBank(libWoLC_gv_wC_CampaignBank, libWoLC_gf_WC_BankSectionName(lp_mission, "Perks"));
         libWoLC_gf_WC_LoadMercenaryFromBank(libWoLC_gv_wC_CampaignBank, libWoLC_gf_WC_BankSectionName(lp_mission, "Mercenary"));
+        libWoLC_gf_LoadAllConscriptionsFromBank(libWoLC_gv_wC_CampaignBank, libWoLC_gf_WC_BankSectionName(lp_mission, "Conscription"));
     }
 
     if ((libWoLC_gf_WC_CampaignIsComplete() == true)) {
@@ -7034,6 +7078,7 @@ void libWoLC_gf_StorySimulationEnd () {
     libWoLC_gf_WC_SaveArmyUnitsToBank(libWoLC_gv_wC_CampaignBank, libWoLC_gf_WC_BankSectionName(libWoLC_gv_pS_StorySimulationMission, "ArmyUnit"));
     libWoLC_gf_WC_SavePerksToBank(libWoLC_gv_wC_CampaignBank, libWoLC_gf_WC_BankSectionName(libWoLC_gv_pS_StorySimulationMission, "Perks"));
     libWoLC_gf_WC_SaveMercenaryToBank(libWoLC_gv_wC_CampaignBank, libWoLC_gf_WC_BankSectionName(libWoLC_gv_pS_StorySimulationMission, "Mercenary"));
+    libWoLC_gf_SaveAllConscriptionsToBank(libWoLC_gv_wC_CampaignBank, libWoLC_gf_WC_BankSectionName(libWoLC_gf_WC_StorySimulationMission(), "Conscription"));
     libWoLC_gv_pS_StorySimulationMission = null;
     libWoLC_gf_WC_LoadMapFromBank(null, libWoLC_gv_pS_StorySimulationOriginalBank);
     libWoLC_gf_WC_SetLocationActive((libWoLC_gf_WC_LoadTransitionVarString(libWoLC_gv_pS_StorySimulationOriginalBank, libWoLC_gf_WC_BankSectionName(null, "CampaignLastInfo"), ("Location"), "")));
@@ -7042,6 +7087,7 @@ void libWoLC_gf_StorySimulationEnd () {
     libWoLC_gf_WC_LoadArmyUpgradesFromBank(libWoLC_gv_pS_StorySimulationOriginalBank, libWoLC_gf_WC_BankSectionName(null, "ArmyUpgrade"));
     libWoLC_gf_WC_LoadPerksFromBank(libWoLC_gv_pS_StorySimulationOriginalBank, libWoLC_gf_WC_BankSectionName(null, "Perks"));
     libWoLC_gf_WC_LoadMercenaryFromBank(libWoLC_gv_pS_StorySimulationOriginalBank, libWoLC_gf_WC_BankSectionName(null, "Mercenary"));
+    libWoLC_gf_LoadAllConscriptionsFromBank(libWoLC_gv_pS_StorySimulationOriginalBank, libWoLC_gf_WC_BankSectionName(null, "Conscription"));
     libWoLC_gf_UpdateMissionFlow();
     libWoLC_gf_WC_UpdateTechStates(1);
     libWoLC_gf_WC_ApplyTech(1);
