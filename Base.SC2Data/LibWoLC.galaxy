@@ -65,6 +65,10 @@ string libWoLC_ge_ConscriptionActionType_Ident (int lp_val) {
     else if (lp_val == libWoLC_ge_ConscriptionActionType_Purchase) { return "Purchase"; }
     else if (lp_val == libWoLC_ge_ConscriptionActionType_Refund) { return "Refund"; }
     else if (lp_val == libWoLC_ge_ConscriptionActionType_Override) { return "Override"; }
+    else if (lp_val == libWoLC_ge_ConscriptionActionType_Save) { return "Save"; }
+    else if (lp_val == libWoLC_ge_ConscriptionActionType_Load) { return "Load"; }
+    else if (lp_val == libWoLC_ge_ConscriptionActionType_SaveAll) { return "SaveAll"; }
+    else if (lp_val == libWoLC_ge_ConscriptionActionType_LoadAll) { return "LoadAll"; }
     return null;
 }
 
@@ -2554,12 +2558,18 @@ int libWoLC_gf_ParseConscriptionActionTypeString (string lp_actionTypeName) {
     else if (auto130814E7_val == StringCase(libWoLC_ge_ConscriptionActionType_Ident(libWoLC_ge_ConscriptionActionType_Override), false)) {
         return libWoLC_ge_ConscriptionActionType_Override;
     }
+    else if (auto130814E7_val == StringCase(libWoLC_ge_ConscriptionActionType_Ident(libWoLC_ge_ConscriptionActionType_SaveAll), false)) {
+        return libWoLC_ge_ConscriptionActionType_SaveAll;
+    }
+    else if (auto130814E7_val == StringCase(libWoLC_ge_ConscriptionActionType_Ident(libWoLC_ge_ConscriptionActionType_LoadAll), false)) {
+        return libWoLC_ge_ConscriptionActionType_LoadAll;
+    }
     else {
         return libWoLC_ge_ConscriptionActionType_None;
     }
 }
 
-string libWoLC_gf_ExecuteConscriptionActionString (string lp_actionTypeName, string lp_unitTypeName, string lp_conscriptionStateName) {
+string libWoLC_gf_ExecuteConscriptionActionString (string lp_actionTypeName, string lp_unitTypeName, string lp_conscriptionStateName, string lp_sectionName) {
     // Variable Declarations
     int lv_actionType;
     string lv_unitType;
@@ -2573,6 +2583,15 @@ string libWoLC_gf_ExecuteConscriptionActionString (string lp_actionTypeName, str
     lv_actionType = libWoLC_gf_ParseConscriptionActionTypeString(lp_actionTypeName);
     if ((lv_actionType == libWoLC_ge_ConscriptionActionType_None)) {
         return "invalid action type name";
+    }
+
+    if ((lv_actionType == libWoLC_ge_ConscriptionActionType_SaveAll)) {
+        libWoLC_gf_SaveAllConscriptionsToCampaignBank(lp_sectionName);
+        return "";
+    }
+
+    if ((lv_actionType == libWoLC_ge_ConscriptionActionType_LoadAll)) {
+        return "";
     }
 
     lv_unitType = libWoLC_gf_ParseUnitType(lp_unitTypeName);
@@ -2819,6 +2838,15 @@ void libWoLC_gf_SetConscriptionState (string lp_conscription, int lp_state) {
     }
 }
 
+void libWoLC_gf_SaveAllConscriptionsToCampaignBank (string lp_section) {
+    // Automatic Variable Declarations
+    // Implementation
+    libWoLC_gf_WC_OpenCampaignBank();
+    libWoLC_gf_SaveAllConscriptionsToBank(libWoLC_gv_wC_CampaignBank, lp_section);
+    libWoLC_gf_WC_SaveCampaignBank();
+    libWoLC_gf_WC_SaveCampaignBank2();
+}
+
 void libWoLC_gf_SaveAllConscriptionsToBank (bank lp_bank, string lp_section) {
     // Variable Declarations
     string lv_currentConscription;
@@ -2904,6 +2932,7 @@ string libWoLC_gf_ConscriptionCheatHandler (string lp_inputWords) {
     string lv_unitTypeName;
     int lv_unitTypeNameIndex;
     string lv_stateName;
+    string lv_sectionName;
 
     // Automatic Variable Declarations
     // Variable Initialization
@@ -2911,6 +2940,7 @@ string libWoLC_gf_ConscriptionCheatHandler (string lp_inputWords) {
     lv_unitTypeName = "";
     lv_unitTypeNameIndex = (libWoLC_ge_ConscriptionCheatToken_UnitTokenStartIndex);
     lv_stateName = "";
+    lv_sectionName = "";
 
     // Implementation
     lv_actionTypeName = StringWord(lp_inputWords, (libWoLC_ge_ConscriptionCheatToken_ActionTokenIndex));
@@ -2932,7 +2962,13 @@ string libWoLC_gf_ConscriptionCheatHandler (string lp_inputWords) {
         return "Unit type name required.<n/>Format: conscription <action type name> <unit type name><n/>Valid actions: enable, disable, purchase, refund, override";
     }
 
-    return libWoLC_gf_ExecuteConscriptionActionString(lv_actionTypeName, lv_unitTypeName, lv_stateName);
+    if ((libWoLC_gv_wC_CurrentMap == "TStory01")) {
+        lv_sectionName = libWoLC_gf_WC_BankSectionName(libWoLC_gv_wCX_LastMap, "Conscription");
+    }
+    else {
+        lv_sectionName = libWoLC_gf_WC_BankSectionName(libWoLC_gv_wC_CurrentMap, "Conscription");
+    }
+    return libWoLC_gf_ExecuteConscriptionActionString(lv_actionTypeName, lv_unitTypeName, lv_stateName, lv_sectionName);
 }
 
 bool libWoLC_gf_CampaignMercenaryStateCheck (string lp_mercenary, string lp_state) {
@@ -8131,6 +8167,45 @@ void libWoLC_gt_WC_SceneSkipped_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
+// Trigger: Conscription Cheat Listener
+//--------------------------------------------------------------------------------------------------
+bool libWoLC_gt_ConscriptionCheatListener_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv_errorMessage;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_errorMessage = "";
+
+    // Conditions
+    if (testConds) {
+        if (!((StringEqual(StringWord(EventChatMessage(false), (libWoLC_ge_ConscriptionCheatToken_ConscriptionTokenIndex)), "conscription", c_stringNoCase) == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_errorMessage = libWoLC_gf_ConscriptionCheatHandler(EventChatMessage(false));
+    if ((StringEqual(lv_errorMessage, "", c_stringNoCase) != true)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, StringToText(lv_errorMessage));
+        return true;
+    }
+
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, StringToText("cheat applied successfully"));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libWoLC_gt_ConscriptionCheatListener_Init () {
+    libWoLC_gt_ConscriptionCheatListener = TriggerCreate("libWoLC_gt_ConscriptionCheatListener_Func");
+    TriggerAddEventChatMessage(libWoLC_gt_ConscriptionCheatListener, c_playerAny, "conscription", false);
+}
+
+//--------------------------------------------------------------------------------------------------
 // Trigger: WC_TrackLoadingComplete
 //--------------------------------------------------------------------------------------------------
 bool libWoLC_gt_WC_TrackLoadingComplete_Func (bool testConds, bool runActions) {
@@ -8522,6 +8597,7 @@ void libWoLC_InitTriggers () {
     libWoLC_gt_WC_PlaySceneSkippable_Init();
     libWoLC_gt_WC_CinematicDetectSkipping_Init();
     libWoLC_gt_WC_SceneSkipped_Init();
+    libWoLC_gt_ConscriptionCheatListener_Init();
     libWoLC_gt_WC_TrackLoadingComplete_Init();
     libWoLC_gt_WC_TrackLoadingFromSave_Init();
     libWoLC_gt_WC_ArchivesBankLoadSyncComplete_Init();
