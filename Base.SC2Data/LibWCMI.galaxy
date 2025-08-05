@@ -707,6 +707,7 @@ void libWCMI_gf_WM_MissionEndStats (int lp_type) {
         autoD86639D2_ai = 1;
         while (autoD86639D2_ai <= autoD86639D2_ae) {
             lv_indexArmyCategory = CatalogEntryGet(c_gameCatalogArmyCategory, autoD86639D2_ai);
+            autoD86639D2_ai = autoD86639D2_ai + 1;
             if ((libWoLC_gf_ArmyCategoryStateCheck(lv_indexArmyCategory, c_armyCategoryStateUnlocked) == true)) {
                 lv_purchasedUnit = libWoLC_gf_WC_ArmyCategoryPurchasedUnit(lv_indexArmyCategory);
                 if ((lv_purchasedUnit == null)) {
@@ -717,7 +718,6 @@ void libWCMI_gf_WM_MissionEndStats (int lp_type) {
                 }
             }
 
-            autoD86639D2_ai = autoD86639D2_ai + 1;
         }
         libWoLC_gf_WC_StatEventDone(libWoLC_gf_WC_StatEventLast());
     }
@@ -738,6 +738,7 @@ void libWCMI_gf_WM_MissionEndStats (int lp_type) {
     autoC085A94F_ai = 1;
     while (autoC085A94F_ai <= autoC085A94F_ae) {
         lv_indexArmyCategory = CatalogEntryGet(c_gameCatalogArmyCategory, autoC085A94F_ai);
+        autoC085A94F_ai = autoC085A94F_ai + 1;
         if ((libWoLC_gf_WC_TechUnitOfArmyCategory(lv_indexArmyCategory) != null) && (libWoLC_gf_WC_ArmyCategoryUnitType(lv_indexArmyCategory) != null)) {
             libWoLC_gf_WC_StatEventCreate("UnitStats");
             libWoLC_gf_WC_StatEventAddStr("UnitID", (libWoLC_gf_WC_ArmyCategoryUnitType(lv_indexArmyCategory)), libWoLC_gf_WC_StatEventLast());
@@ -775,7 +776,6 @@ void libWCMI_gf_WM_MissionEndStats (int lp_type) {
             }
         }
 
-        autoC085A94F_ai = autoC085A94F_ai + 1;
     }
     libWoLC_gf_WC_StatRecordMiscUnits();
     auto1132B9C5_ai = 1;
