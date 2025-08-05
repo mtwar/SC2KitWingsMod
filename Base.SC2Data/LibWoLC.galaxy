@@ -50,6 +50,13 @@ void libWoLC_InitVariables () {
 }
 
 // Presets
+string libWoLC_ge_ConscriptionUnitState_Ident (int lp_val) {
+         if (lp_val == libWoLC_ge_ConscriptionUnitState_Locked) { return "Locked"; }
+    else if (lp_val == libWoLC_ge_ConscriptionUnitState_Available) { return "Available"; }
+    else if (lp_val == libWoLC_ge_ConscriptionUnitState_Purchased) { return "Purchased"; }
+    return null;
+}
+
 // Functions
 trigger auto_libWoLC_gf_CampaignAwardAchievement_Trigger = null;
 string auto_libWoLC_gf_CampaignAwardAchievement_lp_achievement;
@@ -2475,75 +2482,24 @@ void libWoLC_gf_WC_FadeAllSoundsExceptMusic (fixed lp_duration, bool lp_wait) {
 
 }
 
-string libWoLC_gf_ConscriptionCheatHandler (string lp_inputWords) {
-    // Variable Declarations
-    string lv_actionTypeName;
-    string lv_unitTypeName;
-
+int libWoLC_gf_ParseConscriptionUnitState (int lp_stateValue) {
     // Automatic Variable Declarations
-    // Variable Initialization
-    lv_actionTypeName = "";
-    lv_unitTypeName = "";
+    int auto33B630C7_val;
 
     // Implementation
-    lv_actionTypeName = StringWord(lp_inputWords, (libWoLC_ge_ConscriptionCheatToken_ActionTokenIndex));
-    if ((lv_actionTypeName == null)) {
-        return "Action type name required.<n/>Format: Conscription <action type name> <unit type name><n/>Valid actions: enable, disable, purchase, refund";
+    auto33B630C7_val = lp_stateValue;
+    if (auto33B630C7_val == libWoLC_ge_ConscriptionUnitState_Locked) {
+        return libWoLC_ge_ConscriptionUnitState_Locked;
     }
-
-    lv_unitTypeName = libWoLC_gf_CamelCaseFromSpaceSeparated(lp_inputWords, true, (libWoLC_ge_ConscriptionCheatToken_UnitTokenStartIndex), 0);
-    if (((lv_unitTypeName == null) || (StringEqual(lv_unitTypeName, "", c_stringNoCase) == true))) {
-        return "Unit type name required.<n/>Format: Conscription <action type name> <unit type name><n/>Valid actions: enable, disable, purchase, refund";
+    else if (auto33B630C7_val == libWoLC_ge_ConscriptionUnitState_Available) {
+        return libWoLC_ge_ConscriptionUnitState_Available;
     }
-
-    return libWoLC_gf_ExecuteConscriptionActionString(lv_actionTypeName, lv_unitTypeName);
-}
-
-void libWoLC_gf_SetConscriptionStateBank (string lp_conscription, int lp_state) {
-    // Variable Declarations
-    string lv_armyCategory;
-
-    // Automatic Variable Declarations
-    // Variable Initialization
-    lv_armyCategory = UserDataGetGameLink("Conscription", lp_conscription, "ArmyCategory", 1);
-
-    // Implementation
-    UserDataSetInt("Conscription", lp_conscription, "State", 1, (lp_state));
-    if ((lv_armyCategory == null)) {
-        TriggerDebugOutput(1, StringExternal("Param/Value/lib_WoLC_0E2A86B6"), true);
-    }
-
-    if ((lp_state == libWoLC_ge_ConscriptionUnitState_Purchased)) {
-        libWoLC_gf_EnableCampaignTechUnit(true, libWoLC_gf_WC_TechUnitOfArmyCategory(lv_armyCategory), 1);
-        libWoLC_gf_WC_SetArmyCategoryState(lv_armyCategory, c_armyCategoryStateUnlocked);
+    else if (auto33B630C7_val == libWoLC_ge_ConscriptionUnitState_Purchased) {
+        return libWoLC_ge_ConscriptionUnitState_Purchased;
     }
     else {
-        libWoLC_gf_EnableCampaignTechUnit(false, libWoLC_gf_WC_TechUnitOfArmyCategory(lv_armyCategory), 1);
-        libWoLC_gf_WC_SetArmyCategoryState(lv_armyCategory, c_armyCategoryStateLocked);
+        return libWoLC_ge_ConscriptionUnitState_Locked;
     }
-}
-
-string libWoLC_gf_SetConscriptionState (unit lp_unit, int lp_state) {
-    // Variable Declarations
-    string lv_indexConscription;
-
-    // Automatic Variable Declarations
-    int autoB59F93B0_ai;
-    int autoB59F93B0_ae;
-
-    // Variable Initialization
-
-    // Implementation
-    autoB59F93B0_ai = 1;
-    autoB59F93B0_ae = UserDataInstanceCount("Conscription")+1;
-    while (autoB59F93B0_ai < autoB59F93B0_ae) {
-        lv_indexConscription = UserDataInstance("Conscription", autoB59F93B0_ai);
-        autoB59F93B0_ai = autoB59F93B0_ai+1;
-        if (true) {
-        }
-
-    }
-    return "";
 }
 
 int libWoLC_gf_ParseConscriptionActionType (string lp_actionTypeName) {
@@ -2604,66 +2560,316 @@ string libWoLC_gf_ExecuteConscriptionAction (int lp_actionType, string lp_unitTy
     // Implementation
     auto979691FF_val = lp_actionType;
     if (auto979691FF_val == libWoLC_ge_ConscriptionActionType_EnableUnit) {
-        return libWoLC_gf_EnableUnit(lp_unitType);
+        return libWoLC_gf_EnableConscriptionUnit(lp_unitType);
     }
     else if (auto979691FF_val == libWoLC_ge_ConscriptionActionType_DisableUnit) {
-        return libWoLC_gf_DisableUnit(lp_unitType);
+        return libWoLC_gf_DisableConscriptionUnit(lp_unitType);
     }
     else if (auto979691FF_val == libWoLC_ge_ConscriptionActionType_PurchaseUnit) {
-        return libWoLC_gf_PurchaseUnit(lp_unitType);
+        return libWoLC_gf_PurchaseConscriptionUnit(lp_unitType);
     }
     else if (auto979691FF_val == libWoLC_ge_ConscriptionActionType_RefundUnit) {
-        return libWoLC_gf_RefundUnit(lp_unitType);
+        return libWoLC_gf_RefundConscriptionUnit(lp_unitType);
     }
     else {
         return "action type not implemented";
     }
 }
 
-string libWoLC_gf_EnableUnit (string lp_unit) {
-    // Automatic Variable Declarations
-    // Implementation
-    return "";
-}
-
-string libWoLC_gf_DisableUnit (string lp_unitType) {
-    // Automatic Variable Declarations
-    // Implementation
-    return "";
-}
-
-string libWoLC_gf_PurchaseUnit (string lp_unitType) {
-    // Automatic Variable Declarations
-    // Implementation
-    return "";
-}
-
-string libWoLC_gf_RefundUnit (string lp_unitType) {
-    // Automatic Variable Declarations
-    // Implementation
-    return "";
-}
-
-string libWoLC_gf_GetConscriptionEntries (string lp_unitType) {
+string libWoLC_gf_EnableConscriptionUnit (string lp_unitType) {
     // Variable Declarations
-    string lv_unitConscriptionData;
+    string lv_conscription;
 
     // Automatic Variable Declarations
     // Variable Initialization
+    lv_conscription = libWoLC_gf_GetConscriptionEntryForUnit(lp_unitType);
 
     // Implementation
-    return null;
+    if ((lv_conscription == null)) {
+        return ("conscription not configured for unit type " + lp_unitType);
+    }
+
+    return libWoLC_gf_EnableConscription(lv_conscription);
+}
+
+string libWoLC_gf_EnableConscription (string lp_conscription) {
+    // Variable Declarations
+    int lv_currentState;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_currentState = libWoLC_gf_ParseConscriptionUnitState(UserDataGetInt("Conscription", lp_conscription, "State", 1));
+
+    // Implementation
+    if ((lv_currentState != libWoLC_ge_ConscriptionUnitState_Locked)) {
+        return ("unit type " + lp_conscription + " already set to " + libWoLC_ge_ConscriptionUnitState_Ident(lv_currentState));
+    }
+
+    libWoLC_gf_SetConscriptionState(lp_conscription, libWoLC_ge_ConscriptionUnitState_Available);
+    return "";
+}
+
+string libWoLC_gf_DisableConscriptionUnit (string lp_unitType) {
+    // Variable Declarations
+    string lv_conscription;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_conscription = libWoLC_gf_GetConscriptionEntryForUnit(lp_unitType);
+
+    // Implementation
+    if ((lv_conscription == null)) {
+        return ("conscription not configured for unit type " + lp_unitType);
+    }
+
+    return libWoLC_gf_DisableConscription(lv_conscription);
+}
+
+string libWoLC_gf_DisableConscription (string lp_conscription) {
+    // Variable Declarations
+    int lv_currentState;
+    string lv_errorString;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_currentState = libWoLC_gf_ParseConscriptionUnitState(UserDataGetInt("Conscription", lp_conscription, "State", 1));
+    lv_errorString = "";
+
+    // Implementation
+    if ((lv_currentState == libWoLC_ge_ConscriptionUnitState_Purchased)) {
+        lv_errorString = libWoLC_gf_RefundConscription(lp_conscription);
+        if ((lv_errorString != null)) {
+            return lv_errorString;
+        }
+
+    }
+
+    libWoLC_gf_SetConscriptionState(lp_conscription, libWoLC_ge_ConscriptionUnitState_Locked);
+    return "";
+}
+
+string libWoLC_gf_PurchaseConscriptionUnit (string lp_unitType) {
+    // Variable Declarations
+    string lv_conscription;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_conscription = libWoLC_gf_GetConscriptionEntryForUnit(lp_unitType);
+
+    // Implementation
+    if ((lv_conscription == null)) {
+        return ("conscription not configured for unit type " + lp_unitType);
+    }
+
+    return libWoLC_gf_PurchaseConscription(lv_conscription);
+}
+
+string libWoLC_gf_PurchaseConscription (string lp_conscription) {
+    // Variable Declarations
+    int lv_currentState;
+    string lv_errorString;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_currentState = libWoLC_gf_ParseConscriptionUnitState(UserDataGetInt("Conscription", lp_conscription, "State", 1));
+    lv_errorString = "";
+
+    // Implementation
+    if ((lv_currentState == libWoLC_ge_ConscriptionUnitState_Purchased)) {
+        return ("unit type " + lp_conscription + " already set to " + libWoLC_ge_ConscriptionUnitState_Ident(lv_currentState));
+    }
+
+    if ((lv_currentState == libWoLC_ge_ConscriptionUnitState_Locked)) {
+        lv_errorString = libWoLC_gf_EnableConscription(lp_conscription);
+        if ((lv_errorString != null)) {
+            return lv_errorString;
+        }
+
+    }
+
+    libWoLC_gf_SetConscriptionState(lp_conscription, libWoLC_ge_ConscriptionUnitState_Purchased);
+    return "";
+}
+
+string libWoLC_gf_RefundConscriptionUnit (string lp_unitType) {
+    // Variable Declarations
+    string lv_conscription;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_conscription = libWoLC_gf_GetConscriptionEntryForUnit(lp_unitType);
+
+    // Implementation
+    if ((lv_conscription == null)) {
+        return ("conscription not configured for unit type " + lp_unitType);
+    }
+
+    return libWoLC_gf_RefundConscription(lv_conscription);
+}
+
+string libWoLC_gf_RefundConscription (string lp_conscription) {
+    // Variable Declarations
+    int lv_currentState;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_currentState = libWoLC_gf_ParseConscriptionUnitState(UserDataGetInt("Conscription", lp_conscription, "State", 1));
+
+    // Implementation
+    if ((lv_currentState != libWoLC_ge_ConscriptionUnitState_Purchased)) {
+        return ("unit type " + lp_conscription + " already set to " + libWoLC_ge_ConscriptionUnitState_Ident(lv_currentState));
+    }
+
+    libWoLC_gf_SetConscriptionState(lp_conscription, libWoLC_ge_ConscriptionUnitState_Available);
+    return "";
+}
+
+string libWoLC_gf_OverrideConscriptionUnit (string lp_unitType) {
+    // Automatic Variable Declarations
+    // Implementation
+    return "";
+}
+
+void libWoLC_gf_SetConscriptionState (string lp_conscription, int lp_state) {
+    // Variable Declarations
+    string lv_armyCategory;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_armyCategory = (UserDataGetString("Conscription", lp_conscription, "Name", 1));
+
+    // Implementation
+    if (((lv_armyCategory == null) || (lv_armyCategory == ""))) {
+        TriggerDebugOutput(1, StringExternal("Param/Value/lib_WoLC_363B7E8D"), true);
+    }
+
+    UserDataSetInt("Conscription", lp_conscription, "State", 1, (lp_state));
+    if ((lp_state == libWoLC_ge_ConscriptionUnitState_Purchased)) {
+        libWoLC_gf_EnableCampaignTechUnit(true, libWoLC_gf_WC_TechUnitOfArmyCategory(lv_armyCategory), 1);
+        libWoLC_gf_WC_SetArmyCategoryState(lv_armyCategory, c_armyCategoryStateUnlocked);
+    }
+    else {
+        libWoLC_gf_EnableCampaignTechUnit(false, libWoLC_gf_WC_TechUnitOfArmyCategory(lv_armyCategory), 1);
+        libWoLC_gf_WC_SetArmyCategoryState(lv_armyCategory, c_armyCategoryStateLocked);
+    }
+}
+
+void libWoLC_gf_SetUnitConscriptionState (string lp_unitType, int lp_state) {
+    // Variable Declarations
+    string lv_conscription;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_conscription = libWoLC_gf_GetConscriptionEntryForUnit(lp_unitType);
+
+    // Implementation
+    if ((lv_conscription != null)) {
+        libWoLC_gf_SetConscriptionState(lv_conscription, lp_state);
+    }
+
+}
+
+void libWoLC_gf_SaveConscriptionToBank (bank lp_bank, string lp_section, string lp_conscription) {
+    // Automatic Variable Declarations
+    // Implementation
+    libWoLC_gf_WC_SaveTransitionVarInteger(lp_bank, lp_section, (lp_conscription), UserDataGetInt("Conscription", lp_conscription, "State", 1), 0);
+}
+
+void libWoLC_gf_SaveAllConscriptionsToBank (bank lp_bank, string lp_section) {
+    // Variable Declarations
+    string lv_currentConscription;
+
+    // Automatic Variable Declarations
+    int autoDD6B77B9_ai;
+    int autoDD6B77B9_ae;
+
+    // Variable Initialization
+
+    // Implementation
+    autoDD6B77B9_ai = 1;
+    autoDD6B77B9_ae = UserDataInstanceCount("Conscription")+1;
+    while (autoDD6B77B9_ai < autoDD6B77B9_ae) {
+        lv_currentConscription = UserDataInstance("Conscription", autoDD6B77B9_ai);
+        autoDD6B77B9_ai = autoDD6B77B9_ai+1;
+        libWoLC_gf_SaveConscriptionToBank(lp_bank, lp_section, lv_currentConscription);
+    }
+}
+
+void libWoLC_gf_LoadConscriptionFromBank (bank lp_bank, string lp_section, string lp_conscription) {
+    // Automatic Variable Declarations
+    // Implementation
+    libWoLC_gf_SetConscriptionState(lp_conscription, libWoLC_gf_ParseConscriptionUnitState(libWoLC_gf_WC_LoadTransitionVarInteger(lp_bank, lp_section, (lp_conscription), 0)));
+}
+
+void libWoLC_gf_LoadAllConscriptionsFromBank (bank lp_bank, string lp_section) {
+    // Variable Declarations
+    string lv_currentConscription;
+
+    // Automatic Variable Declarations
+    int auto90F3622F_ai;
+    int auto90F3622F_ae;
+
+    // Variable Initialization
+
+    // Implementation
+    auto90F3622F_ai = 1;
+    auto90F3622F_ae = UserDataInstanceCount("Conscription")+1;
+    while (auto90F3622F_ai < auto90F3622F_ae) {
+        lv_currentConscription = UserDataInstance("Conscription", auto90F3622F_ai);
+        auto90F3622F_ai = auto90F3622F_ai+1;
+        libWoLC_gf_LoadConscriptionFromBank(lp_bank, lp_section, lv_currentConscription);
+    }
 }
 
 string libWoLC_gf_GetConscriptionEntryForUnit (string lp_unitType) {
     // Variable Declarations
+    string lv_currentConscription;
+    bool lv_found;
     string lv_unitConscriptionData;
 
     // Automatic Variable Declarations
+    int autoC22D9E6D_ai;
+    int autoC22D9E6D_ae;
+
     // Variable Initialization
 
     // Implementation
+    autoC22D9E6D_ai = 1;
+    autoC22D9E6D_ae = UserDataInstanceCount("Conscription")+1;
+    while (autoC22D9E6D_ai < autoC22D9E6D_ae) {
+        lv_currentConscription = UserDataInstance("Conscription", autoC22D9E6D_ai);
+        autoC22D9E6D_ai = autoC22D9E6D_ai+1;
+        if ((libWoLC_gf_ParseUnitType((lv_currentConscription)) == lp_unitType)) {
+            return lv_currentConscription;
+        }
+
+    }
+    TriggerDebugOutput(1, StringToText(("unit " + lp_unitType + " not found in the Conscription table")), true);
     return null;
+}
+
+string libWoLC_gf_ConscriptionCheatHandler (string lp_inputWords) {
+    // Variable Declarations
+    string lv_actionTypeName;
+    string lv_unitTypeName;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_actionTypeName = "";
+    lv_unitTypeName = "";
+
+    // Implementation
+    lv_actionTypeName = StringWord(lp_inputWords, (libWoLC_ge_ConscriptionCheatToken_ActionTokenIndex));
+    if ((lv_actionTypeName == null)) {
+        return "Action type name required.<n/>Format: Conscription <action type name> <unit type name><n/>Valid actions: enable, disable, purchase, refund";
+    }
+
+    lv_unitTypeName = libWoLC_gf_CamelCaseFromSpaceSeparated(lp_inputWords, true, (libWoLC_ge_ConscriptionCheatToken_UnitTokenStartIndex), 0);
+    if (((lv_unitTypeName == null) || (StringEqual(lv_unitTypeName, "", c_stringNoCase) == true))) {
+        return "Unit type name required.<n/>Format: Conscription <action type name> <unit type name><n/>Valid actions: enable, disable, purchase, refund";
+    }
+
+    return libWoLC_gf_ExecuteConscriptionActionString(lv_actionTypeName, lv_unitTypeName);
 }
 
 bool libWoLC_gf_CampaignMercenaryStateCheck (string lp_mercenary, string lp_state) {
@@ -5750,6 +5956,9 @@ void libWoLC_gf_WC_SaveTransitionVars (bank lp_targetBank, string lp_map, bool l
         lv__SectionName = libWoLC_gf_WC_BankSectionName(lp_map, "Mercenary");
         BankSectionCreate(lp_targetBank, lv__SectionName);
         libWoLC_gf_WC_SaveMercenaryToBank(lp_targetBank, lv__SectionName);
+        lv__SectionName = libWoLC_gf_WC_BankSectionName(lp_map, "Conscription");
+        BankSectionCreate(lp_targetBank, lv__SectionName);
+        libWoLC_gf_SaveAllConscriptionsToBank(lp_targetBank, lv__SectionName);
     }
 
     libWoLC_gf_WC_SaveMapToBank(lp_map, lp_targetBank, (lp_resultFromSimulation || lp_resultFromVictoryAgain));
@@ -5836,6 +6045,8 @@ void libWoLC_gf_WC_LoadTransitionVars (bank lp_sourceBank, string lp_map) {
     libWoLC_gf_WC_LoadPerksFromBank(lp_sourceBank, lv__SectionName);
     lv__SectionName = libWoLC_gf_WC_BankSectionName(lp_map, "Mercenary");
     libWoLC_gf_WC_LoadMercenaryFromBank(lp_sourceBank, lv__SectionName);
+    lv__SectionName = libWoLC_gf_WC_BankSectionName(lp_map, "Conscription");
+    libWoLC_gf_LoadAllConscriptionsFromBank(lp_sourceBank, lv__SectionName);
     lv__SectionName = libWoLC_gf_WC_BankSectionName(lp_map, "HelpUnitsPanel");
     lv_count = libWoLC_gf_WC_LoadTransitionVarInteger(lp_sourceBank, lv__SectionName, IntToString(0), 0);
     autoE1BE8001_ae = lv_count;

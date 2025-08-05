@@ -6700,10 +6700,15 @@
         <Fields Id="State" Type="Int">
             <Flags index="Modifiable" value="1"/>
         </Fields>
+        <Fields Id="UnlockMission" Type="Int"/>
+        <Fields Id="UnlockMap" Type="GameLink" GameLinkType="User"/>
         <Instances Id="[Default]"/>
         <Instances Id="Marine">
             <Int Int="2">
                 <Field Id="State"/>
+            </Int>
+            <Int Int="1">
+                <Field Id="UnlockMission"/>
             </Int>
         </Instances>
         <Instances Id="Medic">
