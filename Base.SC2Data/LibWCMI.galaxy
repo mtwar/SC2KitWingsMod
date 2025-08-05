@@ -758,6 +758,7 @@ void libWCMI_gf_WM_MissionEndStats (int lp_type) {
             autoA40095C7_ai = 1;
             while (autoA40095C7_ai <= autoA40095C7_ae) {
                 lv_indexArmyUnit = CatalogFieldValueGet(c_gameCatalogArmyCategory, lv_indexArmyCategory, "ArmyUnitArray["+IntToString(autoA40095C7_ai-1)+"]", 1);
+                autoA40095C7_ai = autoA40095C7_ai + 1;
                 libWoLC_gf_WC_StatEventCreate("UnitStats");
                 libWoLC_gf_WC_StatEventAddStr("UnitID", (libWoLC_gf_WC_StoryArmyUnitUnitType(lv_indexArmyUnit)), libWoLC_gf_WC_StatEventLast());
                 libWoLC_gf_WC_StatEventAddInt("UnitsMade", DataTableGetInt(true, ("UnitMade_" + libWoLC_gf_WC_ArmyStringFromArmyUnit(lv_indexArmyUnit))), libWoLC_gf_WC_StatEventLast());
@@ -772,7 +773,6 @@ void libWCMI_gf_WM_MissionEndStats (int lp_type) {
                 libWoLC_gf_WC_StatEventAddInt("MineralsLost", DataTableGetInt(true, ("MinLost_" + libWoLC_gf_WC_ArmyStringFromArmyUnit(lv_indexArmyUnit))), libWoLC_gf_WC_StatEventLast());
                 libWoLC_gf_WC_StatEventAddInt("VespeneLost", DataTableGetInt(true, ("VesLost_" + libWoLC_gf_WC_ArmyStringFromArmyUnit(lv_indexArmyUnit))), libWoLC_gf_WC_StatEventLast());
                 libWoLC_gf_WC_StatEventDone(libWoLC_gf_WC_StatEventLast());
-                autoA40095C7_ai = autoA40095C7_ai + 1;
             }
         }
 
