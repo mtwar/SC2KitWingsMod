@@ -8260,7 +8260,7 @@ bool libWoLC_gt_ConscriptionCheatListener_Func (bool testConds, bool runActions)
 //--------------------------------------------------------------------------------------------------
 void libWoLC_gt_ConscriptionCheatListener_Init () {
     libWoLC_gt_ConscriptionCheatListener = TriggerCreate("libWoLC_gt_ConscriptionCheatListener_Func");
-    TriggerAddEventChatMessage(libWoLC_gt_ConscriptionCheatListener, c_playerAny, "conscription", false);
+    TriggerAddEventChatMessage(libWoLC_gt_ConscriptionCheatListener, c_playerAny, "", false);
 }
 
 //--------------------------------------------------------------------------------------------------

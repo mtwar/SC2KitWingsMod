@@ -6797,6 +6797,9 @@
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
             </Int>
+            <String String="Reaper">
+                <Field Id="Name"/>
+            </String>
         </Instances>
         <Instances Id="WidowMine">
             <Int Int="25000">
@@ -7048,7 +7051,29 @@
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
             </Int>
+            <Int Int="2">
+                <Field Id="UnlockMission"/>
+            </Int>
             <String String="Bunker">
+                <Field Id="Name"/>
+            </String>
+        </Instances>
+        <Instances Id="MissileTurret">
+            <Int Int="1">
+                <Field Id="UnlockWithConscription"/>
+            </Int>
+            <Int Int="2">
+                <Field Id="UnlockMission"/>
+            </Int>
+            <String String="MissileTurret">
+                <Field Id="Name"/>
+            </String>
+        </Instances>
+        <Instances Id="PerditionTurret">
+            <Int Int="1">
+                <Field Id="UnlockWithConscription"/>
+            </Int>
+            <String String="PerditionTurret">
                 <Field Id="Name"/>
             </String>
         </Instances>
