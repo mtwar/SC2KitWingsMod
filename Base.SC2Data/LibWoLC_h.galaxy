@@ -389,6 +389,7 @@ void libWoLC_gf_UnlockConscriptionsByMap (string lp_map);
 void libWoLC_gf_UnlockConscriptionsByMissionCount ();
 void libWoLC_gf_SetConscriptionState (string lp_conscription, int lp_state);
 string libWoLC_gf_ConscriptionCheatHandler (string lp_inputWords);
+string libWoLC_gf_ValidConscriptionActionList ();
 bool libWoLC_gf_CampaignMercenaryStateCheck (string lp_mercenary, string lp_state);
 string libWoLC_gf_WC_MercenaryState (string lp_mercenary);
 text libWoLC_gf_WC_MercenaryName (string lp_mercenary);

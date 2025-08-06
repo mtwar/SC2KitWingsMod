@@ -4242,7 +4242,7 @@ string libWoLC_gf_ConscriptionCheatHandler (string lp_inputWords) {
     // Implementation
     lv_actionTypeName = StringWord(lp_inputWords, (libWoLC_ge_ConscriptionCheatToken_ActionTokenIndex));
     if ((StringEqual(lv_actionTypeName, "", c_stringNoCase) == true)) {
-        return "Action type name required.<n/>Format: conscription <action type name> <unit type name><n/>Valid actions: enable, disable, purchase, refund, override";
+        return ("Action type name required.<n/>Format: conscription <action type name> <unit type name><n/>Valid actions: " + libWoLC_gf_ValidConscriptionActionList());
     }
 
     if (((StringEqual(lv_actionTypeName, libWoLC_ge_ConscriptionActionType_Ident(libWoLC_ge_ConscriptionActionType_SaveAll), c_stringNoCase) == true) || (StringEqual(lv_actionTypeName, libWoLC_ge_ConscriptionActionType_Ident(libWoLC_ge_ConscriptionActionType_LoadAll), c_stringNoCase) == true))) {
@@ -4266,10 +4266,35 @@ string libWoLC_gf_ConscriptionCheatHandler (string lp_inputWords) {
 
     lv_unitTypeName = libWoLC_gf_CamelCaseFromSpaceSeparated(lp_inputWords, true, (libWoLC_ge_ConscriptionCheatToken_UnitTokenStartIndex), 0);
     if ((StringEqual(lv_unitTypeName, "", c_stringNoCase) == true)) {
-        return "Unit type name required.<n/>Format: conscription <action type name> <unit type name><n/>Valid actions: enable, disable, purchase, refund, override";
+        return ("Unit type name required.<n/>Format: conscription <action type name> <unit type name><n/>Valid actions: " + libWoLC_gf_ValidConscriptionActionList());
     }
 
     return libWoLC_gf_ExecuteConscriptionActionString(lv_actionTypeName, lv_unitTypeName, lv_stateName, lv_sectionName);
+}
+
+string libWoLC_gf_ValidConscriptionActionList () {
+    // Variable Declarations
+    int lv_actionIndex;
+    string lv_actionString;
+    string lv_outputString;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_actionIndex = libWoLC_ge_ConscriptionActionType_Unlock;
+    lv_actionString = libWoLC_ge_ConscriptionActionType_Ident(lv_actionIndex);
+    lv_outputString = "";
+
+    // Implementation
+    if ((lv_actionString == null)) {
+        return "";
+    }
+
+    while ((lv_actionString != null)) {
+        lv_actionIndex = lv_actionIndex + 1;
+        lv_outputString = lv_outputString + ", " + lv_actionString;
+        lv_actionString = libWoLC_ge_ConscriptionActionType_Ident(lv_actionIndex);
+    }
+    return StringSub(lv_outputString, 3, StringLength(lv_outputString));
 }
 
 bool libWoLC_gf_CampaignMercenaryStateCheck (string lp_mercenary, string lp_state) {

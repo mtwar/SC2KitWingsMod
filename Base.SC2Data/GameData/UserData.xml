@@ -6701,7 +6701,7 @@
             <Flags index="Modifiable" value="1"/>
         </Fields>
         <Fields Id="UnlockMission" Type="Int"/>
-        <Fields Id="UnlockMap" Type="GameLink" GameLinkType="User"/>
+        <Fields Id="UnlockMap" Type="GameLink" GameLinkType="Map"/>
         <Instances Id="[Default]"/>
         <Instances Id="Marine">
             <Int Int="2">
@@ -6746,6 +6746,9 @@
             </String>
         </Instances>
         <Instances Id="Firebat">
+            <GameLink GameLink="TRaynor01">
+                <Field Id="UnlockMap"/>
+            </GameLink>
             <Int Int="30000">
                 <Field Id="Price"/>
             </Int>
