@@ -6713,6 +6713,9 @@
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
             </Int>
+            <String String="Marine">
+                <Field Id="Name"/>
+            </String>
         </Instances>
         <Instances Id="Medic">
             <Int Int="30000">
@@ -6805,7 +6808,7 @@
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
             </Int>
-            <String String="Widow Mine">
+            <String String="WidowMine">
                 <Field Id="Name"/>
             </String>
         </Instances>
@@ -6861,7 +6864,7 @@
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
             </Int>
-            <String String="Science Vessel">
+            <String String="ScienceVessel">
                 <Field Id="Name"/>
             </String>
         </Instances>
@@ -6917,7 +6920,7 @@
             <Int Int="7">
                 <Field Id="UnlockMission"/>
             </Int>
-            <String String="Siege Tank">
+            <String String="SiegeTank">
                 <Field Id="Name"/>
             </String>
         </Instances>
@@ -7038,6 +7041,14 @@
                 <Field Id="UnlockWithConscription"/>
             </Int>
             <String String="Ghost">
+                <Field Id="Name"/>
+            </String>
+        </Instances>
+        <Instances Id="Bunker">
+            <Int Int="1">
+                <Field Id="UnlockWithConscription"/>
+            </Int>
+            <String String="Bunker">
                 <Field Id="Name"/>
             </String>
         </Instances>

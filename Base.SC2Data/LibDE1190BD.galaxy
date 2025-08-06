@@ -150,98 +150,6 @@ void libDE1190BD_gf_PointAoEGroundOnly (unit lp_unit, abilcmd lp_ability, int lp
 
 // Triggers
 //--------------------------------------------------------------------------------------------------
-// Trigger: Swap Lab Techs
-//--------------------------------------------------------------------------------------------------
-bool libDE1190BD_gt_SwapLabTechs_Func (bool testConds, bool runActions) {
-    // Automatic Variable Declarations
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    TechTreeUnitAllow(1, "MercCompound", true);
-    TechTreeAbilityAllow(1, AbilityCommand("TerranBuild", 12), true);
-    if ((TechTreeUpgradeCount(1, "OrbitalRelay", c_techCountQueuedOrBetter) == 1)) {
-        TechTreeAbilityAllow(1, AbilityCommand("SupplyDrop", 0), true);
-        TechTreeAbilityAllow(1, AbilityCommand("CalldownMULE", 0), false);
-    }
-
-    if ((TechTreeUpgradeCount(1, "UltraCapacitors", c_techCountQueuedOrBetter) == 1)) {
-        TechTreeAbilityAllow(1, AbilityCommand("StimpackMarauder", 0), true);
-        TechTreeAbilityAllow(1, AbilityCommand("StimpackReaper", 0), true);
-    }
-
-    if ((TechTreeUpgradeCount(1, "OrbitalStrike", c_techCountQueuedOrBetter) == 1)) {
-        libNtve_gf_SetUpgradeLevelForPlayer(1, "OrbitalStrike", 0);
-        libNtve_gf_SetUpgradeLevelForPlayer(1, "RogueForces", 1);
-    }
-
-    if (((TechTreeUpgradeCount(1, "PermanentCloakGhost", c_techCountQueuedOrBetter) == 1) || (TechTreeUpgradeCount(1, "PermanentCloakSpectre", c_techCountQueuedOrBetter) == 1))) {
-        libNtve_gf_SetUpgradeLevelForPlayer(1, "PermanentCloakSpectre", 0);
-        libNtve_gf_SetUpgradeLevelForPlayer(1, "PermanentCloakGhost", 0);
-        libNtve_gf_SetUpgradeLevelForPlayer(1, "PsionicAbsorption", 1);
-    }
-
-    if ((TechTreeUpgradeCount(1, "TwinLinkedFlameThrowers", c_techCountQueuedOrBetter) == 1)) {
-        libNtve_gf_SetUpgradeLevelForPlayer(1, "TwinLinkedFlameThrowers", 0);
-        libNtve_gf_SetUpgradeLevelForPlayer(1, "HellionSmartServos", 1);
-    }
-
-    if ((TechTreeUpgradeCount(1, "MaelstromRounds", c_techCountQueuedOrBetter) == 1)) {
-        libNtve_gf_SetUpgradeLevelForPlayer(1, "MaelstromRounds", 0);
-        libNtve_gf_SetUpgradeLevelForPlayer(1, "UnknownUpgrade2", 1);
-    }
-
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void libDE1190BD_gt_SwapLabTechs_Init () {
-    libDE1190BD_gt_SwapLabTechs = TriggerCreate("libDE1190BD_gt_SwapLabTechs_Func");
-    TriggerAddEventTimePeriodic(libDE1190BD_gt_SwapLabTechs, 5.0, c_timeGame);
-}
-
-//--------------------------------------------------------------------------------------------------
-// Trigger: Vanadium
-//--------------------------------------------------------------------------------------------------
-bool libDE1190BD_gt_Vanadium_Func (bool testConds, bool runActions) {
-    // Automatic Variable Declarations
-    string autoBE108536_val;
-
-    // Conditions
-    if (testConds) {
-        if (!(((EventUpgradeName() == "TerranVehicleArmorsVanadiumPlatingLevel1") || (EventUpgradeName() == "TerranVehicleArmorsVanadiumPlatingLevel2") || (EventUpgradeName() == "TerranVehicleArmorsVanadiumPlatingLevel3")))) {
-            return false;
-        }
-    }
-
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    autoBE108536_val = EventUpgradeName();
-    if (autoBE108536_val == "TerranVehicleArmorsVanadiumPlatingLevel1") {
-        libNtve_gf_SetUpgradeLevelForPlayer(1, "TerranShipArmorsVanadiumPlatingLevel1", 1);
-    }
-    else if (autoBE108536_val == "TerranVehicleArmorsVanadiumPlatingLevel2") {
-        libNtve_gf_SetUpgradeLevelForPlayer(1, "TerranShipArmorsVanadiumPlatingLevel2", 1);
-    }
-    else if (autoBE108536_val == "TerranVehicleArmorsVanadiumPlatingLevel3") {
-        libNtve_gf_SetUpgradeLevelForPlayer(1, "TerranShipArmorsVanadiumPlatingLevel3", 1);
-    }
-    else {
-    }
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void libDE1190BD_gt_Vanadium_Init () {
-    libDE1190BD_gt_Vanadium = TriggerCreate("libDE1190BD_gt_Vanadium_Func");
-    TriggerAddEventUpgradeLevelChanged(libDE1190BD_gt_Vanadium, 1);
-}
-
-//--------------------------------------------------------------------------------------------------
 // Trigger: Lower Than Brutal
 //--------------------------------------------------------------------------------------------------
 bool libDE1190BD_gt_LowerThanBrutal_Func (bool testConds, bool runActions) {
@@ -337,12 +245,8 @@ bool libDE1190BD_gt_RunZergAI_Func (bool testConds, bool runActions) {
 
     TriggerExecute(libDE1190BD_gt_Infestor, true, false);
     TriggerExecute(libDE1190BD_gt_BroodQueen, true, false);
-    if ((TriggerActiveCount(libDE1190BD_gt_SwapLabTechs) == 0)) {
-        TriggerExecute(libDE1190BD_gt_SwapLabTechs, true, false);
-        TriggerExecute(libDE1190BD_gt_LowerThanBrutal, true, false);
-        TriggerExecute(libDE1190BD_gt_Brutalisk, true, false);
-    }
-
+    TriggerExecute(libDE1190BD_gt_LowerThanBrutal, true, false);
+    TriggerExecute(libDE1190BD_gt_Brutalisk, true, false);
     return true;
 }
 
@@ -367,11 +271,7 @@ bool libDE1190BD_gt_RunTerranAI_Func (bool testConds, bool runActions) {
     TriggerExecute(libDE1190BD_gt_Raven, true, false);
     TriggerExecute(libDE1190BD_gt_Banshee, true, false);
     TriggerExecute(libDE1190BD_gt_Wraith, true, false);
-    if ((TriggerActiveCount(libDE1190BD_gt_SwapLabTechs) == 0)) {
-        TriggerExecute(libDE1190BD_gt_SwapLabTechs, true, false);
-        TriggerExecute(libDE1190BD_gt_LowerThanBrutal, true, false);
-    }
-
+    TriggerExecute(libDE1190BD_gt_LowerThanBrutal, true, false);
     return true;
 }
 
@@ -394,11 +294,7 @@ bool libDE1190BD_gt_RunProtossAI_Func (bool testConds, bool runActions) {
     TriggerExecute(libDE1190BD_gt_Stalker, true, false);
     TriggerExecute(libDE1190BD_gt_Ascendent, true, false);
     TriggerExecute(libDE1190BD_gt_Wrathwalker, true, false);
-    if ((TriggerActiveCount(libDE1190BD_gt_SwapLabTechs) == 0)) {
-        TriggerExecute(libDE1190BD_gt_SwapLabTechs, true, false);
-        TriggerExecute(libDE1190BD_gt_LowerThanBrutal, true, false);
-    }
-
+    TriggerExecute(libDE1190BD_gt_LowerThanBrutal, true, false);
     return true;
 }
 
@@ -1020,8 +916,6 @@ void libDE1190BD_gt_Wrathwalker_Init () {
 }
 
 void libDE1190BD_InitTriggers () {
-    libDE1190BD_gt_SwapLabTechs_Init();
-    libDE1190BD_gt_Vanadium_Init();
     libDE1190BD_gt_LowerThanBrutal_Init();
     libDE1190BD_gt_ForceCheater_Init();
     libDE1190BD_gt_RunAllCustomAI_Init();
