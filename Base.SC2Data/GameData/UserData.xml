@@ -5451,6 +5451,14 @@
                 <Field Id="Name"/>
             </Text>
         </Instances>
+        <Instances Id="WidowMine">
+            <Text Text="UserData/TechUnit/WidowMine_Name">
+                <Field Id="Name"/>
+            </Text>
+            <Unit Unit="WidowMineBurrowed">
+                <Field Id="Variants"/>
+            </Unit>
+        </Instances>
     </CUser>
     <CUser id="Timestamps">
         <Fields Id="StartDelay" Type="Fixed"/>
@@ -6704,9 +6712,6 @@
         <Fields Id="UnlockMap" Type="GameLink" GameLinkType="Map"/>
         <Instances Id="[Default]"/>
         <Instances Id="Marine">
-            <Int Int="2">
-                <Field Id="State"/>
-            </Int>
             <Int Int="1">
                 <Field Id="UnlockMission"/>
             </Int>
@@ -6746,9 +6751,6 @@
             </String>
         </Instances>
         <Instances Id="Firebat">
-            <GameLink GameLink="TRaynor01">
-                <Field Id="UnlockMap"/>
-            </GameLink>
             <Int Int="30000">
                 <Field Id="Price"/>
             </Int>
@@ -7035,6 +7037,9 @@
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
             </Int>
+            <Int Int="-1">
+                <Field Id="UnlockMission"/>
+            </Int>
             <String String="Spectre">
                 <Field Id="Name"/>
             </String>
@@ -7045,6 +7050,9 @@
             </Int>
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
+            </Int>
+            <Int Int="-1">
+                <Field Id="UnlockMission"/>
             </Int>
             <String String="Ghost">
                 <Field Id="Name"/>
@@ -7075,6 +7083,9 @@
         <Instances Id="PerditionTurret">
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
+            </Int>
+            <Int Int="-1">
+                <Field Id="UnlockMission"/>
             </Int>
             <String String="PerditionTurret">
                 <Field Id="Name"/>

@@ -8321,6 +8321,7 @@ UserData/TechUnit/VikingFighter_Name=Viking
 UserData/TechUnit/Vulture_DescriptionShort=Fast skirmish unit.
 UserData/TechUnit/Vulture_Name=Vulture
 UserData/TechUnit/WarPig_Name=War Pig
+UserData/TechUnit/WidowMine_Name=Widow Mine
 UserData/TechUnit/Wraith_DescriptionShort=Highly mobile flying unit. Excellent at surgical strikes.
 UserData/TechUnit/Wraith_Name=Wraith
 UserData/TechUpgrade/Tech_Banshee_1_Name=Cross-Spectrum Dampeners
