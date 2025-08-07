@@ -847,6 +847,7 @@ void libWCMI_gf_EndCampaignMission (int lp_player, int lp_type) {
 
     TextExpressionSetToken("Param/Expression/lib_WCMI_20839488", "A", libWoLC_gf_WC_CampaignMapName(libWoLC_gf_CurrentMap()));
     libWoLC_gf_CreateStoryModeTransitionSave(TextExpressionAssemble("Param/Expression/lib_WCMI_20839488"), StringToText(""));
+    libWoLC_gf_SaveAllConscriptionsToCampaignMapBank(libWoLC_gf_CurrentMap());
     libWCUI_gf_DisplayCampaignVictoryScoreScreen(libWoLC_gf_CurrentMap());
     if ((libWoLC_gv_wCX_IsSimulation == true)) {
         libWoLC_gf_WC_OpenCampaignBank();

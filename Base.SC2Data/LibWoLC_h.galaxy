@@ -389,9 +389,16 @@ void libWoLC_gf_LoadConscriptionFromBank (bank lp_bank, string lp_section, strin
 void libWoLC_gf_SetConscriptionState (string lp_conscription, int lp_state);
 void libWoLC_gf_ApplyAllConscriptionsToTechTree ();
 void libWoLC_gf_ApplyConscriptionToTechTree (string lp_conscription);
+void libWoLC_gf_UnlockConscriptionsOnMapStart ();
 void libWoLC_gf_UnlockConscriptionsOnMapVictory (string lp_map);
 void libWoLC_gf_UnlockConscriptionsByMap (string lp_map);
-void libWoLC_gf_UnlockConscriptionsByMissionCount ();
+void libWoLC_gf_UnlockConscriptionsByMissionNumber (int lp_missionCount);
+void libWoLC_gf_UnlockConscriptionByMap (string lp_conscription, string lp_map);
+void libWoLC_gf_UnlockConscriptionByMissionNumber (string lp_conscription, int lp_missionCount);
+bool libWoLC_gf_ConscriptionUnlocksInCutscene (string lp_conscription);
+bool libWoLC_gf_ConscriptionUnlocksByMissionNumber (string lp_conscription);
+bool libWoLC_gf_ConscriptionUnlocksByMap (string lp_conscription);
+bool libWoLC_gf_ConscriptionUnlocksAutomatically (string lp_conscription);
 bool libWoLC_gf_CampaignMercenaryStateCheck (string lp_mercenary, string lp_state);
 string libWoLC_gf_WC_MercenaryState (string lp_mercenary);
 text libWoLC_gf_WC_MercenaryName (string lp_mercenary);

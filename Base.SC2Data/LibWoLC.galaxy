@@ -3890,7 +3890,7 @@ string libWoLC_gf_GetConscriptionEntryForUnit (string lp_unitType) {
     while (autoC22D9E6D_ai < autoC22D9E6D_ae) {
         lv_currentConscription = UserDataInstance("Conscription", autoC22D9E6D_ai);
         autoC22D9E6D_ai = autoC22D9E6D_ai+1;
-        if (!UserDataGetInt("Conscription", lv_currentConscription, "UnlockWithConscription", 1)) {
+        if (UserDataGetInt("Conscription", lv_currentConscription, "UnlockWithConscription", 1) <= 0) {
             continue;
         }
         if ((libWoLC_gf_ParseUnitType((lv_currentConscription)) == lp_unitType)) {
@@ -4152,7 +4152,7 @@ void libWoLC_gf_SaveAllConscriptionsToBank (bank lp_bank, string lp_section) {
     while (autoDD6B77B9_ai < autoDD6B77B9_ae) {
         lv_currentConscription = UserDataInstance("Conscription", autoDD6B77B9_ai);
         autoDD6B77B9_ai = autoDD6B77B9_ai+1;
-        if (!UserDataGetInt("Conscription", lv_currentConscription, "UnlockWithConscription", 1)) {
+        if (UserDataGetInt("Conscription", lv_currentConscription, "UnlockWithConscription", 1) <= 0) {
             continue;
         }
         libWoLC_gf_WriteConscriptionToBank(lp_bank, lp_section, lv_currentConscription);
@@ -4176,7 +4176,7 @@ void libWoLC_gf_LoadAllConscriptionsFromBank (bank lp_bank, string lp_section) {
     while (auto90F3622F_ai < auto90F3622F_ae) {
         lv_currentConscription = UserDataInstance("Conscription", auto90F3622F_ai);
         auto90F3622F_ai = auto90F3622F_ai+1;
-        if (!UserDataGetInt("Conscription", lv_currentConscription, "UnlockWithConscription", 1)) {
+        if (UserDataGetInt("Conscription", lv_currentConscription, "UnlockWithConscription", 1) <= 0) {
             continue;
         }
         libWoLC_gf_LoadConscriptionFromBank(lp_bank, lp_section, lv_currentConscription);
@@ -4217,7 +4217,7 @@ void libWoLC_gf_ApplyAllConscriptionsToTechTree () {
     while (auto9FC9690B_ai < auto9FC9690B_ae) {
         lv_currentConscription = UserDataInstance("Conscription", auto9FC9690B_ai);
         auto9FC9690B_ai = auto9FC9690B_ai+1;
-        if (!UserDataGetInt("Conscription", lv_currentConscription, "UnlockWithConscription", 1)) {
+        if (UserDataGetInt("Conscription", lv_currentConscription, "UnlockWithConscription", 1) <= 0) {
             continue;
         }
         libWoLC_gf_ApplyConscriptionToTechTree(lv_currentConscription);
@@ -4248,18 +4248,44 @@ void libWoLC_gf_ApplyConscriptionToTechTree (string lp_conscription) {
     }
 }
 
+void libWoLC_gf_UnlockConscriptionsOnMapStart () {
+    // Variable Declarations
+    string lv_conscription;
+
+    // Automatic Variable Declarations
+    int autoBF44A804_ai;
+    int autoBF44A804_ae;
+
+    // Variable Initialization
+
+    // Implementation
+    autoBF44A804_ai = 1;
+    autoBF44A804_ae = UserDataInstanceCount("Conscription")+1;
+    while (autoBF44A804_ai < autoBF44A804_ae) {
+        lv_conscription = UserDataInstance("Conscription", autoBF44A804_ai);
+        autoBF44A804_ai = autoBF44A804_ai+1;
+        if (UserDataGetInt("Conscription", lv_conscription, "UnlockWithConscription", 1) <= 0) {
+            continue;
+        }
+        if ((libWoLC_gf_ConscriptionUnlocksInCutscene(lv_conscription) == true)) {
+            continue;
+        }
+
+        libWoLC_gf_UnlockConscriptionByMap(lv_conscription, libWoLC_gf_CurrentMap());
+        libWoLC_gf_UnlockConscriptionByMissionNumber(lv_conscription, (libWoLC_gf_NumberOfMissions(libWoLC_ge_MissionCountOptions_Completed) + 1));
+    }
+}
+
 void libWoLC_gf_UnlockConscriptionsOnMapVictory (string lp_map) {
     // Automatic Variable Declarations
     // Implementation
     libWoLC_gf_UnlockConscriptionsByMap(lp_map);
-    libWoLC_gf_UnlockConscriptionsByMissionCount();
-    libWoLC_gf_SaveAllConscriptionsToCampaignMapBank(lp_map);
+    libWoLC_gf_UnlockConscriptionsByMissionNumber(libWoLC_gf_NumberOfMissions(libWoLC_ge_MissionCountOptions_Completed));
 }
 
 void libWoLC_gf_UnlockConscriptionsByMap (string lp_map) {
     // Variable Declarations
     string lv_conscription;
-    string lv_unlockMap;
 
     // Automatic Variable Declarations
     int autoD50C7323_ai;
@@ -4273,22 +4299,16 @@ void libWoLC_gf_UnlockConscriptionsByMap (string lp_map) {
     while (autoD50C7323_ai < autoD50C7323_ae) {
         lv_conscription = UserDataInstance("Conscription", autoD50C7323_ai);
         autoD50C7323_ai = autoD50C7323_ai+1;
-        if (!UserDataGetInt("Conscription", lv_conscription, "UnlockWithConscription", 1)) {
+        if (UserDataGetInt("Conscription", lv_conscription, "UnlockWithConscription", 1) <= 0) {
             continue;
         }
-        lv_unlockMap = UserDataGetGameLink("Conscription", lv_conscription, "UnlockMap", 1);
-        if (((lv_unlockMap == null) || (lv_unlockMap != lp_map))) {
-            continue;
-        }
-
-        libWoLC_gf_LogDebugIfNotEmpty(libWoLC_gf_UnlockConscription(lv_conscription));
+        libWoLC_gf_UnlockConscriptionByMap(lv_conscription, lp_map);
     }
 }
 
-void libWoLC_gf_UnlockConscriptionsByMissionCount () {
+void libWoLC_gf_UnlockConscriptionsByMissionNumber (int lp_missionCount) {
     // Variable Declarations
     string lv_conscription;
-    int lv_unlockMissionCount;
 
     // Automatic Variable Declarations
     int auto8DC33BE0_ai;
@@ -4302,16 +4322,53 @@ void libWoLC_gf_UnlockConscriptionsByMissionCount () {
     while (auto8DC33BE0_ai < auto8DC33BE0_ae) {
         lv_conscription = UserDataInstance("Conscription", auto8DC33BE0_ai);
         auto8DC33BE0_ai = auto8DC33BE0_ai+1;
-        if (!UserDataGetInt("Conscription", lv_conscription, "UnlockWithConscription", 1)) {
+        if (UserDataGetInt("Conscription", lv_conscription, "UnlockWithConscription", 1) <= 0) {
             continue;
         }
-        lv_unlockMissionCount = UserDataGetInt("Conscription", lv_conscription, "UnlockMission", 1);
-        if (((lv_unlockMissionCount < 0) || (libWoLC_gf_NumberOfMissions(libWoLC_ge_MissionCountOptions_Completed) < UserDataGetInt("Conscription", lv_conscription, "UnlockMission", 1)))) {
-            continue;
-        }
-
-        libWoLC_gf_LogDebugIfNotEmpty(libWoLC_gf_UnlockConscription(lv_conscription));
+        libWoLC_gf_UnlockConscriptionByMissionNumber(lv_conscription, lp_missionCount);
     }
+}
+
+void libWoLC_gf_UnlockConscriptionByMap (string lp_conscription, string lp_map) {
+    // Automatic Variable Declarations
+    // Implementation
+    if ((libWoLC_gf_ConscriptionUnlocksByMap(lp_conscription) == true) && (lp_map == UserDataGetGameLink("Conscription", lp_conscription, "UnlockMap", 1))) {
+        libWoLC_gf_LogDebugIfNotEmpty(libWoLC_gf_UnlockConscription(lp_conscription));
+    }
+
+}
+
+void libWoLC_gf_UnlockConscriptionByMissionNumber (string lp_conscription, int lp_missionCount) {
+    // Automatic Variable Declarations
+    // Implementation
+    if ((libWoLC_gf_ConscriptionUnlocksByMissionNumber(lp_conscription) == true) && (lp_missionCount == UserDataGetInt("Conscription", lp_conscription, "UnlockMissionNumber", 1))) {
+        libWoLC_gf_LogDebugIfNotEmpty(libWoLC_gf_UnlockConscription(lp_conscription));
+    }
+
+}
+
+bool libWoLC_gf_ConscriptionUnlocksInCutscene (string lp_conscription) {
+    // Automatic Variable Declarations
+    // Implementation
+    return (UserDataGetInt("Conscription", lp_conscription, "UnlockInCutscene", 1) > 0);
+}
+
+bool libWoLC_gf_ConscriptionUnlocksByMissionNumber (string lp_conscription) {
+    // Automatic Variable Declarations
+    // Implementation
+    return (UserDataGetInt("Conscription", lp_conscription, "UnlockMissionNumber", 1) > 0);
+}
+
+bool libWoLC_gf_ConscriptionUnlocksByMap (string lp_conscription) {
+    // Automatic Variable Declarations
+    // Implementation
+    return (UserDataGetInt("Conscription", lp_conscription, "UnlockMap", 1) > 0);
+}
+
+bool libWoLC_gf_ConscriptionUnlocksAutomatically (string lp_conscription) {
+    // Automatic Variable Declarations
+    // Implementation
+    return libWoLC_gf_ConscriptionUnlocksByMap(lp_conscription) || libWoLC_gf_ConscriptionUnlocksByMissionNumber(lp_conscription);
 }
 
 bool libWoLC_gf_CampaignMercenaryStateCheck (string lp_mercenary, string lp_state) {
@@ -5064,7 +5121,7 @@ int libWoLC_gf_WC_CreditsTotalSpent () {
     while (autoA6C0A25C_ai < autoA6C0A25C_ae) {
         lv_conscription = UserDataInstance("Conscription", autoA6C0A25C_ai);
         autoA6C0A25C_ai = autoA6C0A25C_ai+1;
-        if (!UserDataGetInt("Conscription", lv_conscription, "UnlockWithConscription", 1)) {
+        if (UserDataGetInt("Conscription", lv_conscription, "UnlockWithConscription", 1) <= 0) {
             continue;
         }
         if ((libWoLC_gf_ConscriptionPurchased(lv_conscription) == true)) {
@@ -6213,10 +6270,6 @@ void libWoLC_gf_WC_SaveTransitionVars (bank lp_targetBank, string lp_map, bool l
             BankSectionCreate(lp_targetBank, lv__SectionName);
             libWoLC_gf_WC_SaveArmyCategoryToBank(lp_targetBank, lv__SectionName);
             libWoLC_gf_SaveAllConscriptionsToCampaignMapBank(null);
-            if ((libWoLC_gv_wCX_LastMap != null) && (libWoLC_gv_wCX_LastMap != "TStory01") && (libWoLC_gv_wCX_LastMapSuccess == true)) {
-                libWoLC_gf_UnlockConscriptionsOnMapVictory(libWoLC_gv_wCX_LastMap);
-            }
-
             autoB8A58551_ae = libWoLC_gv_wC_PersistentUserTypeCount;
             autoB8A58551_var = 0;
             for ( ; autoB8A58551_var <= autoB8A58551_ae; autoB8A58551_var += 1 ) {
@@ -6250,7 +6303,6 @@ void libWoLC_gf_WC_SaveTransitionVars (bank lp_targetBank, string lp_map, bool l
         lv__SectionName = libWoLC_gf_WC_BankSectionName(lp_map, "Mercenary");
         BankSectionCreate(lp_targetBank, lv__SectionName);
         libWoLC_gf_WC_SaveMercenaryToBank(lp_targetBank, lv__SectionName);
-        libWoLC_gf_SaveAllConscriptionsToCampaignMapBank(lp_map);
     }
 
     libWoLC_gf_WC_SaveMapToBank(lp_map, lp_targetBank, (lp_resultFromSimulation || lp_resultFromVictoryAgain));
@@ -6340,6 +6392,10 @@ void libWoLC_gf_WC_LoadTransitionVars (bank lp_sourceBank, string lp_map) {
     lv__SectionName = libWoLC_gf_WC_BankSectionName(lp_map, "Conscription");
     libWoLC_gf_LoadAllConscriptionsFromBank(lp_sourceBank, lv__SectionName);
     libWoLC_gf_ApplyAllConscriptionsToTechTree();
+    if ((libWoLC_gf_CurrentMap() != "TStory01")) {
+        libWoLC_gf_UnlockConscriptionsOnMapStart();
+    }
+
     lv__SectionName = libWoLC_gf_WC_BankSectionName(lp_map, "HelpUnitsPanel");
     lv_count = libWoLC_gf_WC_LoadTransitionVarInteger(lp_sourceBank, lv__SectionName, IntToString(0), 0);
     autoE1BE8001_ae = lv_count;

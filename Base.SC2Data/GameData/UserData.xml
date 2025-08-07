@@ -6708,12 +6708,13 @@
         <Fields Id="State" Type="Int">
             <Flags index="Modifiable" value="1"/>
         </Fields>
-        <Fields Id="UnlockMission" Type="Int"/>
+        <Fields Id="UnlockMissionNumber" Type="Int"/>
         <Fields Id="UnlockMap" Type="GameLink" GameLinkType="Map"/>
+        <Fields Id="UnlockInCutscene" Type="Int"/>
         <Instances Id="[Default]"/>
         <Instances Id="Marine">
             <Int Int="1">
-                <Field Id="UnlockMission"/>
+                <Field Id="UnlockMissionNumber"/>
             </Int>
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
@@ -6723,14 +6724,11 @@
             </String>
         </Instances>
         <Instances Id="Medic">
-            <Int Int="30000">
-                <Field Id="Price"/>
-            </Int>
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
             </Int>
-            <Int Int="1">
-                <Field Id="UnlockMission"/>
+            <Int Int="2">
+                <Field Id="UnlockMissionNumber"/>
             </Int>
             <String String="Medic">
                 <Field Id="Name"/>
@@ -6744,7 +6742,7 @@
                 <Field Id="UnlockWithConscription"/>
             </Int>
             <Int Int="1">
-                <Field Id="UnlockMission"/>
+                <Field Id="UnlockMissionNumber"/>
             </Int>
             <String String="Vulture">
                 <Field Id="Name"/>
@@ -6758,7 +6756,7 @@
                 <Field Id="UnlockWithConscription"/>
             </Int>
             <Int Int="2">
-                <Field Id="UnlockMission"/>
+                <Field Id="UnlockMissionNumber"/>
             </Int>
             <String String="Firebat">
                 <Field Id="Name"/>
@@ -6772,21 +6770,21 @@
                 <Field Id="UnlockWithConscription"/>
             </Int>
             <Int Int="2">
-                <Field Id="UnlockMission"/>
+                <Field Id="UnlockMissionNumber"/>
             </Int>
             <String String="Hellion">
                 <Field Id="Name"/>
             </String>
         </Instances>
         <Instances Id="Marauder">
-            <Int Int="35000">
-                <Field Id="Price"/>
-            </Int>
-            <Int Int="3">
-                <Field Id="UnlockMission"/>
-            </Int>
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
+            </Int>
+            <Int Int="3">
+                <Field Id="UnlockMissionNumber"/>
+            </Int>
+            <Int Int="1">
+                <Field Id="UnlockInCutscene"/>
             </Int>
             <String String="Marauder">
                 <Field Id="Name"/>
@@ -6797,7 +6795,7 @@
                 <Field Id="Price"/>
             </Int>
             <Int Int="3">
-                <Field Id="UnlockMission"/>
+                <Field Id="UnlockMissionNumber"/>
             </Int>
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
@@ -6811,7 +6809,7 @@
                 <Field Id="Price"/>
             </Int>
             <Int Int="3">
-                <Field Id="UnlockMission"/>
+                <Field Id="UnlockMissionNumber"/>
             </Int>
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
@@ -6825,7 +6823,7 @@
                 <Field Id="Price"/>
             </Int>
             <Int Int="4">
-                <Field Id="UnlockMission"/>
+                <Field Id="UnlockMissionNumber"/>
             </Int>
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
@@ -6839,7 +6837,7 @@
                 <Field Id="Price"/>
             </Int>
             <Int Int="4">
-                <Field Id="UnlockMission"/>
+                <Field Id="UnlockMissionNumber"/>
             </Int>
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
@@ -6853,7 +6851,7 @@
                 <Field Id="Price"/>
             </Int>
             <Int Int="5">
-                <Field Id="UnlockMission"/>
+                <Field Id="UnlockMissionNumber"/>
             </Int>
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
@@ -6867,7 +6865,7 @@
                 <Field Id="Price"/>
             </Int>
             <Int Int="5">
-                <Field Id="UnlockMission"/>
+                <Field Id="UnlockMissionNumber"/>
             </Int>
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
@@ -6881,7 +6879,7 @@
                 <Field Id="UnlockWithConscription"/>
             </Int>
             <Int Int="6">
-                <Field Id="UnlockMission"/>
+                <Field Id="UnlockMissionNumber"/>
             </Int>
             <Int Int="35000">
                 <Field Id="Price"/>
@@ -6895,7 +6893,7 @@
                 <Field Id="Price"/>
             </Int>
             <Int Int="6">
-                <Field Id="UnlockMission"/>
+                <Field Id="UnlockMissionNumber"/>
             </Int>
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
@@ -6909,7 +6907,7 @@
                 <Field Id="Price"/>
             </Int>
             <Int Int="6">
-                <Field Id="UnlockMission"/>
+                <Field Id="UnlockMissionNumber"/>
             </Int>
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
@@ -6926,7 +6924,7 @@
                 <Field Id="Price"/>
             </Int>
             <Int Int="7">
-                <Field Id="UnlockMission"/>
+                <Field Id="UnlockMissionNumber"/>
             </Int>
             <String String="SiegeTank">
                 <Field Id="Name"/>
@@ -6937,7 +6935,7 @@
                 <Field Id="UnlockWithConscription"/>
             </Int>
             <Int Int="7">
-                <Field Id="UnlockMission"/>
+                <Field Id="UnlockMissionNumber"/>
             </Int>
             <Int Int="40000">
                 <Field Id="Price"/>
@@ -6951,7 +6949,7 @@
                 <Field Id="Price"/>
             </Int>
             <Int Int="7">
-                <Field Id="UnlockMission"/>
+                <Field Id="UnlockMissionNumber"/>
             </Int>
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
@@ -6965,7 +6963,7 @@
                 <Field Id="Price"/>
             </Int>
             <Int Int="8">
-                <Field Id="UnlockMission"/>
+                <Field Id="UnlockMissionNumber"/>
             </Int>
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
@@ -6979,7 +6977,7 @@
                 <Field Id="Price"/>
             </Int>
             <Int Int="8">
-                <Field Id="UnlockMission"/>
+                <Field Id="UnlockMissionNumber"/>
             </Int>
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
@@ -6993,7 +6991,7 @@
                 <Field Id="UnlockWithConscription"/>
             </Int>
             <Int Int="9">
-                <Field Id="UnlockMission"/>
+                <Field Id="UnlockMissionNumber"/>
             </Int>
             <Int Int="45000">
                 <Field Id="Price"/>
@@ -7007,7 +7005,7 @@
                 <Field Id="Price"/>
             </Int>
             <Int Int="9">
-                <Field Id="UnlockMission"/>
+                <Field Id="UnlockMissionNumber"/>
             </Int>
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
@@ -7021,7 +7019,7 @@
                 <Field Id="Price"/>
             </Int>
             <Int Int="10">
-                <Field Id="UnlockMission"/>
+                <Field Id="UnlockMissionNumber"/>
             </Int>
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
@@ -7038,7 +7036,7 @@
                 <Field Id="UnlockWithConscription"/>
             </Int>
             <Int Int="-1">
-                <Field Id="UnlockMission"/>
+                <Field Id="UnlockMissionNumber"/>
             </Int>
             <String String="Spectre">
                 <Field Id="Name"/>
@@ -7052,7 +7050,7 @@
                 <Field Id="UnlockWithConscription"/>
             </Int>
             <Int Int="-1">
-                <Field Id="UnlockMission"/>
+                <Field Id="UnlockMissionNumber"/>
             </Int>
             <String String="Ghost">
                 <Field Id="Name"/>
@@ -7063,7 +7061,7 @@
                 <Field Id="UnlockWithConscription"/>
             </Int>
             <Int Int="2">
-                <Field Id="UnlockMission"/>
+                <Field Id="UnlockMissionNumber"/>
             </Int>
             <String String="Bunker">
                 <Field Id="Name"/>
@@ -7074,7 +7072,7 @@
                 <Field Id="UnlockWithConscription"/>
             </Int>
             <Int Int="2">
-                <Field Id="UnlockMission"/>
+                <Field Id="UnlockMissionNumber"/>
             </Int>
             <String String="MissileTurret">
                 <Field Id="Name"/>
@@ -7085,9 +7083,31 @@
                 <Field Id="UnlockWithConscription"/>
             </Int>
             <Int Int="-1">
-                <Field Id="UnlockMission"/>
+                <Field Id="UnlockMissionNumber"/>
             </Int>
             <String String="PerditionTurret">
+                <Field Id="Name"/>
+            </String>
+        </Instances>
+        <Instances Id="SCV">
+            <Int Int="2">
+                <Field Id="UnlockMissionNumber"/>
+            </Int>
+            <Int Int="1">
+                <Field Id="UnlockWithConscription"/>
+            </Int>
+            <String String="SCV">
+                <Field Id="Name"/>
+            </String>
+        </Instances>
+        <Instances Id="CommandCenter">
+            <Int Int="2">
+                <Field Id="UnlockMissionNumber"/>
+            </Int>
+            <Int Int="1">
+                <Field Id="UnlockWithConscription"/>
+            </Int>
+            <String String="CommandCenter">
                 <Field Id="Name"/>
             </String>
         </Instances>
