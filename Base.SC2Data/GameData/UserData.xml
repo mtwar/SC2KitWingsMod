@@ -6963,40 +6963,31 @@
             </String>
         </Instances>
         <Instances Id="Viking">
+            <GameLink GameLink="TCampaignTHanson03InOrComplete">
+                <Field Id="UnlockWithBankCondition"/>
+            </GameLink>
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
-            </Int>
-            <Int Int="9">
-                <Field Id="UnlockMissionNumber"/>
-            </Int>
-            <Int Int="45000">
-                <Field Id="Price"/>
             </Int>
             <String String="Viking">
                 <Field Id="TechUnitId"/>
             </String>
         </Instances>
         <Instances Id="Hercules">
-            <Int Int="60000">
-                <Field Id="Price"/>
-            </Int>
-            <Int Int="9">
-                <Field Id="UnlockMissionNumber"/>
-            </Int>
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
+            </Int>
+            <Int Int="1">
+                <Field Id="UnlockManually"/>
             </Int>
             <String String="Hercules">
                 <Field Id="TechUnitId"/>
             </String>
         </Instances>
         <Instances Id="Battlecruiser">
-            <Int Int="80000">
-                <Field Id="Price"/>
-            </Int>
-            <Int Int="10">
-                <Field Id="UnlockMissionNumber"/>
-            </Int>
+            <GameLink GameLink="TTychus05">
+                <Field Id="UnlockMap"/>
+            </GameLink>
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
             </Int>
@@ -7005,50 +6996,44 @@
             </String>
         </Instances>
         <Instances Id="Spectre">
-            <Int Int="75000">
-                <Field Id="Price"/>
-            </Int>
+            <GameLink GameLink="TTosh03A">
+                <Field Id="UnlockMap"/>
+            </GameLink>
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
-            </Int>
-            <Int Int="-1">
-                <Field Id="UnlockMissionNumber"/>
             </Int>
             <String String="Spectre">
                 <Field Id="TechUnitId"/>
             </String>
         </Instances>
         <Instances Id="Ghost">
-            <Int Int="75000">
-                <Field Id="Price"/>
-            </Int>
+            <GameLink GameLink="TTosh03B">
+                <Field Id="UnlockMap"/>
+            </GameLink>
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
-            </Int>
-            <Int Int="-1">
-                <Field Id="UnlockMissionNumber"/>
             </Int>
             <String String="Ghost">
                 <Field Id="TechUnitId"/>
             </String>
         </Instances>
         <Instances Id="Bunker">
+            <GameLink GameLink="TRaynor03">
+                <Field Id="UnlockMap"/>
+            </GameLink>
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
-            </Int>
-            <Int Int="2">
-                <Field Id="UnlockMissionNumber"/>
             </Int>
             <String String="Bunker">
                 <Field Id="TechUnitId"/>
             </String>
         </Instances>
         <Instances Id="MissileTurret">
+            <GameLink GameLink="TRaynor03">
+                <Field Id="UnlockMap"/>
+            </GameLink>
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
-            </Int>
-            <Int Int="2">
-                <Field Id="UnlockMissionNumber"/>
             </Int>
             <String String="MissileTurret">
                 <Field Id="TechUnitId"/>
@@ -7058,17 +7043,17 @@
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
             </Int>
-            <Int Int="-1">
-                <Field Id="UnlockMissionNumber"/>
+            <Int Int="1">
+                <Field Id="UnlockManually"/>
             </Int>
             <String String="PerditionTurret">
                 <Field Id="TechUnitId"/>
             </String>
         </Instances>
         <Instances Id="SCV">
-            <Int Int="2">
-                <Field Id="UnlockMissionNumber"/>
-            </Int>
+            <GameLink GameLink="TRaynor02">
+                <Field Id="UnlockMap"/>
+            </GameLink>
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
             </Int>
@@ -7077,9 +7062,9 @@
             </String>
         </Instances>
         <Instances Id="CommandCenter">
-            <Int Int="2">
-                <Field Id="UnlockMissionNumber"/>
-            </Int>
+            <GameLink GameLink="TRaynor02">
+                <Field Id="UnlockMap"/>
+            </GameLink>
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
             </Int>
