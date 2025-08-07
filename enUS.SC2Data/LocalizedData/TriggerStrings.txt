@@ -3663,6 +3663,7 @@ Variable/Name/lib_WoLC_E2DD77EE=Conscription
 Variable/Name/lib_WoLC_E3C5B1DE=WC_CurrentMap
 Variable/Name/lib_WoLC_E4422274=Conscription
 Variable/Name/lib_WoLC_E4AE6ABB=IndexPerk
+Variable/Name/lib_WoLC_E52DFCC6=Unlock Manually
 Variable/Name/lib_WoLC_E5BFF440=CampaignWoLID
 Variable/Name/lib_WoLC_E62B2AEE=MechArmor3
 Variable/Name/lib_WoLC_E66B99E6=WC_ArchiveWoLBankName

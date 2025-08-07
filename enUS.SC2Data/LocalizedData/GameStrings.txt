@@ -30,6 +30,7 @@ ArmyCategory/Name/Hellion=Hellion
 ArmyCategory/Name/HelsAngelFighter=Hel's Angel
 ArmyCategory/Name/Hercules=Hercules
 ArmyCategory/Name/HiveMindEmulator=Hive Mind Emulator
+ArmyCategory/Name/Liberator=Liberator
 ArmyCategory/Name/Marauder=Marauder
 ArmyCategory/Name/Marine=Marine
 ArmyCategory/Name/Medic=Medic
@@ -53,6 +54,7 @@ ArmyCategory/Name/UnknownArmyCategory=Unknown Army Category
 ArmyCategory/Name/VikingFighter=Viking
 ArmyCategory/Name/Vulture=Vulture
 ArmyCategory/Name/WarPig=War Pig
+ArmyCategory/Name/WidowMine=Widow Mine
 ArmyCategory/Name/Wraith=Wraith
 Behavior/Name/ChannelSnipeCombat=Steady Targeting
 Behavior/Name/Char03KerriganHighGroundVision=High Ground Vision
@@ -125,6 +127,7 @@ Button/Tooltip/Kit@SiegeTankImprovedSiegeMode=Reduces the transformation time of
 Button/Tooltip/Kit@SupplyDepotDisabled=Supply Depots are not available for this mission.
 Button/Tooltip/Kit@ThorHeavyServos=Allows Thors to transform quickly between combat modes.
 Button/Tooltip/Kit@WraithPulseAmplifier=Increases the damage of Gemini Missiles by <d ref="(Behavior,Kit@WraithAAMovementBuff,DamageResponse.ModifyFraction-1)*100"/>% and Burst Lasers by <d ref="(Behavior,Kit@WraithAGMovementBuff,DamageResponse.ModifyFraction-1)*100"/>% while the Wraith decelerates after moving.
+Button/Tooltip/Liberator=It's a Liberator (update this)
 Button/Tooltip/Nuke=
 Button/Tooltip/NukeArm=Arms the Silo with a Tactical Nuke.<n/><n/>Nukes take <d time="20"/> to land, but they deal up to 300 (+200 vs. structures) damage in a large radius.<n/><n/>Use a Ghost or Spectre to designate the target.
 Button/Tooltip/NukeArmFast=Arms the Silo with a Tactical Nuke.<n/><n/>Nukes take <d time="10"/> to land, but they deal up to 300 (+200 vs. structures) damage in a large radius.<n/><n/>Use a Ghost or Spectre to designate the target.
@@ -138,6 +141,7 @@ Button/Tooltip/TechLabBarracks=Enables additional unit construction options.
 Button/Tooltip/TechLabFactory=Enables additional unit construction options.
 Button/Tooltip/TechLabStarport=Enables additional unit construction options.
 Button/Tooltip/U238Rounds=Increases Reaper range by 1. Adds an additional +3 damage to light armor.
+Button/Tooltip/WidowMine=It's a widow mine. (update this)
 Button/Tooltip/Wraith=Highly mobile flying unit. Excellent at surgical strikes. Can use cloak.<n/><n/><c val="ffff8a">Can attack ground and air units.</c>
 Campaign/Description/WingsOfLiberty=
 Character/Attitude/Zagara=Determined
@@ -8287,6 +8291,7 @@ UserData/TechUnit/Hellion_Name=Hellion
 UserData/TechUnit/HelsAngelFighter_Name=Hel's Angel
 UserData/TechUnit/Hercules_Name=Hercules
 UserData/TechUnit/HiveMindEmulator_Name=Hive Mind Emulator
+UserData/TechUnit/Liberator_Name=Liberator
 UserData/TechUnit/Marauder_DescriptionShort=Heavy infantry.
 UserData/TechUnit/Marauder_Name=Marauder
 UserData/TechUnit/Marine_DescriptionShort=General-purpose infantry.

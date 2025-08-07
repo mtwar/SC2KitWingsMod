@@ -5458,6 +5458,23 @@
             <Unit Unit="WidowMineBurrowed">
                 <Field Id="Variants"/>
             </Unit>
+            <User Type="TechGroup" Instance="Dominion">
+                <Field Id="Group"/>
+            </User>
+        </Instances>
+        <Instances Id="Liberator">
+            <Text Text="UserData/TechUnit/Liberator_Name">
+                <Field Id="Name"/>
+            </Text>
+            <Unit Unit="Liberator">
+                <Field Id="Variants"/>
+            </Unit>
+            <Unit Unit="LiberatorAG">
+                <Field Id="Variants" Index="1"/>
+            </Unit>
+            <User Type="TechGroup" Instance="Starships">
+                <Field Id="Group"/>
+            </User>
         </Instances>
     </CUser>
     <CUser id="Timestamps">
@@ -6710,7 +6727,7 @@
         </Fields>
         <Fields Id="UnlockMissionNumber" Type="Int"/>
         <Fields Id="UnlockMap" Type="GameLink" GameLinkType="Map"/>
-        <Fields Id="UnlockInCutscene" Type="Int"/>
+        <Fields Id="UnlockManually" Type="Int"/>
         <Instances Id="[Default]"/>
         <Instances Id="Marine">
             <Int Int="1">
@@ -6777,14 +6794,14 @@
             </String>
         </Instances>
         <Instances Id="Marauder">
+            <GameLink GameLink="TTychus01">
+                <Field Id="UnlockMap"/>
+            </GameLink>
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
             </Int>
-            <Int Int="3">
-                <Field Id="UnlockMissionNumber"/>
-            </Int>
             <Int Int="1">
-                <Field Id="UnlockInCutscene"/>
+                <Field Id="UnlockManually"/>
             </Int>
             <String String="Marauder">
                 <Field Id="Name"/>
@@ -7108,6 +7125,17 @@
                 <Field Id="UnlockWithConscription"/>
             </Int>
             <String String="CommandCenter">
+                <Field Id="Name"/>
+            </String>
+        </Instances>
+        <Instances Id="SensorTower">
+            <GameLink GameLink="THanson02">
+                <Field Id="UnlockMap"/>
+            </GameLink>
+            <Int Int="1">
+                <Field Id="UnlockWithConscription"/>
+            </Int>
+            <String String="SensorTower">
                 <Field Id="Name"/>
             </String>
         </Instances>

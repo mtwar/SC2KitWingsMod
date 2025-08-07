@@ -720,6 +720,10 @@ id=Wraith
 Unit
 id=SensorTower
 Unit
+id=WidowMine
+Unit
+id=Liberator
+Unit=##id##SkinPreview
 
 [ArmyUpgrade]
 default=CArmyUpgrade
@@ -16297,7 +16301,7 @@ Alert=UpgradeComplete
 [User]
 id=TechUnit
 Actor=CommandUIHarnessAttackProtoss,CommandUIHarnessAttackTerran,CommandUIHarnessAttackZerg,CommandUIHarnessConfirmProtoss,CommandUIHarnessConfirmTerran,CommandUIHarnessConfirmZerg,CommandUIHarnessMoveProtoss,CommandUIHarnessMoveTerran,CommandUIHarnessMoveZerg,CommandUIHarnessRallyProtoss,CommandUIHarnessRallyTerran,CommandUIHarnessRallyZerg,TerrainMgr
-Unit=HellionTank,HelsAngelAssault,Odin,PerditionTurretUnderground,SiegeBreakerSieged,SiegeTankSieged,ThorAP,VikingAssault,WidowMineBurrowed
+Unit=HellionTank,HelsAngelAssault,Liberator,LiberatorAG,Odin,PerditionTurretUnderground,SiegeBreakerSieged,SiegeTankSieged,ThorAP,VikingAssault,WidowMineBurrowed
 User=TechGroup
 id=TechUpgrade
 path=Assets\Textures\.dds

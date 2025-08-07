@@ -3962,20 +3962,6 @@ string libWoLC_gf_RefundConscriptionUnit (string lp_unitType) {
     return ("conscription not configured for unit type " + lp_unitType);
 }
 
-void libWoLC_gf_SetConscriptionUnitState (string lp_unitType, int lp_state) {
-    // Variable Declarations
-    string lv_conscription;
-
-    // Automatic Variable Declarations
-    // Variable Initialization
-    lv_conscription = libWoLC_gf_GetConscriptionEntryForUnit(lp_unitType);
-
-    // Implementation
-    if (StringEqual(lv_conscription, "", c_stringNoCase) == false) {
-        libWoLC_gf_SetConscriptionState(lv_conscription, lp_state);
-    }
-}
-
 string libWoLC_gf_ExecuteConscriptionActionString (string lp_actionTypeName, string lp_unitTypeName, string lp_conscriptionStateName, string lp_sectionName) {
     // Variable Declarations
     int lv_actionType;
@@ -4201,6 +4187,20 @@ void libWoLC_gf_SetConscriptionState (string lp_conscription, int lp_state) {
     UserDataSetInt("Conscription", lp_conscription, "State", 1, (lp_state));
 }
 
+void libWoLC_gf_SetConscriptionUnitState (string lp_unitType, int lp_state) {
+    // Variable Declarations
+    string lv_conscription;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_conscription = libWoLC_gf_GetConscriptionEntryForUnit(lp_unitType);
+
+    // Implementation
+    if (StringEqual(lv_conscription, "", c_stringNoCase) == false) {
+        libWoLC_gf_SetConscriptionState(lv_conscription, lp_state);
+    }
+}
+
 void libWoLC_gf_ApplyAllConscriptionsToTechTree () {
     // Variable Declarations
     string lv_currentConscription;
@@ -4350,7 +4350,7 @@ void libWoLC_gf_UnlockConscriptionByMissionNumber (string lp_conscription, int l
 bool libWoLC_gf_ConscriptionUnlocksInCutscene (string lp_conscription) {
     // Automatic Variable Declarations
     // Implementation
-    return (UserDataGetInt("Conscription", lp_conscription, "UnlockInCutscene", 1) > 0);
+    return (UserDataGetInt("Conscription", lp_conscription, "UnlockManually", 1) > 0);
 }
 
 bool libWoLC_gf_ConscriptionUnlocksByMissionNumber (string lp_conscription) {
@@ -4366,9 +4366,15 @@ bool libWoLC_gf_ConscriptionUnlocksByMap (string lp_conscription) {
 }
 
 bool libWoLC_gf_ConscriptionUnlocksAutomatically (string lp_conscription) {
+    // Variable Declarations
+    int lv_unlockManually;
+
     // Automatic Variable Declarations
+    // Variable Initialization
+    lv_unlockManually = UserDataGetInt("Conscription", lp_conscription, "UnlockManually", 1);
+
     // Implementation
-    return libWoLC_gf_ConscriptionUnlocksByMap(lp_conscription) || libWoLC_gf_ConscriptionUnlocksByMissionNumber(lp_conscription);
+    return !lv_unlockManually <= 0 && (libWoLC_gf_ConscriptionUnlocksByMap(lp_conscription) || libWoLC_gf_ConscriptionUnlocksByMissionNumber(lp_conscription));
 }
 
 bool libWoLC_gf_CampaignMercenaryStateCheck (string lp_mercenary, string lp_state) {

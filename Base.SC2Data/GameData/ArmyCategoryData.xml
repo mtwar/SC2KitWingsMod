@@ -86,12 +86,21 @@
         <ArmyUpgradeArray index="1" value="Tech_Viking_2"/>
     </CArmyCategory>
     <CArmyCategory id="Vulture"/>
+    <CArmyCategory id="WidowMine">
+        <ArmyUpgradeArray index="0" removed="1"/>
+        <ArmyUpgradeArray index="1" removed="1"/>
+    </CArmyCategory>
     <CArmyCategory id="WarPig">
         <Flags index="Hidden" value="1"/>
     </CArmyCategory>
     <CArmyCategory id="Wraith"/>
     <CArmyCategory id="SensorTower">
         <Flags index="Hidden" value="1"/>
+        <ArmyUpgradeArray index="0" removed="1"/>
+        <ArmyUpgradeArray index="1" removed="1"/>
+    </CArmyCategory>
+    <CArmyCategory id="Liberator">
+        <Unit value="LiberatorSkinPreview"/>
         <ArmyUpgradeArray index="0" removed="1"/>
         <ArmyUpgradeArray index="1" removed="1"/>
     </CArmyCategory>
