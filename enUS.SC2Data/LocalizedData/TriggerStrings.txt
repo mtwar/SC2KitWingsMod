@@ -3581,6 +3581,7 @@ Variable/Name/lib_WoLC_AE3CDCDB=PointsEarned
 Variable/Name/lib_WoLC_AF1A5436=AchievementDialog
 Variable/Name/lib_WoLC_AFF30F1D=Value
 Variable/Name/lib_WoLC_B0064164=IndexCategory
+Variable/Name/lib_WoLC_B05BCFE2=Unlock Map
 Variable/Name/lib_WoLC_B0C6A60B=WC_CampaignDataBackup_MissionBestTime
 Variable/Name/lib_WoLC_B1659679=IndexChampion
 Variable/Name/lib_WoLC_B1B3B774=WC_StorySimulationMission

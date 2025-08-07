@@ -4318,16 +4318,22 @@ void libWoLC_gf_UnlockConscriptionsByMap (string lp_map) {
 void libWoLC_gf_UnlockConscriptionByMap (string lp_conscription, string lp_map) {
     // Automatic Variable Declarations
     // Implementation
-    if ((libWoLC_gf_ConscriptionUnlocksByMap(lp_conscription) == true) && (lp_map == UserDataGetGameLink("Conscription", lp_conscription, "UnlockMap", 1))) {
+    if ((lp_map != null) && (libWoLC_gf_ConscriptionUnlocksByMap(lp_conscription) == true) && (lp_map == UserDataGetGameLink("Conscription", lp_conscription, "UnlockMap", 1))) {
         libWoLC_gf_LogDebugIfNotEmpty(libWoLC_gf_UnlockConscription(lp_conscription));
     }
 
 }
 
 bool libWoLC_gf_ConscriptionUnlocksByMap (string lp_conscription) {
+    // Variable Declarations
+    string lv_unlockMap;
+
     // Automatic Variable Declarations
+    // Variable Initialization
+    lv_unlockMap = UserDataGetGameLink("Conscription", lp_conscription, "UnlockMap", 1);
+
     // Implementation
-    return (UserDataGetInt("Conscription", lp_conscription, "UnlockMap", 1) > 0);
+    return !libWoLC_gf_NullOrEmptyString(lv_unlockMap);
 }
 
 void libWoLC_gf_UnlockConscriptionsByMissionNumber (int lp_missionCount) {
@@ -4414,7 +4420,7 @@ bool libWoLC_gf_ConscriptionUnlocksAutomatically (string lp_conscription) {
     lv_unlockManually = UserDataGetInt("Conscription", lp_conscription, "UnlockManually", 1);
 
     // Implementation
-    return !lv_unlockManually <= 0 && (libWoLC_gf_ConscriptionUnlocksByMap(lp_conscription) || libWoLC_gf_ConscriptionUnlocksByMissionNumber(lp_conscription));
+    return lv_unlockManually <= 0 && (libWoLC_gf_ConscriptionUnlocksByMap(lp_conscription) || libWoLC_gf_ConscriptionUnlocksByMissionNumber(lp_conscription));
 }
 
 bool libWoLC_gf_ConscriptionUnlocksManually (string lp_conscription) {
