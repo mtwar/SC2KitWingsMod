@@ -405,6 +405,7 @@ bool libWoLC_gf_ConscriptionUnlocksByTrigger (string lp_conscription);
 void libWoLC_gf_ConscriptionMissionVictoryEvent ();
 void libWoLC_gf_UnlockConscriptionsOnMapStart (string lp_map, int lp_missionNumber);
 void libWoLC_gf_UnlockConscriptionsOnMapVictory (string lp_map, int lp_missionNumber);
+void libWoLC_gf_UnlockConscriptionsInMission (string lp_map, int lp_missionNumber, bool lp_isMissionStart);
 bool libWoLC_gf_ConscriptionUnlocksInCutscene (string lp_conscription);
 bool libWoLC_gf_ConscriptionUnlocksAutomatically (string lp_conscription);
 bool libWoLC_gf_CampaignMercenaryStateCheck (string lp_mercenary, string lp_state);
