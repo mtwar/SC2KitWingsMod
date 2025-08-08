@@ -189,15 +189,47 @@
     </CUnit>
     <CUnit id="Factory">
         <CardLayouts index="0">
-            <LayoutButtons index="2" Row="2" Column="2"/>
-            <LayoutButtons index="14" Type="Undefined" Row="2" Column="2"/>
-            <LayoutButtons index="15" Type="Undefined"/>
-            <LayoutButtons Face="Predator" Type="AbilCmd" AbilCmd="FactoryTrain,Train11" Row="1" Column="1"/>
+            <LayoutButtons index="2" Face="Rally" Type="AbilCmd" AbilCmd="Rally,Rally1" Row="1" Column="4"/>
+            <LayoutButtons index="3" Face="Lift" AbilCmd="FactoryLiftOff,Execute" Row="2" Column="3"/>
+            <LayoutButtons index="4" Face="Halt" AbilCmd="BuildInProgress,Halt"/>
+            <LayoutButtons index="5" Face="Reactor" AbilCmd="FactoryAddOns,Build2" Column="1"/>
+            <LayoutButtons index="6" Face="TechLabFactory" AbilCmd="FactoryAddOns,Build1" Column="0"/>
+            <LayoutButtons index="7" Face="Cancel" AbilCmd="que5,CancelLast" Column="4"/>
+            <LayoutButtons index="8" AbilCmd="FactoryAddOns,Halt"/>
+            <LayoutButtons index="9" Face="CancelBuilding" AbilCmd="BuildInProgress,Cancel"/>
+            <LayoutButtons index="10" Face="SelectBuilder" Type="SelectBuilder" AbilCmd="" Row="1" Column="3"/>
+            <LayoutButtons index="11" Face="WarHound" Type="AbilCmd" AbilCmd="FactoryTrain,Train13" Row="0" Column="2"/>
+            <LayoutButtons index="12" Face="TechReactor" AbilCmd="FactoryAddOns,Build4" Row="2" Column="0"/>
+            <LayoutButtons index="13">
+                <Face value="MengskUnits"/>
+                <Type value="Undefined"/>
+                <AbilCmd value=""/>
+                <SubmenuCardId value="MGSK"/>
+                <Row value="1"/>
+                <Column value="3"/>
+            </LayoutButtons>
+            <LayoutButtons index="14" Face="TechReactorAI" Type="AbilCmd" AbilCmd="FactoryAddOns,Build3" SubmenuCardId="" Row="2"/>
+            <LayoutButtons index="15">
+                <Face value="Vulture"/>
+                <Type value="AbilCmd"/>
+                <AbilCmd value="FactoryTrain,Train10"/>
+                <SubmenuCardId value=""/>
+                <Row value="0"/>
+                <Column value="0"/>
+            </LayoutButtons>
+            <LayoutButtons index="16" Face="Diamondback" AbilCmd="FactoryTrain,Train4" Row="0" Column="3"/>
+            <LayoutButtons index="17" Face="Goliath" AbilCmd="FactoryTrain,Train3" Column="4"/>
+            <LayoutButtons index="18" Face="Thor" AbilCmd="FactoryTrain,Train5" Row="1" Column="0"/>
+            <LayoutButtons index="19" Face="WidowMine" AbilCmd="FactoryTrain,Train25" Row="2" Column="2"/>
+            <LayoutButtons index="20" Face="Predator" AbilCmd="FactoryTrain,Train11" Column="1"/>
+            <LayoutButtons Face="BuildCyclone" Type="AbilCmd" AbilCmd="FactoryTrain,Train8" Row="1" Column="2"/>
         </CardLayouts>
         <TechTreeProducedUnitArray index="3" value="Diamondback"/>
         <TechTreeProducedUnitArray value="Goliath"/>
         <TechTreeProducedUnitArray value="Vulture"/>
         <TechTreeProducedUnitArray value="Predator"/>
+        <TechTreeProducedUnitArray value="Cyclone"/>
+        <TechTreeProducedUnitArray value="WidowMine"/>
     </CUnit>
     <CUnit id="FactoryReactor">
         <BehaviorArray Link="Kit@AddonMarker"/>
@@ -632,6 +664,7 @@
         <CardLayouts index="0">
             <LayoutButtons index="14" Type="Undefined"/>
             <LayoutButtons Face="BuildHercules" Type="AbilCmd" AbilCmd="StarportTrain,Train6" Row="1" Column="1"/>
+            <LayoutButtons Face="Liberator" Type="AbilCmd" AbilCmd="StarportTrain,Train7" Row="1" Column="2"/>
         </CardLayouts>
         <TechTreeProducedUnitArray index="2" value="Hercules"/>
         <TechTreeProducedUnitArray index="3" value="ScienceVessel"/>
@@ -639,6 +672,7 @@
         <TechTreeProducedUnitArray index="5" value="Wraith"/>
         <TechTreeProducedUnitArray value="Banshee"/>
         <TechTreeProducedUnitArray value="Battlecruiser"/>
+        <TechTreeProducedUnitArray value="Liberator"/>
     </CUnit>
     <CUnit id="StarportReactor">
         <BehaviorArray Link="Kit@AddonMarker"/>

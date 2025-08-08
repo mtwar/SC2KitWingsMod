@@ -4,18 +4,14 @@
         <Fields Id="Value" Type="Int" EditorColumn="2"/>
         <Instances Id="[Default]"/>
         <Instances Id="StartCredits"/>
-        <Instances Id="ResearchStartPointProt">
-            <Int Int="1">
-                <Field Id="Value"/>
-            </Int>
-        </Instances>
+        <Instances Id="ResearchStartPointProt"/>
         <Instances Id="ResearchStartPointZerg">
             <Int Int="3">
                 <Field Id="Value"/>
             </Int>
         </Instances>
         <Instances Id="ResearchCap">
-            <Int Int="30">
+            <Int Int="25">
                 <Field Id="Value"/>
             </Int>
         </Instances>
@@ -5476,6 +5472,14 @@
                 <Field Id="Group"/>
             </User>
         </Instances>
+        <Instances Id="Cyclone">
+            <Text Text="UserData/TechUnit/Cyclone_Name">
+                <Field Id="Name"/>
+            </Text>
+            <User Type="TechGroup" Instance="Dominion">
+                <Field Id="Group"/>
+            </User>
+        </Instances>
     </CUser>
     <CUser id="Timestamps">
         <Fields Id="StartDelay" Type="Fixed"/>
@@ -6728,11 +6732,11 @@
         <Fields Id="UnlockMissionNumber" Type="Int"/>
         <Fields Id="UnlockMap" Type="GameLink" GameLinkType="Map"/>
         <Fields Id="UnlockInCutscene" Type="Int"/>
-        <Fields Id="UnlockBankCondition" Type="GameLink" GameLinkType="BankCondition"/>
+        <Fields Id="UnlockTriggerName" Type="String"/>
         <Instances Id="[Default]"/>
         <Instances Id="Marine">
-            <GameLink GameLink="TCampaignInTRaynor01">
-                <Field Id="UnlockBankCondition"/>
+            <GameLink GameLink="TRaynor01">
+                <Field Id="UnlockMap"/>
             </GameLink>
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
@@ -6742,8 +6746,8 @@
             </String>
         </Instances>
         <Instances Id="Medic">
-            <GameLink GameLink="TCampaignInTRaynor02">
-                <Field Id="UnlockBankCondition"/>
+            <GameLink GameLink="TRaynor02">
+                <Field Id="UnlockMap"/>
             </GameLink>
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
@@ -6875,8 +6879,8 @@
             </String>
         </Instances>
         <Instances Id="Cyclone">
-            <Int Int="35000">
-                <Field Id="Price"/>
+            <Int Int="1">
+                <Field Id="UnlockWithConscription"/>
             </Int>
             <String String="Cyclone">
                 <Field Id="TechUnitId"/>
@@ -6963,14 +6967,14 @@
             </String>
         </Instances>
         <Instances Id="Viking">
-            <GameLink GameLink="TCampaignTHanson03InOrComplete">
-                <Field Id="UnlockBankCondition"/>
-            </GameLink>
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
             </Int>
-            <String String="Viking">
+            <String String="VikingFighter">
                 <Field Id="TechUnitId"/>
+            </String>
+            <String String="libWoLC_gt_ConscriptionVanillaVikingUnlockTrigger_Func">
+                <Field Id="UnlockTriggerName"/>
             </String>
         </Instances>
         <Instances Id="Hercules">

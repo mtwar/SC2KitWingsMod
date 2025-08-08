@@ -93,6 +93,10 @@
     <CArmyCategory id="WarPig">
         <Flags index="Hidden" value="1"/>
     </CArmyCategory>
+    <CArmyCategory id="Cyclone">
+        <ArmyUpgradeArray index="0" removed="1"/>
+        <ArmyUpgradeArray index="1" removed="1"/>
+    </CArmyCategory>
     <CArmyCategory id="Wraith"/>
     <CArmyCategory id="SensorTower">
         <Flags index="Hidden" value="1"/>
@@ -100,7 +104,6 @@
         <ArmyUpgradeArray index="1" removed="1"/>
     </CArmyCategory>
     <CArmyCategory id="Liberator">
-        <Unit value="LiberatorSkinPreview"/>
         <ArmyUpgradeArray index="0" removed="1"/>
         <ArmyUpgradeArray index="1" removed="1"/>
     </CArmyCategory>

@@ -61,6 +61,7 @@ ArmyCategory/EditorPrefix/Banshee=Air -
 ArmyCategory/EditorPrefix/Battlecruiser=Air -
 ArmyCategory/EditorPrefix/Bunker=Building -
 ArmyCategory/EditorPrefix/CommandCenter=Building -
+ArmyCategory/EditorPrefix/Cyclone=Mech -
 ArmyCategory/EditorPrefix/DevilDog=Merc -
 ArmyCategory/EditorPrefix/Diamondback=Mech -
 ArmyCategory/EditorPrefix/DukesRevenge=Merc -

@@ -18,6 +18,7 @@ ArmyCategory/Name/Banshee=Banshee
 ArmyCategory/Name/Battlecruiser=Battlecruiser
 ArmyCategory/Name/Bunker=Bunker
 ArmyCategory/Name/CommandCenter=Terran Building
+ArmyCategory/Name/Cyclone=Cyclone
 ArmyCategory/Name/DevilDog=Devil Dog
 ArmyCategory/Name/Diamondback=Diamondback
 ArmyCategory/Name/DukesRevenge=Jackson's Revenge
@@ -99,6 +100,7 @@ Button/Tooltip/BunkerFortifiedUpgraded=Defensive structure. Able to protect up t
 Button/Tooltip/BunkerUpgraded=Defensive structure. <n/>Infantry fights from inside. <n/><n/><c val="#ColorAttackInfo">Bonus: +2 range to units inside.</c>
 Button/Tooltip/ChannelSnipe=After carefully aiming for <d ref="Effect,ChannelSnipeCreatePersistent,PeriodCount*Effect,ChannelSnipeCreatePersistent,PeriodicPeriodArray[0]" precision="2"/> seconds while not taking damage, the Ghost fires a sniper round dealing <d ref="Effect,ChannelSnipeDamage,Amount"/> (+<d ref="Effect,ChannelSnipeDamage,AttributeBonus[Psionic]"/> vs. psionic) damage. Ignores armor.<n/><n/><c val="#ColorAttackInfo">Can only target biological units.</c>
 Button/Tooltip/CommandCenter=Primary structure. Used to receive gathered resources. Can use the Lift Off ability.
+Button/Tooltip/Cyclone=It's a widow cyclone (update this)
 Button/Tooltip/D8Charge=Timed explosive that does heavy area damage.
 Button/Tooltip/DarkTemplarBlink=Teleports the Dark Templar to a nearby target location.
 Button/Tooltip/DisplacementField=Wraiths move 20% faster and evade 20% of incoming attacks while cloaked.
@@ -8274,6 +8276,7 @@ UserData/TechUnit/Battlecruiser_Name=Battlecruiser
 UserData/TechUnit/Bunker_DescriptionShort=Defensive structure able to protect infantry units.
 UserData/TechUnit/Bunker_Name=Bunker
 UserData/TechUnit/CommandCenter_Name=Command Center
+UserData/TechUnit/Cyclone_Name=Cyclone
 UserData/TechUnit/DevilDog_Name=Devil Dog
 UserData/TechUnit/Diamondback_DescriptionShort=Tank hunter unit. Can fire while moving.
 UserData/TechUnit/Diamondback_Name=Diamondback
