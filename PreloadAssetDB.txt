@@ -714,13 +714,13 @@ id=VikingFighter
 Unit
 id=Vulture
 Unit
+id=WidowMine
+Unit
 id=WarPig
 Unit
 id=Wraith
 Unit
 id=SensorTower
-Unit
-id=WidowMine
 Unit
 id=Liberator
 Unit=##id##SkinPreview

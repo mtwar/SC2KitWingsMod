@@ -2,6 +2,7 @@ include "TriggerLibs/NativeLib"
 include "TriggerLibs/LibertyLib"
 include "LibCamp_h"
 include "LibWCMI_h"
+include "LibWCUI_h"
 
 include "LibWoLC_h"
 
@@ -14,6 +15,7 @@ void libWoLC_InitLibraries () {
     libLbty_InitVariables();
     libCamp_InitVariables();
     libWCMI_InitVariables();
+    libWCUI_InitVariables();
 }
 
 // Variable Initialization
@@ -4274,7 +4276,7 @@ void libWoLC_gf_UnlockConscriptionsByBankCondition () {
 void libWoLC_gf_UnlockConscriptionByBankCondition (string lp_conscription) {
     // Automatic Variable Declarations
     // Implementation
-    if ((libWoLC_gf_ConscriptionUnlocksByBankCondition(lp_conscription) == true) && (BankConditionEvaluate(1, UserDataGetGameLink("Conscription", lp_conscription, "UnlockWithBankCondition", 1)) == true)) {
+    if ((libWoLC_gf_ConscriptionUnlocksByBankCondition(lp_conscription) == true) && (BankConditionEvaluate(1, UserDataGetGameLink("Conscription", lp_conscription, "UnlockBankCondition", 1)) == true)) {
         libWoLC_gf_LogDebugIfNotEmpty(libWoLC_gf_UnlockConscription(lp_conscription));
     }
 
@@ -4286,7 +4288,7 @@ bool libWoLC_gf_ConscriptionUnlocksByBankCondition (string lp_conscription) {
 
     // Automatic Variable Declarations
     // Variable Initialization
-    lv_unlockBankCondition = UserDataGetGameLink("Conscription", lp_conscription, "UnlockWithBankCondition", 1);
+    lv_unlockBankCondition = UserDataGetGameLink("Conscription", lp_conscription, "UnlockBankCondition", 1);
 
     // Implementation
     return !libWoLC_gf_NullOrEmptyString(lv_unlockBankCondition);
@@ -4374,7 +4376,22 @@ bool libWoLC_gf_ConscriptionUnlocksByMissionNumber (string lp_conscription) {
     return (UserDataGetInt("Conscription", lp_conscription, "UnlockMissionNumber", 1) > 0);
 }
 
-void libWoLC_gf_UnlockConscriptionsOnMapStart () {
+void libWoLC_gf_ConscriptionMissionVictoryEvent () {
+    // Automatic Variable Declarations
+    // Implementation
+    if ((libWoLC_gv_wCX_IsSimulation == false)) {
+        if ((libWoLC_gf_CurrentMap() != "TStory01")) {
+            libWoLC_gf_UnlockConscriptionsOnMapVictory(libWoLC_gf_CurrentMap(), libWoLC_gf_NumberOfMissions(libWoLC_ge_MissionCountOptions_Completed));
+            libWoLC_gf_SaveAllConscriptionsToCampaignMapBank(libWoLC_gf_CurrentMap());
+        }
+
+        libWoLC_gf_SaveAllConscriptionsToCampaignMapBank(null);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, StringToText("mission victory event called"));
+    }
+
+}
+
+void libWoLC_gf_UnlockConscriptionsOnMapStart (string lp_map, int lp_missionNumber) {
     // Variable Declarations
     string lv_conscription;
 
@@ -4393,22 +4410,43 @@ void libWoLC_gf_UnlockConscriptionsOnMapStart () {
         if (UserDataGetInt("Conscription", lv_conscription, "UnlockWithConscription", 1) <= 0) {
             continue;
         }
-        if ((libWoLC_gf_ConscriptionUnlocksManually(lv_conscription) == true)) {
+        if (((libWoLC_gf_ConscriptionUnlocksInCutscene(lv_conscription) == true) || (libWoLC_gf_ConscriptionUnlocksAutomatically(lv_conscription) == false))) {
             continue;
         }
 
-        libWoLC_gf_UnlockConscriptionByMap(lv_conscription, libWoLC_gf_CurrentMap());
-        libWoLC_gf_UnlockConscriptionByMissionNumber(lv_conscription, (libWoLC_gf_NumberOfMissions(libWoLC_ge_MissionCountOptions_Completed) + 1));
+        libWoLC_gf_UnlockConscriptionByMap(lv_conscription, lp_map);
+        libWoLC_gf_UnlockConscriptionByMissionNumber(lv_conscription, lp_missionNumber);
         libWoLC_gf_UnlockConscriptionByBankCondition(lv_conscription);
     }
 }
 
-void libWoLC_gf_UnlockConscriptionsOnMapVictory (string lp_map) {
+void libWoLC_gf_UnlockConscriptionsOnMapVictory (string lp_map, int lp_missionNumber) {
+    // Variable Declarations
+    string lv_conscription;
+
     // Automatic Variable Declarations
+    int autoA5ACA905_ai;
+    int autoA5ACA905_ae;
+
+    // Variable Initialization
+
     // Implementation
-    libWoLC_gf_UnlockConscriptionsByMap(lp_map);
-    libWoLC_gf_UnlockConscriptionsByMissionNumber(libWoLC_gf_NumberOfMissions(libWoLC_ge_MissionCountOptions_Completed));
-    libWoLC_gf_UnlockConscriptionsByBankCondition();
+    autoA5ACA905_ai = 1;
+    autoA5ACA905_ae = UserDataInstanceCount("Conscription")+1;
+    while (autoA5ACA905_ai < autoA5ACA905_ae) {
+        lv_conscription = UserDataInstance("Conscription", autoA5ACA905_ai);
+        autoA5ACA905_ai = autoA5ACA905_ai+1;
+        if (UserDataGetInt("Conscription", lv_conscription, "UnlockWithConscription", 1) <= 0) {
+            continue;
+        }
+        if (((libWoLC_gf_ConscriptionUnlocksAutomatically(lv_conscription) == false) || (libWoLC_gf_ConscriptionUnlocksInCutscene(lv_conscription) == false))) {
+            continue;
+        }
+
+        libWoLC_gf_UnlockConscriptionByMap(lv_conscription, lp_map);
+        libWoLC_gf_UnlockConscriptionByMissionNumber(lv_conscription, lp_missionNumber);
+        libWoLC_gf_UnlockConscriptionByBankCondition(lv_conscription);
+    }
 }
 
 bool libWoLC_gf_ConscriptionUnlocksAutomatically (string lp_conscription) {
@@ -4417,16 +4455,16 @@ bool libWoLC_gf_ConscriptionUnlocksAutomatically (string lp_conscription) {
 
     // Automatic Variable Declarations
     // Variable Initialization
-    lv_unlockManually = UserDataGetInt("Conscription", lp_conscription, "UnlockManually", 1);
+    lv_unlockManually = UserDataGetInt("Conscription", lp_conscription, "UnlockInCutscene", 1);
 
     // Implementation
     return lv_unlockManually <= 0 && (libWoLC_gf_ConscriptionUnlocksByMap(lp_conscription) || libWoLC_gf_ConscriptionUnlocksByMissionNumber(lp_conscription));
 }
 
-bool libWoLC_gf_ConscriptionUnlocksManually (string lp_conscription) {
+bool libWoLC_gf_ConscriptionUnlocksInCutscene (string lp_conscription) {
     // Automatic Variable Declarations
     // Implementation
-    return !libWoLC_gf_ConscriptionUnlocksAutomatically(lp_conscription);
+    return (UserDataGetInt("Conscription", lp_conscription, "UnlockInCutscene", 1) > 0);
 }
 
 bool libWoLC_gf_CampaignMercenaryStateCheck (string lp_mercenary, string lp_state) {
@@ -6327,7 +6365,6 @@ void libWoLC_gf_WC_SaveTransitionVars (bank lp_targetBank, string lp_map, bool l
             lv__SectionName = libWoLC_gf_WC_BankSectionName(lp_map, "ArmyCategory");
             BankSectionCreate(lp_targetBank, lv__SectionName);
             libWoLC_gf_WC_SaveArmyCategoryToBank(lp_targetBank, lv__SectionName);
-            libWoLC_gf_SaveAllConscriptionsToCampaignMapBank(null);
             autoB8A58551_ae = libWoLC_gv_wC_PersistentUserTypeCount;
             autoB8A58551_var = 0;
             for ( ; autoB8A58551_var <= autoB8A58551_ae; autoB8A58551_var += 1 ) {
@@ -6448,12 +6485,6 @@ void libWoLC_gf_WC_LoadTransitionVars (bank lp_sourceBank, string lp_map) {
     lv__SectionName = libWoLC_gf_WC_BankSectionName(lp_map, "Mercenary");
     libWoLC_gf_WC_LoadMercenaryFromBank(lp_sourceBank, lv__SectionName);
     lv__SectionName = libWoLC_gf_WC_BankSectionName(lp_map, "Conscription");
-    libWoLC_gf_LoadAllConscriptionsFromBank(lp_sourceBank, lv__SectionName);
-    libWoLC_gf_ApplyAllConscriptionsToTechTree();
-    if ((libWoLC_gf_CurrentMap() != "TStory01")) {
-        libWoLC_gf_UnlockConscriptionsOnMapStart();
-    }
-
     lv__SectionName = libWoLC_gf_WC_BankSectionName(lp_map, "HelpUnitsPanel");
     lv_count = libWoLC_gf_WC_LoadTransitionVarInteger(lp_sourceBank, lv__SectionName, IntToString(0), 0);
     autoE1BE8001_ae = lv_count;
@@ -8533,6 +8564,53 @@ void libWoLC_gt_ConscriptionCheatListener_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
+// Trigger: Conscription Mission Start Event
+//--------------------------------------------------------------------------------------------------
+bool libWoLC_gt_ConscriptionMissionStartEvent_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, StringToText("mission start event called"));
+    libWoLC_gf_LoadAllConscriptionsFromBank(libWoLC_gv_wC_CampaignBank, libWoLC_gf_WC_BankSectionName(null, "Conscription"));
+    libWoLC_gf_ApplyAllConscriptionsToTechTree();
+    if ((libWoLC_gf_CurrentMap() != "TStory01")) {
+        libWoLC_gf_UnlockConscriptionsOnMapStart(libWoLC_gf_CurrentMap(), (libWoLC_gf_NumberOfMissions(libWoLC_ge_MissionCountOptions_Completed) + 1));
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libWoLC_gt_ConscriptionMissionStartEvent_Init () {
+    libWoLC_gt_ConscriptionMissionStartEvent = TriggerCreate("libWoLC_gt_ConscriptionMissionStartEvent_Func");
+    libWoLC_gf_CampaignMissionStarts(libWoLC_gt_ConscriptionMissionStartEvent);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Conscription Travel Panel Mission Start Event
+//--------------------------------------------------------------------------------------------------
+bool libWoLC_gt_ConscriptionTravelPanelMissionStartEvent_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, StringToText("travel panel mission start event called"));
+    libWoLC_gf_SaveAllConscriptionsToCampaignMapBank(null);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libWoLC_gt_ConscriptionTravelPanelMissionStartEvent_Init () {
+    libWoLC_gt_ConscriptionTravelPanelMissionStartEvent = TriggerCreate("libWoLC_gt_ConscriptionTravelPanelMissionStartEvent_Func");
+    libWCUI_gf_TravelPanelMissionStart(libWoLC_gt_ConscriptionTravelPanelMissionStartEvent);
+}
+
+//--------------------------------------------------------------------------------------------------
 // Trigger: WC_TrackLoadingComplete
 //--------------------------------------------------------------------------------------------------
 bool libWoLC_gt_WC_TrackLoadingComplete_Func (bool testConds, bool runActions) {
@@ -8925,6 +9003,8 @@ void libWoLC_InitTriggers () {
     libWoLC_gt_WC_CinematicDetectSkipping_Init();
     libWoLC_gt_WC_SceneSkipped_Init();
     libWoLC_gt_ConscriptionCheatListener_Init();
+    libWoLC_gt_ConscriptionMissionStartEvent_Init();
+    libWoLC_gt_ConscriptionTravelPanelMissionStartEvent_Init();
     libWoLC_gt_WC_TrackLoadingComplete_Init();
     libWoLC_gt_WC_TrackLoadingFromSave_Init();
     libWoLC_gt_WC_ArchivesBankLoadSyncComplete_Init();
@@ -8956,4 +9036,5 @@ void libWoLC_InitLib () {
 
 include "LibCamp"
 include "LibWCMI"
+include "LibWCUI"
 

@@ -6727,12 +6727,12 @@
         </Fields>
         <Fields Id="UnlockMissionNumber" Type="Int"/>
         <Fields Id="UnlockMap" Type="GameLink" GameLinkType="Map"/>
-        <Fields Id="UnlockManually" Type="Int"/>
-        <Fields Id="UnlockWithBankCondition" Type="GameLink" GameLinkType="BankCondition"/>
+        <Fields Id="UnlockInCutscene" Type="Int"/>
+        <Fields Id="UnlockBankCondition" Type="GameLink" GameLinkType="BankCondition"/>
         <Instances Id="[Default]"/>
         <Instances Id="Marine">
-            <GameLink GameLink="TRaynor01">
-                <Field Id="UnlockMap"/>
+            <GameLink GameLink="TCampaignInTRaynor01">
+                <Field Id="UnlockBankCondition"/>
             </GameLink>
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
@@ -6742,8 +6742,8 @@
             </String>
         </Instances>
         <Instances Id="Medic">
-            <GameLink GameLink="TRaynor02">
-                <Field Id="UnlockMap"/>
+            <GameLink GameLink="TCampaignInTRaynor02">
+                <Field Id="UnlockBankCondition"/>
             </GameLink>
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
@@ -6760,7 +6760,7 @@
                 <Field Id="UnlockWithConscription"/>
             </Int>
             <Int Int="1">
-                <Field Id="UnlockManually"/>
+                <Field Id="UnlockInCutscene"/>
             </Int>
             <String String="Vulture">
                 <Field Id="TechUnitId"/>
@@ -6785,7 +6785,7 @@
                 <Field Id="UnlockWithConscription"/>
             </Int>
             <Int Int="1">
-                <Field Id="UnlockManually"/>
+                <Field Id="UnlockInCutscene"/>
             </Int>
             <String String="Hellion">
                 <Field Id="TechUnitId"/>
@@ -6799,7 +6799,7 @@
                 <Field Id="UnlockWithConscription"/>
             </Int>
             <Int Int="1">
-                <Field Id="UnlockManually"/>
+                <Field Id="UnlockInCutscene"/>
             </Int>
             <String String="Marauder">
                 <Field Id="TechUnitId"/>
@@ -6813,7 +6813,7 @@
                 <Field Id="UnlockWithConscription"/>
             </Int>
             <Int Int="1">
-                <Field Id="UnlockManually"/>
+                <Field Id="UnlockInCutscene"/>
             </Int>
             <String String="Reaper">
                 <Field Id="TechUnitId"/>
@@ -6824,7 +6824,7 @@
                 <Field Id="UnlockWithConscription"/>
             </Int>
             <Int Int="1">
-                <Field Id="UnlockManually"/>
+                <Field Id="UnlockInCutscene"/>
             </Int>
             <String String="WidowMine">
                 <Field Id="TechUnitId"/>
@@ -6832,7 +6832,7 @@
         </Instances>
         <Instances Id="Predator">
             <Int Int="1">
-                <Field Id="UnlockManually"/>
+                <Field Id="UnlockInCutscene"/>
             </Int>
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
@@ -6865,7 +6865,7 @@
         </Instances>
         <Instances Id="ScienceVessel">
             <Int Int="1">
-                <Field Id="UnlockManually"/>
+                <Field Id="UnlockInCutscene"/>
             </Int>
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
@@ -6887,7 +6887,7 @@
                 <Field Id="UnlockWithConscription"/>
             </Int>
             <Int Int="1">
-                <Field Id="UnlockManually"/>
+                <Field Id="UnlockInCutscene"/>
             </Int>
             <String String="Raven">
                 <Field Id="TechUnitId"/>
@@ -6923,7 +6923,7 @@
                 <Field Id="UnlockWithConscription"/>
             </Int>
             <Int Int="1">
-                <Field Id="UnlockManually"/>
+                <Field Id="UnlockInCutscene"/>
             </Int>
             <String String="Wraith">
                 <Field Id="TechUnitId"/>
@@ -6945,7 +6945,7 @@
                 <Field Id="UnlockWithConscription"/>
             </Int>
             <Int Int="1">
-                <Field Id="UnlockManually"/>
+                <Field Id="UnlockInCutscene"/>
             </Int>
             <String String="Thor">
                 <Field Id="TechUnitId"/>
@@ -6964,7 +6964,7 @@
         </Instances>
         <Instances Id="Viking">
             <GameLink GameLink="TCampaignTHanson03InOrComplete">
-                <Field Id="UnlockWithBankCondition"/>
+                <Field Id="UnlockBankCondition"/>
             </GameLink>
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
@@ -6978,7 +6978,7 @@
                 <Field Id="UnlockWithConscription"/>
             </Int>
             <Int Int="1">
-                <Field Id="UnlockManually"/>
+                <Field Id="UnlockInCutscene"/>
             </Int>
             <String String="Hercules">
                 <Field Id="TechUnitId"/>
@@ -7044,7 +7044,7 @@
                 <Field Id="UnlockWithConscription"/>
             </Int>
             <Int Int="1">
-                <Field Id="UnlockManually"/>
+                <Field Id="UnlockInCutscene"/>
             </Int>
             <String String="PerditionTurret">
                 <Field Id="TechUnitId"/>
