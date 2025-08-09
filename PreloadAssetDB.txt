@@ -718,13 +718,13 @@ id=WidowMine
 Unit
 id=WarPig
 Unit
+id=Cyclone
+Unit
 id=Wraith
 Unit
 id=SensorTower
 Unit
 id=Liberator
-Unit
-id=Cyclone
 Unit
 
 [ArmyUpgrade]

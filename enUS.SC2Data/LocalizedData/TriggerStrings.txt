@@ -3423,6 +3423,7 @@ Variable/Name/lib_WoLC_3FF3672C=WC_AchievementPosition
 Variable/Name/lib_WoLC_407B4F40=IndexUnit
 Variable/Name/lib_WoLC_412F96B1=IndexUnit
 Variable/Name/lib_WoLC_4162215D=Camel Cased Words
+Variable/Name/lib_WoLC_41BE675D=Army Unit
 Variable/Name/lib_WoLC_41E62CCB=IndexPerk
 Variable/Name/lib_WoLC_4369E1E9=PerkCategory
 Variable/Name/lib_WoLC_44CACAF8=UnitIndex
