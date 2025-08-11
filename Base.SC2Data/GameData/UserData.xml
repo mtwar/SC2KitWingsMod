@@ -3725,9 +3725,6 @@
             <Image Image="Assets\Textures\ui_list_battlereports_traynor01.dds">
                 <Field Id="ArchivesIcon"/>
             </Image>
-            <Int Int="20000">
-                <Field Id="RewardCredits"/>
-            </Int>
         </Instances>
         <Instances Id="TRaynor02">
             <GameLink GameLink="TRaynor02_1">
@@ -4368,23 +4365,7 @@
             </Text>
         </Instances>
         <Instances Id="TRaynor01_3">
-            <Int Int="2500">
-                <Field Id="RewardCreditsEach"/>
-            </Int>
             <Text Text="UserData/MissionObjective/TRaynor01_3_Name">
-                <Field Id="Name"/>
-            </Text>
-        </Instances>
-        <Instances Id="TRaynor01_4">
-            <Int Int="2">
-                <Field Id="RewardProtossFinal"/>
-            </Int>
-            <Text Text="UserData/MissionObjective/TRaynor01_4_Name">
-                <Field Id="Name"/>
-            </Text>
-        </Instances>
-        <Instances Id="TRaynor01_5">
-            <Text Text="UserData/MissionObjective/TRaynor01_5_Name">
                 <Field Id="Name"/>
             </Text>
         </Instances>
