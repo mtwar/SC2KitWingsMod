@@ -4441,9 +4441,12 @@ bool libWoLC_gf_ConscriptionUnlocksByTrigger (string lp_conscription) {
 void libWoLC_gf_ConscriptionMissionVictoryEvent () {
     // Automatic Variable Declarations
     // Implementation
-    if ((libWoLC_gv_wCX_IsSimulation == false) && (libWoLC_gf_CurrentMap() != "TStory01")) {
-        libWoLC_gf_UnlockConscriptionsOnMapVictory(libWoLC_gf_CurrentMap(), libWoLC_gf_NumberOfMissions(libWoLC_ge_MissionCountOptions_Completed));
-        libWoLC_gf_SaveAllConscriptionsToCampaignMapBank(libWoLC_gf_CurrentMap());
+    if ((libWoLC_gv_wCX_IsSimulation == false)) {
+        if ((libWoLC_gf_CurrentMap() != "TStory01")) {
+            libWoLC_gf_UnlockConscriptionsOnMapVictory(libWoLC_gf_CurrentMap(), libWoLC_gf_NumberOfMissions(libWoLC_ge_MissionCountOptions_Completed));
+            libWoLC_gf_SaveAllConscriptionsToCampaignMapBank(libWoLC_gf_CurrentMap());
+        }
+
         libWoLC_gf_SaveAllConscriptionsToCampaignMapBank(null);
     }
 
@@ -8650,7 +8653,12 @@ bool libWoLC_gt_ConscriptionMissionStartEvent_Func (bool testConds, bool runActi
         return true;
     }
 
-    libWoLC_gf_LoadAllConscriptionsFromBank(libWoLC_gv_wC_CampaignBank, libWoLC_gf_WC_BankSectionName(null, "Conscription"));
+    if ((libWoLC_gf_CurrentMap() != "TStory01")) {
+        libWoLC_gf_LoadAllConscriptionsFromBank(libWoLC_gv_wC_CampaignBank, libWoLC_gf_WC_BankSectionName(null, "Conscription"));
+    }
+    else {
+        libWoLC_gf_LoadAllConscriptionsFromBank(libWoLC_gv_wC_CampaignBank, libWoLC_gf_WC_BankSectionName(libWoLC_gf_LastSuccessfulMission(), "Conscription"));
+    }
     libWoLC_gf_ApplyAllConscriptionsToTechTree();
     if ((libWoLC_gf_CurrentMap() != "TStory01")) {
         libWoLC_gf_UnlockConscriptionsOnMapStart(libWoLC_gf_CurrentMap(), (libWoLC_gf_NumberOfMissions(libWoLC_ge_MissionCountOptions_Completed) + 1));

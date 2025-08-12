@@ -59304,7 +59304,7 @@
             <Internal/>
             <Event Type="FunctionCall" Library="WoLC" Id="ABB73189"/>
             <Action Type="FunctionCall" Library="WoLC" Id="4E3717A5"/>
-            <Action Type="FunctionCall" Library="WoLC" Id="BBCB1E6E"/>
+            <Action Type="FunctionCall" Library="WoLC" Id="EC08FDE9"/>
             <Action Type="FunctionCall" Library="WoLC" Id="E9BD56F8"/>
             <Action Type="FunctionCall" Library="WoLC" Id="27C209EB"/>
         </Element>
@@ -59342,8 +59342,45 @@
             <Value>mission start event called</Value>
             <ValueType Type="string"/>
         </Element>
+        <Element Type="FunctionCall" Id="EC08FDE9">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000137"/>
+            <FunctionCall Type="FunctionCall" Library="WoLC" Id="C7E72BAD"/>
+            <FunctionCall Type="FunctionCall" Library="WoLC" Id="BBCB1E6E"/>
+            <FunctionCall Type="FunctionCall" Library="WoLC" Id="2AD651CD"/>
+        </Element>
+        <Element Type="FunctionCall" Id="C7E72BAD">
+            <FunctionDef Type="FunctionDef" Library="WoLC" Id="4C576F28"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000005"/>
+            <Parameter Type="Param" Library="WoLC" Id="4CBCC8D6"/>
+            <Parameter Type="Param" Library="WoLC" Id="0EB2ECEE"/>
+        </Element>
+        <Element Type="Param" Id="4CBCC8D6">
+            <ParameterDef Type="ParamDef" Library="WoLC" Id="07653EB0"/>
+            <Variable Type="Variable" Library="WoLC" Id="4FBDAB6E"/>
+        </Element>
+        <Element Type="Param" Id="0EB2ECEE">
+            <ParameterDef Type="ParamDef" Library="WoLC" Id="4FDB957C"/>
+            <FunctionCall Type="FunctionCall" Library="WoLC" Id="D8BFAB75"/>
+        </Element>
+        <Element Type="FunctionCall" Id="D8BFAB75">
+            <FunctionDef Type="FunctionDef" Library="WoLC" Id="440FBE25"/>
+            <Parameter Type="Param" Library="WoLC" Id="C61FF1FA"/>
+            <Parameter Type="Param" Library="WoLC" Id="39F82EDA"/>
+        </Element>
+        <Element Type="Param" Id="C61FF1FA">
+            <ParameterDef Type="ParamDef" Library="WoLC" Id="D79FE8DD"/>
+            <FunctionCall Type="FunctionCall" Library="WoLC" Id="FC4206CF"/>
+        </Element>
+        <Element Type="FunctionCall" Id="FC4206CF">
+            <FunctionDef Type="FunctionDef" Library="WoLC" Id="D8F10501"/>
+        </Element>
+        <Element Type="Param" Id="39F82EDA">
+            <ParameterDef Type="ParamDef" Library="WoLC" Id="2C030B53"/>
+            <Preset Type="PresetValue" Library="WoLC" Id="DE69B6A8"/>
+        </Element>
         <Element Type="FunctionCall" Id="BBCB1E6E">
             <FunctionDef Type="FunctionDef" Library="WoLC" Id="4C576F28"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
             <Parameter Type="Param" Library="WoLC" Id="7C173019"/>
             <Parameter Type="Param" Library="WoLC" Id="D0088829"/>
         </Element>
@@ -59370,6 +59407,30 @@
         <Element Type="Param" Id="5E2A7F5A">
             <ParameterDef Type="ParamDef" Library="WoLC" Id="2C030B53"/>
             <Preset Type="PresetValue" Library="WoLC" Id="DE69B6A8"/>
+        </Element>
+        <Element Type="FunctionCall" Id="2AD651CD">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000003"/>
+            <Parameter Type="Param" Library="WoLC" Id="4B3C6494"/>
+            <Parameter Type="Param" Library="WoLC" Id="9693690D"/>
+            <Parameter Type="Param" Library="WoLC" Id="BBEB762B"/>
+        </Element>
+        <Element Type="Param" Id="4B3C6494">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="ABB380C4"/>
+            <FunctionCall Type="FunctionCall" Library="WoLC" Id="940828E8"/>
+        </Element>
+        <Element Type="FunctionCall" Id="940828E8">
+            <FunctionDef Type="FunctionDef" Library="WoLC" Id="3AA4773E"/>
+        </Element>
+        <Element Type="Param" Id="9693690D">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="51567265"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="500677B2"/>
+        </Element>
+        <Element Type="Param" Id="BBEB762B">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="4A15EC5F"/>
+            <Value>TStory01</Value>
+            <ValueType Type="gamelink"/>
+            <ValueGameType Type="Map"/>
         </Element>
         <Element Type="FunctionCall" Id="E9BD56F8">
             <FunctionDef Type="FunctionDef" Library="WoLC" Id="CD037E60"/>
@@ -59504,11 +59565,48 @@
         </Element>
         <Element Type="FunctionCall" Id="C437B98D">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000137"/>
+            <FunctionCall Type="FunctionCall" Library="WoLC" Id="797D9546"/>
+            <FunctionCall Type="FunctionCall" Library="WoLC" Id="839D4B21"/>
+            <FunctionCall Type="FunctionCall" Library="WoLC" Id="C4432FF6"/>
+            <FunctionCall Type="FunctionCall" Library="WoLC" Id="FD818610"/>
+        </Element>
+        <Element Type="FunctionCall" Id="797D9546">
+            <Disabled/>
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="0366EE04"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="WoLC" Id="1FCD8FF2"/>
+            <Parameter Type="Param" Library="WoLC" Id="6918C6C5"/>
+            <Parameter Type="Param" Library="WoLC" Id="269D592F"/>
+        </Element>
+        <Element Type="Param" Id="1FCD8FF2">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="0D120C33"/>
+            <FunctionCall Type="FunctionCall" Library="WoLC" Id="33994A2A"/>
+        </Element>
+        <Element Type="FunctionCall" Id="33994A2A">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000192"/>
+        </Element>
+        <Element Type="Param" Id="6918C6C5">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="A4C19F41"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="89CC0A21"/>
+        </Element>
+        <Element Type="Param" Id="269D592F">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="78A54B52"/>
+            <FunctionCall Type="FunctionCall" Library="WoLC" Id="5E0045BC"/>
+        </Element>
+        <Element Type="FunctionCall" Id="5E0045BC">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="55C79F96"/>
+            <Parameter Type="Param" Library="WoLC" Id="2F717834"/>
+        </Element>
+        <Element Type="Param" Id="2F717834">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="30693AA2"/>
+            <Value>mission victory event called</Value>
+            <ValueType Type="string"/>
+        </Element>
+        <Element Type="FunctionCall" Id="839D4B21">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000137"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
             <FunctionCall Type="FunctionCall" Library="WoLC" Id="9A256B9D"/>
             <FunctionCall Type="FunctionCall" Library="WoLC" Id="368153CE"/>
-            <FunctionCall Type="FunctionCall" Library="WoLC" Id="1DCBCDE8"/>
-            <FunctionCall Type="FunctionCall" Library="WoLC" Id="797D9546"/>
-            <FunctionCall Type="FunctionCall" Library="WoLC" Id="FD818610"/>
             <FunctionCall Type="FunctionCall" Library="WoLC" Id="DD8E22C6"/>
         </Element>
         <Element Type="FunctionCall" Id="9A256B9D">
@@ -59548,70 +59646,6 @@
         <Element Type="FunctionCall" Id="A87EA3B6">
             <FunctionDef Type="FunctionDef" Library="WoLC" Id="3AA4773E"/>
         </Element>
-        <Element Type="FunctionCall" Id="1DCBCDE8">
-            <FunctionDef Type="FunctionDef" Library="WoLC" Id="0A9E5856"/>
-            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
-            <Parameter Type="Param" Library="WoLC" Id="C79DEBDE"/>
-        </Element>
-        <Element Type="Param" Id="C79DEBDE">
-            <ParameterDef Type="ParamDef" Library="WoLC" Id="528F5857"/>
-            <CustomType Type="gamelink"/>
-            <ScriptCode>
-                null
-            </ScriptCode>
-        </Element>
-        <Element Type="FunctionCall" Id="797D9546">
-            <Disabled/>
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="0366EE04"/>
-            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
-            <Parameter Type="Param" Library="WoLC" Id="1FCD8FF2"/>
-            <Parameter Type="Param" Library="WoLC" Id="6918C6C5"/>
-            <Parameter Type="Param" Library="WoLC" Id="269D592F"/>
-        </Element>
-        <Element Type="Param" Id="1FCD8FF2">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="0D120C33"/>
-            <FunctionCall Type="FunctionCall" Library="WoLC" Id="33994A2A"/>
-        </Element>
-        <Element Type="FunctionCall" Id="33994A2A">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000192"/>
-        </Element>
-        <Element Type="Param" Id="6918C6C5">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="A4C19F41"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="89CC0A21"/>
-        </Element>
-        <Element Type="Param" Id="269D592F">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="78A54B52"/>
-            <FunctionCall Type="FunctionCall" Library="WoLC" Id="5E0045BC"/>
-        </Element>
-        <Element Type="FunctionCall" Id="5E0045BC">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="55C79F96"/>
-            <Parameter Type="Param" Library="WoLC" Id="2F717834"/>
-        </Element>
-        <Element Type="Param" Id="2F717834">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="30693AA2"/>
-            <Value>mission victory event called</Value>
-            <ValueType Type="string"/>
-        </Element>
-        <Element Type="FunctionCall" Id="FD818610">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
-            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000003"/>
-            <Parameter Type="Param" Library="WoLC" Id="62C6EC00"/>
-            <Parameter Type="Param" Library="WoLC" Id="50530977"/>
-            <Parameter Type="Param" Library="WoLC" Id="DCF455AF"/>
-        </Element>
-        <Element Type="Param" Id="62C6EC00">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="ABB380C4"/>
-            <Variable Type="Variable" Library="WoLC" Id="352015CF"/>
-        </Element>
-        <Element Type="Param" Id="50530977">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="51567265"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="1E7A4625"/>
-        </Element>
-        <Element Type="Param" Id="DCF455AF">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="4A15EC5F"/>
-            <Value>false</Value>
-            <ValueType Type="bool"/>
-        </Element>
         <Element Type="FunctionCall" Id="DD8E22C6">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
             <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000003"/>
@@ -59635,6 +59669,38 @@
             <Value>TStory01</Value>
             <ValueType Type="gamelink"/>
             <ValueGameType Type="Map"/>
+        </Element>
+        <Element Type="FunctionCall" Id="C4432FF6">
+            <FunctionDef Type="FunctionDef" Library="WoLC" Id="0A9E5856"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="WoLC" Id="CB14E365"/>
+        </Element>
+        <Element Type="Param" Id="CB14E365">
+            <ParameterDef Type="ParamDef" Library="WoLC" Id="528F5857"/>
+            <CustomType Type="gamelink"/>
+            <ScriptCode>
+                null
+            </ScriptCode>
+        </Element>
+        <Element Type="FunctionCall" Id="FD818610">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000003"/>
+            <Parameter Type="Param" Library="WoLC" Id="62C6EC00"/>
+            <Parameter Type="Param" Library="WoLC" Id="50530977"/>
+            <Parameter Type="Param" Library="WoLC" Id="DCF455AF"/>
+        </Element>
+        <Element Type="Param" Id="62C6EC00">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="ABB380C4"/>
+            <Variable Type="Variable" Library="WoLC" Id="352015CF"/>
+        </Element>
+        <Element Type="Param" Id="50530977">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="51567265"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="1E7A4625"/>
+        </Element>
+        <Element Type="Param" Id="DCF455AF">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="4A15EC5F"/>
+            <Value>false</Value>
+            <ValueType Type="bool"/>
         </Element>
         <Element Type="FunctionDef" Id="C79466E1">
             <FlagAction/>
