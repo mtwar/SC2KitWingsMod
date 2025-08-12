@@ -854,7 +854,7 @@ void libWCMI_gf_EndCampaignMission (int lp_player, int lp_type) {
     }
 
     libWoLC_gf_WC_AchievementAwardMission(libWoLC_gf_CurrentMap());
-    libWoLC_gf_ConscriptionMissionVictoryEvent();
+    libWoLC_gf_ConscriptionMissionVictory();
 }
 
 void libWCMI_gf_PU_CampaignVictory2 () {

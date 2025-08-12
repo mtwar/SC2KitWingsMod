@@ -3679,6 +3679,12 @@ void libWoLC_gf_WC_ResetArmyTech () {
     }
 }
 
+bool libWoLC_gf_ConscriptionVanillaVikingUnlockCondition (string lp_conscription) {
+    // Automatic Variable Declarations
+    // Implementation
+    return ((libWoLC_gf_CurrentMap() == "THanson03A") || (libWoLC_gf_CurrentMap() == "THanson03B"));
+}
+
 int libWoLC_gf_ParseConscriptionUnitState (int lp_stateValue) {
     // Automatic Variable Declarations
     int auto33B630C7_val;
@@ -4294,6 +4300,42 @@ void libWoLC_gf_ApplyConscriptionToTechTree (string lp_conscription) {
     }
 }
 
+void libWoLC_gf_ConscriptionTravelPanelMissionStart () {
+    // Automatic Variable Declarations
+    // Implementation
+    libWoLC_gf_SaveAllConscriptionsToCampaignMapBank(null);
+}
+
+void libWoLC_gf_ConscriptionMissionStart () {
+    // Automatic Variable Declarations
+    // Implementation
+    if ((libWoLC_gf_CurrentMap() != "TStory01")) {
+        libWoLC_gf_LoadAllConscriptionsFromBank(libWoLC_gv_wC_CampaignBank, libWoLC_gf_WC_BankSectionName(null, "Conscription"));
+    }
+    else {
+        libWoLC_gf_LoadAllConscriptionsFromBank(libWoLC_gv_wC_CampaignBank, libWoLC_gf_WC_BankSectionName(libWoLC_gf_LastSuccessfulMission(), "Conscription"));
+    }
+    libWoLC_gf_ApplyAllConscriptionsToTechTree();
+    if ((libWoLC_gf_CurrentMap() != "TStory01")) {
+        libWoLC_gf_UnlockConscriptionsOnMapStart(libWoLC_gf_CurrentMap(), (libWoLC_gf_NumberOfMissions(libWoLC_ge_MissionCountOptions_Completed) + 1));
+    }
+
+}
+
+void libWoLC_gf_ConscriptionMissionVictory () {
+    // Automatic Variable Declarations
+    // Implementation
+    if ((libWoLC_gv_wCX_IsSimulation == false)) {
+        if ((libWoLC_gf_CurrentMap() != "TStory01")) {
+            libWoLC_gf_UnlockConscriptionsOnMapVictory(libWoLC_gf_CurrentMap(), libWoLC_gf_NumberOfMissions(libWoLC_ge_MissionCountOptions_Completed));
+            libWoLC_gf_SaveAllConscriptionsToCampaignMapBank(libWoLC_gf_CurrentMap());
+        }
+
+        libWoLC_gf_SaveAllConscriptionsToCampaignMapBank(null);
+    }
+
+}
+
 void libWoLC_gf_UnlockConscriptionsByMap (string lp_map) {
     // Variable Declarations
     string lv_conscription;
@@ -4382,12 +4424,6 @@ bool libWoLC_gf_ConscriptionUnlockConditionTemplate (string lp_conscription) {
     return (lp_conscription != null);
 }
 
-bool libWoLC_gf_ConscriptionVanillaVikingUnlockCondition (string lp_conscription) {
-    // Automatic Variable Declarations
-    // Implementation
-    return ((libWoLC_gf_CurrentMap() == "THanson03A") || (libWoLC_gf_CurrentMap() == "THanson03B"));
-}
-
 void libWoLC_gf_UnlockConscriptionsByTrigger () {
     // Variable Declarations
     string lv_conscription;
@@ -4436,20 +4472,6 @@ bool libWoLC_gf_ConscriptionUnlocksByTrigger (string lp_conscription) {
 
     // Implementation
     return !libWoLC_gf_NullOrEmptyString(lv_unlockTriggerName);
-}
-
-void libWoLC_gf_ConscriptionMissionVictoryEvent () {
-    // Automatic Variable Declarations
-    // Implementation
-    if ((libWoLC_gv_wCX_IsSimulation == false)) {
-        if ((libWoLC_gf_CurrentMap() != "TStory01")) {
-            libWoLC_gf_UnlockConscriptionsOnMapVictory(libWoLC_gf_CurrentMap(), libWoLC_gf_NumberOfMissions(libWoLC_ge_MissionCountOptions_Completed));
-            libWoLC_gf_SaveAllConscriptionsToCampaignMapBank(libWoLC_gf_CurrentMap());
-        }
-
-        libWoLC_gf_SaveAllConscriptionsToCampaignMapBank(null);
-    }
-
 }
 
 void libWoLC_gf_UnlockConscriptionsOnMapStart (string lp_map, int lp_missionNumber) {
@@ -4508,6 +4530,71 @@ bool libWoLC_gf_ConscriptionUnlocksAutomatically (string lp_conscription) {
     // Automatic Variable Declarations
     // Implementation
     return (libWoLC_gf_ConscriptionUnlocksByMap(lp_conscription) || (libWoLC_gf_ConscriptionUnlocksByMissionNumber(lp_conscription) || libWoLC_gf_ConscriptionUnlocksByTrigger(lp_conscription)));
+}
+
+bool libWoLC_gf_NullOrEmptyString (string lp_inputString) {
+    // Automatic Variable Declarations
+    // Implementation
+    return lp_inputString == null || StringEqual(lp_inputString, "", c_stringCase);
+}
+
+string libWoLC_gf_ParseUnitTypeFromString (string lp_unitTypeName) {
+    // Variable Declarations
+    string lv_unitType;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Implementation
+    if ((StringEqual(lp_unitTypeName, "", c_stringNoCase) == true)) {
+        return null;
+    }
+
+    lv_unitType = UnitTypeFromString(lp_unitTypeName);
+    if (((lv_unitType == null) || (lv_unitType == ""))) {
+        return null;
+    }
+
+    return lv_unitType;
+}
+
+string libWoLC_gf_CamelCaseFromSpaceSeparated (string lp_inputWords, bool lp_capitalize, int lp_startTokenIndex, int lp_maxTokens) {
+    // Variable Declarations
+    string lv_camelCasedWords;
+    string lv_currentToken;
+    int lv_currentTokenIndex;
+    int lv_numberOfTokens;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_camelCasedWords = "";
+    lv_currentToken = "";
+
+    // Implementation
+    lv_currentTokenIndex = lp_startTokenIndex;
+    lv_currentToken = StringWord(lp_inputWords, lv_currentTokenIndex);
+    while ((lv_currentToken != null) && ((lp_maxTokens <= 0) || (lv_numberOfTokens < lp_maxTokens))) {
+        lv_numberOfTokens = (lv_numberOfTokens + 1);
+        lv_currentToken = StringCase(lv_currentToken, false);
+        lv_currentToken = (StringCase(StringSub(lv_currentToken, 1, 1), true) + StringSub(lv_currentToken, 2, StringLength(lv_currentToken)));
+        lv_camelCasedWords = (lv_camelCasedWords + lv_currentToken);
+        lv_currentTokenIndex = (lv_currentTokenIndex + 1);
+        lv_currentToken = StringWord(EventChatMessage(false), lv_currentTokenIndex);
+    }
+    if ((lp_capitalize == false)) {
+        lv_camelCasedWords = (StringCase(StringSub(lv_camelCasedWords, 1, 1), false) + StringSub(lv_camelCasedWords, 2, StringLength(lv_camelCasedWords)));
+    }
+
+    return lv_camelCasedWords;
+}
+
+void libWoLC_gf_LogDebugIfNotEmpty (string lp_string) {
+    // Automatic Variable Declarations
+    // Implementation
+    if ((libWoLC_gf_NullOrEmptyString(lp_string) == false)) {
+        TriggerDebugOutput(1, StringToText(lp_string), false);
+    }
+
 }
 
 bool libWoLC_gf_CampaignMercenaryStateCheck (string lp_mercenary, string lp_state) {
@@ -7478,71 +7565,6 @@ void libWoLC_gf_RegisterPersistentUserType (string lp_userType) {
     UserDataLoadType(lp_userType, libWoLC_gv_wC_CampaignBank, libWoLC_gf_WC_BankSectionName2(lp_userType));
 }
 
-bool libWoLC_gf_NullOrEmptyString (string lp_inputString) {
-    // Automatic Variable Declarations
-    // Implementation
-    return lp_inputString == null || StringEqual(lp_inputString, "", c_stringCase);
-}
-
-string libWoLC_gf_ParseUnitTypeFromString (string lp_unitTypeName) {
-    // Variable Declarations
-    string lv_unitType;
-
-    // Automatic Variable Declarations
-    // Variable Initialization
-
-    // Implementation
-    if ((StringEqual(lp_unitTypeName, "", c_stringNoCase) == true)) {
-        return null;
-    }
-
-    lv_unitType = UnitTypeFromString(lp_unitTypeName);
-    if (((lv_unitType == null) || (lv_unitType == ""))) {
-        return null;
-    }
-
-    return lv_unitType;
-}
-
-string libWoLC_gf_CamelCaseFromSpaceSeparated (string lp_inputWords, bool lp_capitalize, int lp_startTokenIndex, int lp_maxTokens) {
-    // Variable Declarations
-    string lv_camelCasedWords;
-    string lv_currentToken;
-    int lv_currentTokenIndex;
-    int lv_numberOfTokens;
-
-    // Automatic Variable Declarations
-    // Variable Initialization
-    lv_camelCasedWords = "";
-    lv_currentToken = "";
-
-    // Implementation
-    lv_currentTokenIndex = lp_startTokenIndex;
-    lv_currentToken = StringWord(lp_inputWords, lv_currentTokenIndex);
-    while ((lv_currentToken != null) && ((lp_maxTokens <= 0) || (lv_numberOfTokens < lp_maxTokens))) {
-        lv_numberOfTokens = (lv_numberOfTokens + 1);
-        lv_currentToken = StringCase(lv_currentToken, false);
-        lv_currentToken = (StringCase(StringSub(lv_currentToken, 1, 1), true) + StringSub(lv_currentToken, 2, StringLength(lv_currentToken)));
-        lv_camelCasedWords = (lv_camelCasedWords + lv_currentToken);
-        lv_currentTokenIndex = (lv_currentTokenIndex + 1);
-        lv_currentToken = StringWord(EventChatMessage(false), lv_currentTokenIndex);
-    }
-    if ((lp_capitalize == false)) {
-        lv_camelCasedWords = (StringCase(StringSub(lv_camelCasedWords, 1, 1), false) + StringSub(lv_camelCasedWords, 2, StringLength(lv_camelCasedWords)));
-    }
-
-    return lv_camelCasedWords;
-}
-
-void libWoLC_gf_LogDebugIfNotEmpty (string lp_string) {
-    // Automatic Variable Declarations
-    // Implementation
-    if ((libWoLC_gf_NullOrEmptyString(lp_string) == false)) {
-        TriggerDebugOutput(1, StringToText(lp_string), true);
-    }
-
-}
-
 text libWoLC_gf_WC_FormatReward (int lp_value, string lp_type) {
     // Automatic Variable Declarations
     string auto757A6891_val;
@@ -8567,6 +8589,65 @@ void libWoLC_gt_WC_SceneSkipped_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
+// Trigger: Conscription Vanilla Viking Unlock Trigger
+//--------------------------------------------------------------------------------------------------
+bool libWoLC_gt_ConscriptionVanillaVikingUnlockTrigger_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libWoLC_gv_unlockCurrentTriggerConscription = libWoLC_gf_ConscriptionVanillaVikingUnlockCondition(libWoLC_gv_currentTriggerConscription);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libWoLC_gt_ConscriptionVanillaVikingUnlockTrigger_Init () {
+    libWoLC_gt_ConscriptionVanillaVikingUnlockTrigger = TriggerCreate("libWoLC_gt_ConscriptionVanillaVikingUnlockTrigger_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Conscription Mission Start Event
+//--------------------------------------------------------------------------------------------------
+bool libWoLC_gt_ConscriptionMissionStartEvent_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libWoLC_gf_ConscriptionMissionStart();
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libWoLC_gt_ConscriptionMissionStartEvent_Init () {
+    libWoLC_gt_ConscriptionMissionStartEvent = TriggerCreate("libWoLC_gt_ConscriptionMissionStartEvent_Func");
+    libWoLC_gf_CampaignMissionStarts(libWoLC_gt_ConscriptionMissionStartEvent);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Conscription Travel Panel Mission Start Event
+//--------------------------------------------------------------------------------------------------
+bool libWoLC_gt_ConscriptionTravelPanelMissionStartEvent_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libWoLC_gf_ConscriptionTravelPanelMissionStart();
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libWoLC_gt_ConscriptionTravelPanelMissionStartEvent_Init () {
+    libWoLC_gt_ConscriptionTravelPanelMissionStartEvent = TriggerCreate("libWoLC_gt_ConscriptionTravelPanelMissionStartEvent_Func");
+    libWCUI_gf_TravelPanelMissionStart(libWoLC_gt_ConscriptionTravelPanelMissionStartEvent);
+}
+
+//--------------------------------------------------------------------------------------------------
 // Trigger: Conscription Cheat Listener
 //--------------------------------------------------------------------------------------------------
 bool libWoLC_gt_ConscriptionCheatListener_Func (bool testConds, bool runActions) {
@@ -8622,75 +8703,6 @@ bool libWoLC_gt_ConscriptionUnlockTriggerTemplate_Func (bool testConds, bool run
 //--------------------------------------------------------------------------------------------------
 void libWoLC_gt_ConscriptionUnlockTriggerTemplate_Init () {
     libWoLC_gt_ConscriptionUnlockTriggerTemplate = TriggerCreate("libWoLC_gt_ConscriptionUnlockTriggerTemplate_Func");
-}
-
-//--------------------------------------------------------------------------------------------------
-// Trigger: Conscription Vanilla Viking Unlock Trigger
-//--------------------------------------------------------------------------------------------------
-bool libWoLC_gt_ConscriptionVanillaVikingUnlockTrigger_Func (bool testConds, bool runActions) {
-    // Automatic Variable Declarations
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    libWoLC_gv_unlockCurrentTriggerConscription = libWoLC_gf_ConscriptionVanillaVikingUnlockCondition(libWoLC_gv_currentTriggerConscription);
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void libWoLC_gt_ConscriptionVanillaVikingUnlockTrigger_Init () {
-    libWoLC_gt_ConscriptionVanillaVikingUnlockTrigger = TriggerCreate("libWoLC_gt_ConscriptionVanillaVikingUnlockTrigger_Func");
-}
-
-//--------------------------------------------------------------------------------------------------
-// Trigger: Conscription Mission Start Event
-//--------------------------------------------------------------------------------------------------
-bool libWoLC_gt_ConscriptionMissionStartEvent_Func (bool testConds, bool runActions) {
-    // Automatic Variable Declarations
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    if ((libWoLC_gf_CurrentMap() != "TStory01")) {
-        libWoLC_gf_LoadAllConscriptionsFromBank(libWoLC_gv_wC_CampaignBank, libWoLC_gf_WC_BankSectionName(null, "Conscription"));
-    }
-    else {
-        libWoLC_gf_LoadAllConscriptionsFromBank(libWoLC_gv_wC_CampaignBank, libWoLC_gf_WC_BankSectionName(libWoLC_gf_LastSuccessfulMission(), "Conscription"));
-    }
-    libWoLC_gf_ApplyAllConscriptionsToTechTree();
-    if ((libWoLC_gf_CurrentMap() != "TStory01")) {
-        libWoLC_gf_UnlockConscriptionsOnMapStart(libWoLC_gf_CurrentMap(), (libWoLC_gf_NumberOfMissions(libWoLC_ge_MissionCountOptions_Completed) + 1));
-    }
-
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void libWoLC_gt_ConscriptionMissionStartEvent_Init () {
-    libWoLC_gt_ConscriptionMissionStartEvent = TriggerCreate("libWoLC_gt_ConscriptionMissionStartEvent_Func");
-    libWoLC_gf_CampaignMissionStarts(libWoLC_gt_ConscriptionMissionStartEvent);
-}
-
-//--------------------------------------------------------------------------------------------------
-// Trigger: Conscription Travel Panel Mission Start Event
-//--------------------------------------------------------------------------------------------------
-bool libWoLC_gt_ConscriptionTravelPanelMissionStartEvent_Func (bool testConds, bool runActions) {
-    // Automatic Variable Declarations
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    libWoLC_gf_SaveAllConscriptionsToCampaignMapBank(null);
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void libWoLC_gt_ConscriptionTravelPanelMissionStartEvent_Init () {
-    libWoLC_gt_ConscriptionTravelPanelMissionStartEvent = TriggerCreate("libWoLC_gt_ConscriptionTravelPanelMissionStartEvent_Func");
-    libWCUI_gf_TravelPanelMissionStart(libWoLC_gt_ConscriptionTravelPanelMissionStartEvent);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -9085,11 +9097,11 @@ void libWoLC_InitTriggers () {
     libWoLC_gt_WC_PlaySceneSkippable_Init();
     libWoLC_gt_WC_CinematicDetectSkipping_Init();
     libWoLC_gt_WC_SceneSkipped_Init();
-    libWoLC_gt_ConscriptionCheatListener_Init();
-    libWoLC_gt_ConscriptionUnlockTriggerTemplate_Init();
     libWoLC_gt_ConscriptionVanillaVikingUnlockTrigger_Init();
     libWoLC_gt_ConscriptionMissionStartEvent_Init();
     libWoLC_gt_ConscriptionTravelPanelMissionStartEvent_Init();
+    libWoLC_gt_ConscriptionCheatListener_Init();
+    libWoLC_gt_ConscriptionUnlockTriggerTemplate_Init();
     libWoLC_gt_WC_TrackLoadingComplete_Init();
     libWoLC_gt_WC_TrackLoadingFromSave_Init();
     libWoLC_gt_WC_ArchivesBankLoadSyncComplete_Init();
