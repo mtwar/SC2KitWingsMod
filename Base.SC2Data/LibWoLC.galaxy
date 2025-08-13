@@ -42,7 +42,7 @@ void libWoLC_InitVariables () {
     libWoLC_gv_wC_CampaignCutsceneDialog = c_invalidDialogId;
     libWoLC_gv_wC_SceneStatEvent = -1;
     libWoLC_gv_conscriptionBankData.lv_section = "";
-    libWoLC_gv_conscriptionBankData.lv_keyConscriptionId = "";
+    libWoLC_gv_conscriptionBankData.lv_key = "";
     libWoLC_gv_conscriptionBankSectionName = "";
     libWoLC_gv_wC_ArchiveLotVBankName = "WArchive";
     libWoLC_gv_wC_CampaignWoLBankName = "WCampaign";
@@ -4061,7 +4061,7 @@ void libWoLC_gf_LoadAllConscriptionsFromBank (bank lp_bank, string lp_section) {
         if (!libWoLC_gf_ConscriptionIsEnabled(lv_currentConscription)) {
             continue;
         }
-        libWoLC_gf_LoadConscriptionFromBank(lp_bank, lp_section, lv_currentConscription);
+        libWoLC_gf_ReadConscriptionFromBank(lp_bank, lp_section, lv_currentConscription);
     }
 }
 
@@ -4070,20 +4070,20 @@ void libWoLC_gf_WriteConscriptionToBank (bank lp_bank, string lp_section, string
     // Implementation
     libWoLC_gv_conscriptionBankData.lv_bank = lp_bank;
     libWoLC_gv_conscriptionBankData.lv_section = lp_section;
-    libWoLC_gv_conscriptionBankData.lv_keyConscriptionId = (lp_conscription);
-    libWoLC_gv_conscriptionBankData.lv_valueState = UserDataGetInt("Conscription", lp_conscription, "State", 1);
+    libWoLC_gv_conscriptionBankData.lv_key = (lp_conscription);
+    libWoLC_gv_conscriptionBankData.lv_state = UserDataGetInt("Conscription", lp_conscription, "State", 1);
     libNtve_gf_TriggerExecuteByName(UserDataGetString("ConscriptionModule", "Base", "Write Conscription To Bank Trigger", 1), true, true);
 }
 
-void libWoLC_gf_LoadConscriptionFromBank (bank lp_bank, string lp_section, string lp_conscription) {
+void libWoLC_gf_ReadConscriptionFromBank (bank lp_bank, string lp_section, string lp_conscription) {
     // Automatic Variable Declarations
     // Implementation
     libWoLC_gv_conscriptionBankData.lv_bank = lp_bank;
     libWoLC_gv_conscriptionBankData.lv_section = lp_section;
-    libWoLC_gv_conscriptionBankData.lv_keyConscriptionId = (lp_conscription);
-    libWoLC_gv_conscriptionBankData.lv_valueState = 0;
+    libWoLC_gv_conscriptionBankData.lv_key = (lp_conscription);
+    libWoLC_gv_conscriptionBankData.lv_state = 0;
     libNtve_gf_TriggerExecuteByName(UserDataGetString("ConscriptionModule", "Base", "Read Conscription From Bank Trigger", 1), true, true);
-    libWoLC_gf_SetConscriptionState(lp_conscription, libWoLC_gf_ParseConscriptionUnitState(libWoLC_gv_conscriptionBankData.lv_valueState));
+    libWoLC_gf_SetConscriptionState(lp_conscription, libWoLC_gf_ParseConscriptionUnitState(libWoLC_gv_conscriptionBankData.lv_state));
 }
 
 string libWoLC_gf_GetBankSectionName (string lp_map) {
@@ -8668,7 +8668,7 @@ bool libWoLC_gt_WriteConscriptionToBankTrigger_Func (bool testConds, bool runAct
         return true;
     }
 
-    libWoLC_gf_WC_SaveTransitionVarInteger(libWoLC_gv_conscriptionBankData.lv_bank, libWoLC_gv_conscriptionBankData.lv_section, libWoLC_gv_conscriptionBankData.lv_keyConscriptionId, libWoLC_gv_conscriptionBankData.lv_valueState, 0);
+    libWoLC_gf_WC_SaveTransitionVarInteger(libWoLC_gv_conscriptionBankData.lv_bank, libWoLC_gv_conscriptionBankData.lv_section, libWoLC_gv_conscriptionBankData.lv_key, libWoLC_gv_conscriptionBankData.lv_state, 0);
     return true;
 }
 
@@ -8687,7 +8687,7 @@ bool libWoLC_gt_ReadConscriptionFromBankTrigger_Func (bool testConds, bool runAc
         return true;
     }
 
-    libWoLC_gv_conscriptionBankData.lv_valueState = libWoLC_gf_WC_LoadTransitionVarInteger(libWoLC_gv_conscriptionBankData.lv_bank, libWoLC_gv_conscriptionBankData.lv_section, libWoLC_gv_conscriptionBankData.lv_keyConscriptionId, 0);
+    libWoLC_gv_conscriptionBankData.lv_state = libWoLC_gf_WC_LoadTransitionVarInteger(libWoLC_gv_conscriptionBankData.lv_bank, libWoLC_gv_conscriptionBankData.lv_section, libWoLC_gv_conscriptionBankData.lv_key, 0);
     return true;
 }
 

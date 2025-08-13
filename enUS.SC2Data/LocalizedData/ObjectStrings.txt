@@ -9236,7 +9236,6 @@ User/Name/SceneTypes=Scene Types
 User/Name/Scenes=Scenes
 User/Name/StoryStates=Story States
 User/Name/TechGroup=Campaign Tech Group
-User/Name/TechUnit=Campaign Tech Unit
 User/Name/TechUpgrade=Campaign Tech Upgrade
 User/Name/Timestamps=Scene Timestamps
 Validator/EditorPrefix/Kit@CasterNotMarauderStimmed=Kit@

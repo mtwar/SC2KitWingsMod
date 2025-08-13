@@ -23,7 +23,7 @@
     </CUser>
     <CUser id="ConscriptionModule">
         <Instances Id="[Override]Base">
-            <String String="libWoLC_gt_LoadConscriptionFromBankTrigger_Func">
+            <String String="libWoLC_gt_ReadConscriptionFromBankTrigger_Func">
                 <Field Id="Read Conscription From Bank Trigger"/>
             </String>
             <String String="libWoLC_gt_WriteConscriptionToBankTrigger_Func">
