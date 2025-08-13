@@ -2,6 +2,7 @@ include "TriggerLibs/NativeLib"
 include "TriggerLibs/LibertyLib"
 include "TriggerLibs/SwarmLib"
 include "TriggerLibs/VoidLib"
+include "LibConB"
 include "LibWoLC_h"
 include "LibWCUI_h"
 
@@ -15,6 +16,7 @@ void libWCMI_InitLibraries () {
     libNtve_InitVariables();
     libLbty_InitVariables();
     libHots_InitVariables();
+    libConB_InitVariables();
     libWoLC_InitVariables();
     libWCUI_InitVariables();
 }
@@ -853,7 +855,7 @@ void libWCMI_gf_EndCampaignMission (int lp_player, int lp_type) {
         libWoLC_gf_WC_LoadTransitionVars(BankLastCreated(), libWoLC_gf_CurrentMap());
     }
     else {
-        libWoLC_gf_ConscriptionMissionVictory();
+        libConB_gf_ConscriptionMissionVictory();
     }
     libWoLC_gf_WC_AchievementAwardMission(libWoLC_gf_CurrentMap());
 }

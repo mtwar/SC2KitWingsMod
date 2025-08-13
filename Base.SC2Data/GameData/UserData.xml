@@ -50,6 +50,12 @@
             <String String="libWoLC_gt_GetNumberOfMissionsCompletedTrigger_Func">
                 <Field Id="Get Number Of Missions Completed Trigger"/>
             </String>
+            <String String="libWoLC_gt_GetAvailableCreditsTrigger_Func">
+                <Field Id="Get Available Credits Trigger"/>
+            </String>
+            <String String="libWoLC_gt_LoadConscriptionFromBankTrigger_Func">
+                <Field Id="Load Conscription From Bank Trigger"/>
+            </String>
         </Instances>
     </CUser>
     <CUser id="Mercenaries">
