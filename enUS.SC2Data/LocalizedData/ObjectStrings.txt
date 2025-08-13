@@ -9226,7 +9226,6 @@ User/Name/CampaignConstants=Campaign Constants
 User/Name/CampaignPerk=Campaign Perk
 User/Name/CampaignPerkGroup=Campaign Perk Group
 User/Name/CampaignTips=Campaign Tips
-User/Name/Conscription=Conscription
 User/Name/DifficultySettings=Difficulty Settings
 User/Name/Locations=Locations
 User/Name/Maps=Maps

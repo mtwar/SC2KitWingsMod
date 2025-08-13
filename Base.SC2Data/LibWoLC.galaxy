@@ -43,6 +43,7 @@ void libWoLC_InitVariables () {
     libWoLC_gv_wC_SceneStatEvent = -1;
     libWoLC_gv_conscriptionBankData.lv_section = "";
     libWoLC_gv_conscriptionBankData.lv_keyConscriptionId = "";
+    libWoLC_gv_conscriptionBankSectionName = "";
     libWoLC_gv_wC_ArchiveLotVBankName = "WArchive";
     libWoLC_gv_wC_CampaignWoLBankName = "WCampaign";
     libWoLC_gv_wC_CampaignWoLBankNameLegacy = "TCampaign";
@@ -54,14 +55,6 @@ void libWoLC_InitVariables () {
 }
 
 // Presets
-string libWoLC_ge_ConscriptionUnitState_Ident (int lp_val) {
-         if (lp_val == libWoLC_ge_ConscriptionUnitState_Locked) { return "Locked"; }
-    else if (lp_val == libWoLC_ge_ConscriptionUnitState_Available) { return "Available"; }
-    else if (lp_val == libWoLC_ge_ConscriptionUnitState_Purchased) { return "Purchased"; }
-    else if (lp_val == libWoLC_ge_ConscriptionUnitState_None) { return "None"; }
-    return null;
-}
-
 string libWoLC_ge_ConscriptionActionType_Ident (int lp_val) {
          if (lp_val == libWoLC_ge_ConscriptionActionType_None) { return "None"; }
     else if (lp_val == libWoLC_ge_ConscriptionActionType_Unlock) { return "Unlock"; }
@@ -73,6 +66,14 @@ string libWoLC_ge_ConscriptionActionType_Ident (int lp_val) {
     else if (lp_val == libWoLC_ge_ConscriptionActionType_Load) { return "Load"; }
     else if (lp_val == libWoLC_ge_ConscriptionActionType_SaveAll) { return "SaveAll"; }
     else if (lp_val == libWoLC_ge_ConscriptionActionType_LoadAll) { return "LoadAll"; }
+    return null;
+}
+
+string libWoLC_ge_ConscriptionUnitState_Ident (int lp_val) {
+         if (lp_val == libWoLC_ge_ConscriptionUnitState_Locked) { return "Locked"; }
+    else if (lp_val == libWoLC_ge_ConscriptionUnitState_Available) { return "Available"; }
+    else if (lp_val == libWoLC_ge_ConscriptionUnitState_Purchased) { return "Purchased"; }
+    else if (lp_val == libWoLC_ge_ConscriptionUnitState_None) { return "None"; }
     return null;
 }
 
@@ -3687,44 +3688,183 @@ bool libWoLC_gf_ConscriptionVanillaVikingUnlockCondition (string lp_conscription
     return ((libWoLC_gf_CurrentMap() == "THanson03A") || (libWoLC_gf_CurrentMap() == "THanson03B"));
 }
 
-int libWoLC_gf_ParseConscriptionUnitState (int lp_stateValue) {
+void libWoLC_gf_SaveAllConscriptionsToCampaignMapBank (string lp_map) {
     // Automatic Variable Declarations
-    int auto33B630C7_val;
+    // Implementation
+    libWoLC_gf_SaveAllConscriptionsToCampaignBank(libWoLC_gf_GetBankSectionName(lp_map));
+}
+
+void libWoLC_gf_SaveAllConscriptionsToCampaignBank (string lp_section) {
+    // Automatic Variable Declarations
+    // Implementation
+    libWoLC_gf_SaveAllConscriptionsToBank(libWoLC_gf_GetCampaignBank(), lp_section);
+}
+
+void libWoLC_gf_SaveAllConscriptionsToBank (bank lp_bank, string lp_section) {
+    // Variable Declarations
+    string lv_currentConscription;
+
+    // Automatic Variable Declarations
+    int autoDD6B77B9_ai;
+    int autoDD6B77B9_ae;
+
+    // Variable Initialization
 
     // Implementation
-    auto33B630C7_val = lp_stateValue;
-    if (auto33B630C7_val == libWoLC_ge_ConscriptionUnitState_Locked) {
-        return libWoLC_ge_ConscriptionUnitState_Locked;
+    BankLoad(BankName(lp_bank), 1);
+    BankSectionRemove(lp_bank, lp_section);
+    BankSectionCreate(lp_bank, lp_section);
+    autoDD6B77B9_ai = 1;
+    autoDD6B77B9_ae = UserDataInstanceCount("Conscription")+1;
+    while (autoDD6B77B9_ai < autoDD6B77B9_ae) {
+        lv_currentConscription = UserDataInstance("Conscription", autoDD6B77B9_ai);
+        autoDD6B77B9_ai = autoDD6B77B9_ai+1;
+        if (!libWoLC_gf_ConscriptionIsEnabled(lv_currentConscription)) {
+            continue;
+        }
+        libWoLC_gf_WriteConscriptionToBank(lp_bank, lp_section, lv_currentConscription);
     }
-    else if (auto33B630C7_val == libWoLC_ge_ConscriptionUnitState_Available) {
-        return libWoLC_ge_ConscriptionUnitState_Available;
-    }
-    else if (auto33B630C7_val == libWoLC_ge_ConscriptionUnitState_Purchased) {
-        return libWoLC_ge_ConscriptionUnitState_Purchased;
-    }
-    else {
-        return libWoLC_ge_ConscriptionUnitState_None;
+    BankSave(lp_bank);
+}
+
+void libWoLC_gf_LoadAllConscriptionsFromBank (bank lp_bank, string lp_section) {
+    // Variable Declarations
+    string lv_currentConscription;
+
+    // Automatic Variable Declarations
+    int auto90F3622F_ai;
+    int auto90F3622F_ae;
+
+    // Variable Initialization
+
+    // Implementation
+    auto90F3622F_ai = 1;
+    auto90F3622F_ae = UserDataInstanceCount("Conscription")+1;
+    while (auto90F3622F_ai < auto90F3622F_ae) {
+        lv_currentConscription = UserDataInstance("Conscription", auto90F3622F_ai);
+        auto90F3622F_ai = auto90F3622F_ai+1;
+        if (!libWoLC_gf_ConscriptionIsEnabled(lv_currentConscription)) {
+            continue;
+        }
+        libWoLC_gf_LoadConscriptionFromBank(lp_bank, lp_section, lv_currentConscription);
     }
 }
 
-int libWoLC_gf_ParseConscriptionUnitStateString (string lp_stateName) {
+void libWoLC_gf_WriteConscriptionToBank (bank lp_bank, string lp_section, string lp_conscription) {
     // Automatic Variable Declarations
-    string autoC8270BFC_val;
+    // Implementation
+    libWoLC_gv_conscriptionBankData.lv_bank = lp_bank;
+    libWoLC_gv_conscriptionBankData.lv_section = lp_section;
+    libWoLC_gv_conscriptionBankData.lv_keyConscriptionId = (lp_conscription);
+    libWoLC_gv_conscriptionBankData.lv_valueState = UserDataGetInt("Conscription", lp_conscription, "State", 1);
+    libNtve_gf_TriggerExecuteByName(UserDataGetString("ConscriptionModule", "Base", "Write Conscription To Bank Trigger", 1), true, true);
+}
+
+void libWoLC_gf_LoadConscriptionFromBank (bank lp_bank, string lp_section, string lp_conscription) {
+    // Automatic Variable Declarations
+    // Implementation
+    libWoLC_gv_conscriptionBankData.lv_bank = lp_bank;
+    libWoLC_gv_conscriptionBankData.lv_section = lp_section;
+    libWoLC_gv_conscriptionBankData.lv_keyConscriptionId = (lp_conscription);
+    libWoLC_gv_conscriptionBankData.lv_valueState = 0;
+    libNtve_gf_TriggerExecuteByName(UserDataGetString("ConscriptionModule", "Base", "Read Conscription From Bank Trigger", 1), true, true);
+    libWoLC_gf_SetConscriptionState(lp_conscription, libWoLC_gf_ParseConscriptionUnitState(libWoLC_gv_conscriptionBankData.lv_valueState));
+}
+
+string libWoLC_gf_GetBankSectionName (string lp_map) {
+    // Automatic Variable Declarations
+    // Implementation
+    libWoLC_gv_conscriptionBankMap = lp_map;
+    libWoLC_gv_conscriptionBankSectionName = "";
+    libNtve_gf_TriggerExecuteByName(UserDataGetString("ConscriptionModule", "Base", "Get Bank Section Name Trigger", 1), true, true);
+    return libWoLC_gv_conscriptionBankSectionName;
+}
+
+bank libWoLC_gf_GetCampaignBank () {
+    // Automatic Variable Declarations
+    // Implementation
+    libNtve_gf_TriggerExecuteByName(UserDataGetString("ConscriptionModule", "Base", "Get Campaign Bank Trigger", 1), true, true);
+    return libWoLC_gv_conscriptionCampaignBank;
+}
+
+string libWoLC_gf_GetConscriptionBankSection () {
+    // Automatic Variable Declarations
+    // Implementation
+    return UserDataGetString("ConscriptionModule", "Base", "Conscription Bank Section", 1);
+}
+
+string libWoLC_gf_ConscriptionCheatHandler (string lp_inputWords) {
+    // Variable Declarations
+    string lv_actionTypeName;
+    string lv_unitTypeName;
+    int lv_unitTypeNameIndex;
+    string lv_stateName;
+    string lv_sectionName;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_actionTypeName = "";
+    lv_unitTypeName = "";
+    lv_unitTypeNameIndex = (libWoLC_ge_ConscriptionCheatToken_UnitTokenStartIndex);
+    lv_stateName = "";
+    lv_sectionName = "";
 
     // Implementation
-    autoC8270BFC_val = StringCase(lp_stateName, false);
-    if (autoC8270BFC_val == StringCase(libWoLC_ge_ConscriptionUnitState_Ident(libWoLC_ge_ConscriptionUnitState_Locked), false)) {
-        return libWoLC_ge_ConscriptionUnitState_Locked;
+    lv_actionTypeName = StringWord(lp_inputWords, (libWoLC_ge_ConscriptionCheatToken_ActionTokenIndex));
+    if ((StringEqual(lv_actionTypeName, "", c_stringNoCase) == true)) {
+        return ("Action type name required.<n/>Format: conscription <action type name> <unit type name><n/>Valid actions: " + libWoLC_gf_ValidConscriptionActionList());
     }
-    else if (autoC8270BFC_val == StringCase(libWoLC_ge_ConscriptionUnitState_Ident(libWoLC_ge_ConscriptionUnitState_Available), false)) {
-        return libWoLC_ge_ConscriptionUnitState_Available;
+
+    if (((StringEqual(lv_actionTypeName, libWoLC_ge_ConscriptionActionType_Ident(libWoLC_ge_ConscriptionActionType_SaveAll), c_stringNoCase) == true) || (StringEqual(lv_actionTypeName, libWoLC_ge_ConscriptionActionType_Ident(libWoLC_ge_ConscriptionActionType_LoadAll), c_stringNoCase) == true))) {
+        if ((libWoLC_gv_wC_CurrentMap == "TStory01")) {
+            lv_sectionName = libWoLC_gf_WC_BankSectionName(null, "Conscription");
+        }
+        else {
+            lv_sectionName = libWoLC_gf_WC_BankSectionName(libWoLC_gv_wC_CurrentMap, "Conscription");
+        }
+        return libWoLC_gf_ExecuteConscriptionActionString(lv_actionTypeName, lv_unitTypeName, lv_stateName, lv_sectionName);
     }
-    else if (autoC8270BFC_val == StringCase(libWoLC_ge_ConscriptionUnitState_Ident(libWoLC_ge_ConscriptionUnitState_Purchased), false)) {
-        return libWoLC_ge_ConscriptionUnitState_Purchased;
+
+    if ((StringEqual(lv_actionTypeName, libWoLC_ge_ConscriptionActionType_Ident(libWoLC_ge_ConscriptionActionType_Override), c_stringNoCase) == true)) {
+        lv_stateName = StringWord(lp_inputWords, lv_unitTypeNameIndex);
+        if ((StringEqual(lv_stateName, "", c_stringNoCase) == true)) {
+            return "Conscription State name required.<n/>Format: conscription override <state name> <unit type name><n/>";
+        }
+
+        lv_unitTypeNameIndex = (lv_unitTypeNameIndex + 1);
     }
-    else {
-        return libWoLC_ge_ConscriptionUnitState_None;
+
+    lv_unitTypeName = libWoLC_gf_CamelCaseFromSpaceSeparated(lp_inputWords, true, lv_unitTypeNameIndex, 0);
+    if ((StringEqual(lv_unitTypeName, "", c_stringNoCase) == true)) {
+        return ("Unit type name required.<n/>Format: conscription <action type name> <unit type name><n/>Valid actions: " + libWoLC_gf_ValidConscriptionActionList());
     }
+
+    return libWoLC_gf_ExecuteConscriptionActionString(lv_actionTypeName, lv_unitTypeName, lv_stateName, lv_sectionName);
+}
+
+string libWoLC_gf_ValidConscriptionActionList () {
+    // Variable Declarations
+    int lv_actionIndex;
+    string lv_actionString;
+    string lv_outputString;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv_actionIndex = libWoLC_ge_ConscriptionActionType_Unlock;
+    lv_actionString = libWoLC_ge_ConscriptionActionType_Ident(lv_actionIndex);
+    lv_outputString = "";
+
+    // Implementation
+    if ((lv_actionString == null)) {
+        return "";
+    }
+
+    while ((lv_actionString != null)) {
+        lv_actionIndex = lv_actionIndex + 1;
+        lv_outputString = lv_outputString + ", " + lv_actionString;
+        lv_actionString = libWoLC_ge_ConscriptionActionType_Ident(lv_actionIndex);
+    }
+    return StringSub(lv_outputString, 3, StringLength(lv_outputString));
 }
 
 int libWoLC_gf_ParseConscriptionActionTypeString (string lp_actionTypeName) {
@@ -4042,159 +4182,44 @@ string libWoLC_gf_ExecuteConscriptionAction (int lp_actionType, string lp_unitTy
     }
 }
 
-string libWoLC_gf_ConscriptionCheatHandler (string lp_inputWords) {
-    // Variable Declarations
-    string lv_actionTypeName;
-    string lv_unitTypeName;
-    int lv_unitTypeNameIndex;
-    string lv_stateName;
-    string lv_sectionName;
-
+int libWoLC_gf_ParseConscriptionUnitState (int lp_stateValue) {
     // Automatic Variable Declarations
-    // Variable Initialization
-    lv_actionTypeName = "";
-    lv_unitTypeName = "";
-    lv_unitTypeNameIndex = (libWoLC_ge_ConscriptionCheatToken_UnitTokenStartIndex);
-    lv_stateName = "";
-    lv_sectionName = "";
+    int auto33B630C7_val;
 
     // Implementation
-    lv_actionTypeName = StringWord(lp_inputWords, (libWoLC_ge_ConscriptionCheatToken_ActionTokenIndex));
-    if ((StringEqual(lv_actionTypeName, "", c_stringNoCase) == true)) {
-        return ("Action type name required.<n/>Format: conscription <action type name> <unit type name><n/>Valid actions: " + libWoLC_gf_ValidConscriptionActionList());
+    auto33B630C7_val = lp_stateValue;
+    if (auto33B630C7_val == libWoLC_ge_ConscriptionUnitState_Locked) {
+        return libWoLC_ge_ConscriptionUnitState_Locked;
     }
-
-    if (((StringEqual(lv_actionTypeName, libWoLC_ge_ConscriptionActionType_Ident(libWoLC_ge_ConscriptionActionType_SaveAll), c_stringNoCase) == true) || (StringEqual(lv_actionTypeName, libWoLC_ge_ConscriptionActionType_Ident(libWoLC_ge_ConscriptionActionType_LoadAll), c_stringNoCase) == true))) {
-        if ((libWoLC_gv_wC_CurrentMap == "TStory01")) {
-            lv_sectionName = libWoLC_gf_WC_BankSectionName(null, "Conscription");
-        }
-        else {
-            lv_sectionName = libWoLC_gf_WC_BankSectionName(libWoLC_gv_wC_CurrentMap, "Conscription");
-        }
-        return libWoLC_gf_ExecuteConscriptionActionString(lv_actionTypeName, lv_unitTypeName, lv_stateName, lv_sectionName);
+    else if (auto33B630C7_val == libWoLC_ge_ConscriptionUnitState_Available) {
+        return libWoLC_ge_ConscriptionUnitState_Available;
     }
-
-    if ((StringEqual(lv_actionTypeName, libWoLC_ge_ConscriptionActionType_Ident(libWoLC_ge_ConscriptionActionType_Override), c_stringNoCase) == true)) {
-        lv_stateName = StringWord(lp_inputWords, lv_unitTypeNameIndex);
-        if ((StringEqual(lv_stateName, "", c_stringNoCase) == true)) {
-            return "Conscription State name required.<n/>Format: conscription override <state name> <unit type name><n/>";
-        }
-
-        lv_unitTypeNameIndex = (lv_unitTypeNameIndex + 1);
+    else if (auto33B630C7_val == libWoLC_ge_ConscriptionUnitState_Purchased) {
+        return libWoLC_ge_ConscriptionUnitState_Purchased;
     }
-
-    lv_unitTypeName = libWoLC_gf_CamelCaseFromSpaceSeparated(lp_inputWords, true, lv_unitTypeNameIndex, 0);
-    if ((StringEqual(lv_unitTypeName, "", c_stringNoCase) == true)) {
-        return ("Unit type name required.<n/>Format: conscription <action type name> <unit type name><n/>Valid actions: " + libWoLC_gf_ValidConscriptionActionList());
-    }
-
-    return libWoLC_gf_ExecuteConscriptionActionString(lv_actionTypeName, lv_unitTypeName, lv_stateName, lv_sectionName);
-}
-
-string libWoLC_gf_ValidConscriptionActionList () {
-    // Variable Declarations
-    int lv_actionIndex;
-    string lv_actionString;
-    string lv_outputString;
-
-    // Automatic Variable Declarations
-    // Variable Initialization
-    lv_actionIndex = libWoLC_ge_ConscriptionActionType_Unlock;
-    lv_actionString = libWoLC_ge_ConscriptionActionType_Ident(lv_actionIndex);
-    lv_outputString = "";
-
-    // Implementation
-    if ((lv_actionString == null)) {
-        return "";
-    }
-
-    while ((lv_actionString != null)) {
-        lv_actionIndex = lv_actionIndex + 1;
-        lv_outputString = lv_outputString + ", " + lv_actionString;
-        lv_actionString = libWoLC_ge_ConscriptionActionType_Ident(lv_actionIndex);
-    }
-    return StringSub(lv_outputString, 3, StringLength(lv_outputString));
-}
-
-void libWoLC_gf_SaveAllConscriptionsToCampaignMapBank (string lp_map) {
-    // Automatic Variable Declarations
-    // Implementation
-    libWoLC_gf_SaveAllConscriptionsToCampaignBank(libWoLC_gf_WC_BankSectionName(lp_map, "Conscription"));
-}
-
-void libWoLC_gf_SaveAllConscriptionsToCampaignBank (string lp_section) {
-    // Automatic Variable Declarations
-    // Implementation
-    libWoLC_gf_SaveAllConscriptionsToBank(libWoLC_gv_wC_CampaignBank, lp_section);
-}
-
-void libWoLC_gf_SaveAllConscriptionsToBank (bank lp_bank, string lp_section) {
-    // Variable Declarations
-    string lv_currentConscription;
-
-    // Automatic Variable Declarations
-    int autoDD6B77B9_ai;
-    int autoDD6B77B9_ae;
-
-    // Variable Initialization
-
-    // Implementation
-    BankLoad(BankName(lp_bank), 1);
-    BankSectionRemove(lp_bank, lp_section);
-    BankSectionCreate(lp_bank, lp_section);
-    autoDD6B77B9_ai = 1;
-    autoDD6B77B9_ae = UserDataInstanceCount("Conscription")+1;
-    while (autoDD6B77B9_ai < autoDD6B77B9_ae) {
-        lv_currentConscription = UserDataInstance("Conscription", autoDD6B77B9_ai);
-        autoDD6B77B9_ai = autoDD6B77B9_ai+1;
-        if (!libWoLC_gf_ConscriptionIsEnabled(lv_currentConscription)) {
-            continue;
-        }
-        libWoLC_gf_WriteConscriptionToBank(lp_bank, lp_section, lv_currentConscription);
-    }
-    BankSave(lp_bank);
-}
-
-void libWoLC_gf_LoadAllConscriptionsFromBank (bank lp_bank, string lp_section) {
-    // Variable Declarations
-    string lv_currentConscription;
-
-    // Automatic Variable Declarations
-    int auto90F3622F_ai;
-    int auto90F3622F_ae;
-
-    // Variable Initialization
-
-    // Implementation
-    auto90F3622F_ai = 1;
-    auto90F3622F_ae = UserDataInstanceCount("Conscription")+1;
-    while (auto90F3622F_ai < auto90F3622F_ae) {
-        lv_currentConscription = UserDataInstance("Conscription", auto90F3622F_ai);
-        auto90F3622F_ai = auto90F3622F_ai+1;
-        if (!libWoLC_gf_ConscriptionIsEnabled(lv_currentConscription)) {
-            continue;
-        }
-        libWoLC_gf_LoadConscriptionFromBank(lp_bank, lp_section, lv_currentConscription);
+    else {
+        return libWoLC_ge_ConscriptionUnitState_None;
     }
 }
 
-void libWoLC_gf_WriteConscriptionToBank (bank lp_bank, string lp_section, string lp_conscription) {
+int libWoLC_gf_ParseConscriptionUnitStateString (string lp_stateName) {
     // Automatic Variable Declarations
-    // Implementation
-    libWoLC_gv_conscriptionBankData.lv_bank = lp_bank;
-    libWoLC_gv_conscriptionBankData.lv_section = lp_section;
-    libWoLC_gv_conscriptionBankData.lv_keyConscriptionId = (lp_conscription);
-    libWoLC_gv_conscriptionBankData.lv_valueState = UserDataGetInt("Conscription", lp_conscription, "State", 1);
-}
+    string autoC8270BFC_val;
 
-void libWoLC_gf_LoadConscriptionFromBank (bank lp_bank, string lp_section, string lp_conscription) {
-    // Automatic Variable Declarations
     // Implementation
-    libWoLC_gv_conscriptionBankData.lv_bank = lp_bank;
-    libWoLC_gv_conscriptionBankData.lv_section = lp_section;
-    libWoLC_gv_conscriptionBankData.lv_keyConscriptionId = (lp_conscription);
-    libWoLC_gv_conscriptionBankData.lv_valueState = 0;
-    libWoLC_gf_SetConscriptionState(lp_conscription, libWoLC_gf_ParseConscriptionUnitState(libWoLC_gv_conscriptionBankData.lv_valueState));
+    autoC8270BFC_val = StringCase(lp_stateName, false);
+    if (autoC8270BFC_val == StringCase(libWoLC_ge_ConscriptionUnitState_Ident(libWoLC_ge_ConscriptionUnitState_Locked), false)) {
+        return libWoLC_ge_ConscriptionUnitState_Locked;
+    }
+    else if (autoC8270BFC_val == StringCase(libWoLC_ge_ConscriptionUnitState_Ident(libWoLC_ge_ConscriptionUnitState_Available), false)) {
+        return libWoLC_ge_ConscriptionUnitState_Available;
+    }
+    else if (autoC8270BFC_val == StringCase(libWoLC_ge_ConscriptionUnitState_Ident(libWoLC_ge_ConscriptionUnitState_Purchased), false)) {
+        return libWoLC_ge_ConscriptionUnitState_Purchased;
+    }
+    else {
+        return libWoLC_ge_ConscriptionUnitState_None;
+    }
 }
 
 bool libWoLC_gf_ConscriptionIsEnabled (string lp_conscription) {
@@ -4262,24 +4287,6 @@ void libWoLC_gf_SetConscriptionUnitState (string lp_unitType, int lp_state) {
     }
 }
 
-string libWoLC_gf_ConscriptionBankWriteTriggerName () {
-    // Automatic Variable Declarations
-    // Implementation
-    return "";
-}
-
-string libWoLC_gf_ConscriptionBankReadTriggerName () {
-    // Automatic Variable Declarations
-    // Implementation
-    return "";
-}
-
-string libWoLC_gf_ConscriptionModuleConfiguration () {
-    // Automatic Variable Declarations
-    // Implementation
-    return UserDataInstance("ConscriptionModule", 1);
-}
-
 void libWoLC_gf_ApplyAllConscriptionsToTechTree () {
     // Variable Declarations
     string lv_currentConscription;
@@ -4336,15 +4343,15 @@ void libWoLC_gf_ConscriptionTravelPanelMissionStart () {
 void libWoLC_gf_ConscriptionMissionStart () {
     // Automatic Variable Declarations
     // Implementation
-    if ((libWoLC_gf_CurrentMap() != "TStory01")) {
-        libWoLC_gf_LoadAllConscriptionsFromBank(libWoLC_gv_wC_CampaignBank, libWoLC_gf_WC_BankSectionName(null, "Conscription"));
+    if ((libWoLC_gf_IsStoryMap(libWoLC_gf_GetCurrentMap()) == false)) {
+        libWoLC_gf_LoadAllConscriptionsFromBank(libWoLC_gf_GetCampaignBank(), libWoLC_gf_GetBankSectionName(null));
     }
     else {
-        libWoLC_gf_LoadAllConscriptionsFromBank(libWoLC_gv_wC_CampaignBank, libWoLC_gf_WC_BankSectionName(libWoLC_gf_LastSuccessfulMission(), "Conscription"));
+        libWoLC_gf_LoadAllConscriptionsFromBank(libWoLC_gf_GetCampaignBank(), libWoLC_gf_GetBankSectionName(libWoLC_gf_GetLastSuccessfulMission()));
     }
     libWoLC_gf_ApplyAllConscriptionsToTechTree();
-    if ((libWoLC_gf_CurrentMap() != "TStory01")) {
-        libWoLC_gf_UnlockConscriptionsOnMapStart(libWoLC_gf_CurrentMap(), (libWoLC_gf_NumberOfMissions(libWoLC_ge_MissionCountOptions_Completed) + 1));
+    if ((libWoLC_gf_IsStoryMap(libWoLC_gf_GetCurrentMap()) == false)) {
+        libWoLC_gf_UnlockConscriptionsOnMapStart(libWoLC_gf_GetCurrentMap(), (libWoLC_gf_GetNumberOfMissionsCompleted() + 1));
     }
 
 }
@@ -4352,15 +4359,12 @@ void libWoLC_gf_ConscriptionMissionStart () {
 void libWoLC_gf_ConscriptionMissionVictory () {
     // Automatic Variable Declarations
     // Implementation
-    if ((libWoLC_gv_wCX_IsSimulation == false)) {
-        if ((libWoLC_gf_CurrentMap() != "TStory01")) {
-            libWoLC_gf_UnlockConscriptionsOnMapVictory(libWoLC_gf_CurrentMap(), libWoLC_gf_NumberOfMissions(libWoLC_ge_MissionCountOptions_Completed));
-            libWoLC_gf_SaveAllConscriptionsToCampaignMapBank(libWoLC_gf_CurrentMap());
-        }
-
-        libWoLC_gf_SaveAllConscriptionsToCampaignMapBank(null);
+    if ((libWoLC_gf_IsStoryMap(libWoLC_gf_GetCurrentMap()) == false)) {
+        libWoLC_gf_UnlockConscriptionsOnMapVictory(libWoLC_gf_CurrentMap(), libWoLC_gf_NumberOfMissions(libWoLC_ge_MissionCountOptions_Completed));
+        libWoLC_gf_SaveAllConscriptionsToCampaignMapBank(libWoLC_gf_CurrentMap());
     }
 
+    libWoLC_gf_SaveAllConscriptionsToCampaignMapBank(null);
 }
 
 void libWoLC_gf_UnlockConscriptionsByMap (string lp_map) {
@@ -4404,7 +4408,7 @@ bool libWoLC_gf_ConscriptionUnlocksByMap (string lp_conscription) {
     lv_unlockMap = UserDataGetGameLink("Conscription", lp_conscription, "UnlockMap", 1);
 
     // Implementation
-    return !libWoLC_gf_NullOrEmptyString(lv_unlockMap);
+    return !(libWoLC_gf_NullOrEmptyString(lv_unlockMap));
 }
 
 void libWoLC_gf_UnlockConscriptionsByMissionNumber (int lp_missionCount) {
@@ -4498,7 +4502,7 @@ bool libWoLC_gf_ConscriptionUnlocksByTrigger (string lp_conscription) {
     lv_unlockTriggerName = UserDataGetString("Conscription", lp_conscription, "UnlockTriggerName", 1);
 
     // Implementation
-    return !libWoLC_gf_NullOrEmptyString(lv_unlockTriggerName);
+    return !(libWoLC_gf_NullOrEmptyString(lv_unlockTriggerName));
 }
 
 void libWoLC_gf_UnlockConscriptionsOnMapStart (string lp_map, int lp_missionNumber) {
@@ -4557,6 +4561,37 @@ bool libWoLC_gf_ConscriptionUnlocksAutomatically (string lp_conscription) {
     // Automatic Variable Declarations
     // Implementation
     return (libWoLC_gf_ConscriptionUnlocksByMap(lp_conscription) || (libWoLC_gf_ConscriptionUnlocksByMissionNumber(lp_conscription) || libWoLC_gf_ConscriptionUnlocksByTrigger(lp_conscription)));
+}
+
+string libWoLC_gf_GetCurrentMap () {
+    // Automatic Variable Declarations
+    // Implementation
+    libWoLC_gv_conscriptionMap = null;
+    libNtve_gf_TriggerExecuteByName(UserDataGetString("ConscriptionModule", "Base", "Get Current Map Trigger", 1), true, true);
+    return libWoLC_gv_conscriptionMap;
+}
+
+string libWoLC_gf_GetLastSuccessfulMission () {
+    // Automatic Variable Declarations
+    // Implementation
+    libWoLC_gv_conscriptionMap = null;
+    libNtve_gf_TriggerExecuteByName(UserDataGetString("ConscriptionModule", "Base", "Get Last Successful Mission Trigger", 1), true, true);
+    return libWoLC_gv_conscriptionMap;
+}
+
+bool libWoLC_gf_IsStoryMap (string lp_map) {
+    // Automatic Variable Declarations
+    // Implementation
+    libWoLC_gv_conscriptionMap = lp_map;
+    libNtve_gf_TriggerExecuteByName(UserDataGetString("ConscriptionModule", "Base", "Is Story Map Trigger", 1), true, true);
+    return libWoLC_gv_isStoryMap;
+}
+
+int libWoLC_gf_GetNumberOfMissionsCompleted () {
+    // Automatic Variable Declarations
+    // Implementation
+    libWoLC_gv_numberOfMissionsCompleted = 0;
+    return libWoLC_gv_numberOfMissionsCompleted;
 }
 
 bool libWoLC_gf_NullOrEmptyString (string lp_inputString) {
@@ -7405,11 +7440,17 @@ string libWoLC_gf_WC_BankMissionDifficultyKey (string lp_mission, int lp_difficu
 string libWoLC_gf_WC_BankSectionName (string lp_map, string lp_section) {
     // Automatic Variable Declarations
     // Implementation
+    return libWoLC_gf_WC_BankSectionNameStringSection(lp_map, (lp_section));
+}
+
+string libWoLC_gf_WC_BankSectionNameStringSection (string lp_map, string lp_section) {
+    // Automatic Variable Declarations
+    // Implementation
     if ((lp_map == null)) {
-        return ("WCampaign" + "|" + (lp_section));
+        return ("WCampaign" + "|" + lp_section);
     }
 
-    return (libWoLC_gf_WC_StoryMapBankID(lp_map) + "|" + (lp_section));
+    return (libWoLC_gf_WC_StoryMapBankID(lp_map) + "|" + lp_section);
 }
 
 string libWoLC_gf_WC_BankSectionName2 (string lp_userType) {
@@ -8616,9 +8657,9 @@ void libWoLC_gt_WC_SceneSkipped_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Write Conscription Bank Value
+// Trigger: Write Conscription To Bank Trigger
 //--------------------------------------------------------------------------------------------------
-bool libWoLC_gt_WriteConscriptionBankValue_Func (bool testConds, bool runActions) {
+bool libWoLC_gt_WriteConscriptionToBankTrigger_Func (bool testConds, bool runActions) {
     // Automatic Variable Declarations
     // Actions
     if (!runActions) {
@@ -8630,14 +8671,14 @@ bool libWoLC_gt_WriteConscriptionBankValue_Func (bool testConds, bool runActions
 }
 
 //--------------------------------------------------------------------------------------------------
-void libWoLC_gt_WriteConscriptionBankValue_Init () {
-    libWoLC_gt_WriteConscriptionBankValue = TriggerCreate("libWoLC_gt_WriteConscriptionBankValue_Func");
+void libWoLC_gt_WriteConscriptionToBankTrigger_Init () {
+    libWoLC_gt_WriteConscriptionToBankTrigger = TriggerCreate("libWoLC_gt_WriteConscriptionToBankTrigger_Func");
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Read Conscription Bank Value
+// Trigger: Read Conscription From Bank Trigger
 //--------------------------------------------------------------------------------------------------
-bool libWoLC_gt_ReadConscriptionBankValue_Func (bool testConds, bool runActions) {
+bool libWoLC_gt_ReadConscriptionFromBankTrigger_Func (bool testConds, bool runActions) {
     // Automatic Variable Declarations
     // Actions
     if (!runActions) {
@@ -8649,8 +8690,116 @@ bool libWoLC_gt_ReadConscriptionBankValue_Func (bool testConds, bool runActions)
 }
 
 //--------------------------------------------------------------------------------------------------
-void libWoLC_gt_ReadConscriptionBankValue_Init () {
-    libWoLC_gt_ReadConscriptionBankValue = TriggerCreate("libWoLC_gt_ReadConscriptionBankValue_Func");
+void libWoLC_gt_ReadConscriptionFromBankTrigger_Init () {
+    libWoLC_gt_ReadConscriptionFromBankTrigger = TriggerCreate("libWoLC_gt_ReadConscriptionFromBankTrigger_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Get Bank Section Name Trigger
+//--------------------------------------------------------------------------------------------------
+bool libWoLC_gt_GetBankSectionNameTrigger_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libWoLC_gv_conscriptionBankSectionName = libWoLC_gf_WC_BankSectionNameStringSection(libWoLC_gv_conscriptionBankMap, libWoLC_gf_GetConscriptionBankSection());
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libWoLC_gt_GetBankSectionNameTrigger_Init () {
+    libWoLC_gt_GetBankSectionNameTrigger = TriggerCreate("libWoLC_gt_GetBankSectionNameTrigger_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Get Campaign Bank Trigger
+//--------------------------------------------------------------------------------------------------
+bool libWoLC_gt_GetCampaignBankTrigger_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libWoLC_gv_conscriptionCampaignBank = libWoLC_gv_wC_CampaignBank;
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libWoLC_gt_GetCampaignBankTrigger_Init () {
+    libWoLC_gt_GetCampaignBankTrigger = TriggerCreate("libWoLC_gt_GetCampaignBankTrigger_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Is Story Map Trigger
+//--------------------------------------------------------------------------------------------------
+bool libWoLC_gt_IsStoryMapTrigger_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libWoLC_gv_isStoryMap = (libWoLC_gv_conscriptionMap == "TStory01");
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libWoLC_gt_IsStoryMapTrigger_Init () {
+    libWoLC_gt_IsStoryMapTrigger = TriggerCreate("libWoLC_gt_IsStoryMapTrigger_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Get Current Map Trigger
+//--------------------------------------------------------------------------------------------------
+bool libWoLC_gt_GetCurrentMapTrigger_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libWoLC_gv_conscriptionMap = libWoLC_gf_CurrentMap();
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libWoLC_gt_GetCurrentMapTrigger_Init () {
+    libWoLC_gt_GetCurrentMapTrigger = TriggerCreate("libWoLC_gt_GetCurrentMapTrigger_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Get Last Successful Mission Trigger
+//--------------------------------------------------------------------------------------------------
+bool libWoLC_gt_GetLastSuccessfulMissionTrigger_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libWoLC_gv_conscriptionMap = libWoLC_gf_LastSuccessfulMission();
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libWoLC_gt_GetLastSuccessfulMissionTrigger_Init () {
+    libWoLC_gt_GetLastSuccessfulMissionTrigger = TriggerCreate("libWoLC_gt_GetLastSuccessfulMissionTrigger_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Get Number Of Missions Completed Trigger
+//--------------------------------------------------------------------------------------------------
+bool libWoLC_gt_GetNumberOfMissionsCompletedTrigger_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libWoLC_gt_GetNumberOfMissionsCompletedTrigger_Init () {
+    libWoLC_gt_GetNumberOfMissionsCompletedTrigger = TriggerCreate("libWoLC_gt_GetNumberOfMissionsCompletedTrigger_Func");
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -9162,8 +9311,14 @@ void libWoLC_InitTriggers () {
     libWoLC_gt_WC_PlaySceneSkippable_Init();
     libWoLC_gt_WC_CinematicDetectSkipping_Init();
     libWoLC_gt_WC_SceneSkipped_Init();
-    libWoLC_gt_WriteConscriptionBankValue_Init();
-    libWoLC_gt_ReadConscriptionBankValue_Init();
+    libWoLC_gt_WriteConscriptionToBankTrigger_Init();
+    libWoLC_gt_ReadConscriptionFromBankTrigger_Init();
+    libWoLC_gt_GetBankSectionNameTrigger_Init();
+    libWoLC_gt_GetCampaignBankTrigger_Init();
+    libWoLC_gt_IsStoryMapTrigger_Init();
+    libWoLC_gt_GetCurrentMapTrigger_Init();
+    libWoLC_gt_GetLastSuccessfulMissionTrigger_Init();
+    libWoLC_gt_GetNumberOfMissionsCompletedTrigger_Init();
     libWoLC_gt_ConscriptionMissionStartEvent_Init();
     libWoLC_gt_ConscriptionTravelPanelMissionStartEvent_Init();
     libWoLC_gt_ConscriptionVanillaVikingUnlockTrigger_Init();

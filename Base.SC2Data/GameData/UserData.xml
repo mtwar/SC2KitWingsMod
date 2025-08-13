@@ -21,6 +21,31 @@
             </Int>
         </Instances>
     </CUser>
+    <CUser id="ConscriptionModule">
+        <Instances Id="[Override]Base">
+            <String String="libWoLC_gt_LoadConscriptionFromBankTrigger_Func">
+                <Field Id="Read Conscription From Bank Trigger"/>
+            </String>
+            <String String="libWoLC_gt_WriteConscriptionToBankTrigger_Func">
+                <Field Id="Write Conscription To Bank Trigger"/>
+            </String>
+            <String String="libWoLC_gt_GetBankSectionNameTrigger_Func">
+                <Field Id="Get Bank Section Name Trigger"/>
+            </String>
+            <String String="libWoLC_gt_GetCampaignBankTrigger_Func">
+                <Field Id="Get Campaign Bank Trigger"/>
+            </String>
+            <String String="libWoLC_gt_GetCurrentMapTrigger_Func">
+                <Field Id="Get Current Map Trigger"/>
+            </String>
+            <String String="libWoLC_gt_IsStoryMapTrigger_Func">
+                <Field Id="Is Story Map Trigger"/>
+            </String>
+            <String String="libWoLC_gt_GetLastSuccessfulMissionTrigger_Func">
+                <Field Id="Get Last Successful Mission Trigger"/>
+            </String>
+        </Instances>
+    </CUser>
     <CUser id="Mercenaries">
         <Fields Id="Name" Type="Text" EditorText="Name"/>
         <Fields>
