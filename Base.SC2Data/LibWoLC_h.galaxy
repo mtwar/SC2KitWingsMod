@@ -90,6 +90,14 @@ const string libWoLC_gv_wC_StoryBankName = "WStory";
 const string libWoLC_gv_wC_StoryBankName2 = "WStorySimulation";
 const string libWoLC_gv_wC_GameUIDataTableConnector = "&%&";
 
+// Structures
+struct libWoLC_gs_ConscriptionBankData {
+    bank lv_bank;
+    string lv_section;
+    string lv_keyConscriptionId;
+    int lv_valueState;
+};
+
 // Variable Declarations
 bool libWoLC_gv_wC_AchievementsEnabled;
 int libWoLC_gv_wC_AchievementPosition;
@@ -111,6 +119,7 @@ string libWoLC_gv_wC_PlaySceneCurrentScene;
 int libWoLC_gv_wC_SceneStatEvent;
 bool libWoLC_gv_wC_ApplyingCampaignTech;
 bool libWoLC_gv_wC_CampaignTechApplied;
+libWoLC_gs_ConscriptionBankData libWoLC_gv_conscriptionBankData;
 string libWoLC_gv_currentTriggerConscription;
 bool libWoLC_gv_unlockCurrentTriggerConscription;
 int libWoLC_gv_pCX_HelpUnitPanel_EnabledUnitTypeCount;
@@ -394,6 +403,9 @@ void libWoLC_gf_SetConscriptionState (string lp_conscription, int lp_state);
 bool libWoLC_gf_ConscriptionIsEnabledForUnit (string lp_unitType);
 int libWoLC_gf_GetConscriptionUnitState (string lp_unitType);
 void libWoLC_gf_SetConscriptionUnitState (string lp_unitType, int lp_state);
+string libWoLC_gf_ConscriptionBankWriteTriggerName ();
+string libWoLC_gf_ConscriptionBankReadTriggerName ();
+string libWoLC_gf_ConscriptionModuleConfiguration ();
 void libWoLC_gf_ApplyAllConscriptionsToTechTree ();
 void libWoLC_gf_ApplyConscriptionToTechTree (string lp_conscription);
 void libWoLC_gf_ConscriptionTravelPanelMissionStart ();
@@ -619,9 +631,11 @@ trigger libWoLC_gt_WC_CampaignCutsceneEnded;
 trigger libWoLC_gt_WC_PlaySceneSkippable;
 trigger libWoLC_gt_WC_CinematicDetectSkipping;
 trigger libWoLC_gt_WC_SceneSkipped;
-trigger libWoLC_gt_ConscriptionVanillaVikingUnlockTrigger;
+trigger libWoLC_gt_WriteConscriptionBankValue;
+trigger libWoLC_gt_ReadConscriptionBankValue;
 trigger libWoLC_gt_ConscriptionMissionStartEvent;
 trigger libWoLC_gt_ConscriptionTravelPanelMissionStartEvent;
+trigger libWoLC_gt_ConscriptionVanillaVikingUnlockTrigger;
 trigger libWoLC_gt_ConscriptionCheatListener;
 trigger libWoLC_gt_ConscriptionUnlockTriggerTemplate;
 trigger libWoLC_gt_WC_TrackLoadingComplete;
