@@ -6729,17 +6729,6 @@
         </Instances>
     </CUser>
     <CUser id="Conscription">
-        <Fields Id="TechUnitId" Type="String"/>
-        <Fields Id="UnlockWithConscription" Type="Int"/>
-        <Fields Id="Price" Type="Int"/>
-        <Fields Id="State" Type="Int">
-            <Flags index="Modifiable" value="1"/>
-        </Fields>
-        <Fields Id="UnlockMissionNumber" Type="Int"/>
-        <Fields Id="UnlockMap" Type="GameLink" GameLinkType="Map"/>
-        <Fields Id="UnlockInCutscene" Type="Int"/>
-        <Fields Id="UnlockTriggerName" Type="String"/>
-        <Instances Id="[Default]"/>
         <Instances Id="Marine">
             <GameLink GameLink="TRaynor01">
                 <Field Id="UnlockMap"/>

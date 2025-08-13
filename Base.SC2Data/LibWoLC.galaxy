@@ -4323,15 +4323,15 @@ void libWoLC_gf_ApplyConscriptionToTechTree (string lp_conscription) {
         TriggerDebugOutput(1, StringExternal("Param/Value/lib_WoLC_363B7E8D"), true);
     }
     else {
-        if ((libWoLC_gf_ParseConscriptionUnitState(UserDataGetInt("Conscription", lp_conscription, "State", 1)) == libWoLC_ge_ConscriptionUnitState_Purchased)) {
-            libWoLC_gf_EnableCampaignTechUnit(true, libWoLC_gf_WC_TechUnitOfArmyCategory(lv_armyCategory), 1);
-            libWoLC_gf_WC_SetArmyCategoryState(lv_armyCategory, c_armyCategoryStateUnlocked);
-        }
-        else {
-            libWoLC_gf_EnableCampaignTechUnit(false, libWoLC_gf_WC_TechUnitOfArmyCategory(lv_armyCategory), 1);
-            libWoLC_gf_WC_SetArmyCategoryState(lv_armyCategory, c_armyCategoryStateLocked);
-        }
+        libWoLC_gf_UpdateTechTreeForArmyCategory(lv_armyCategory, (libWoLC_gf_ParseConscriptionUnitState(UserDataGetInt("Conscription", lp_conscription, "State", 1)) == libWoLC_ge_ConscriptionUnitState_Purchased));
     }
+}
+
+void libWoLC_gf_UpdateTechTreeForArmyCategory (string lp_armyCategory, bool lp_enable) {
+    // Automatic Variable Declarations
+    // Implementation
+    libWoLC_gv_techTreeArmyCategory = lp_armyCategory;
+    libWoLC_gv_techTreeEnable = lp_enable;
 }
 
 void libWoLC_gf_ConscriptionTravelPanelMissionStart () {
@@ -8794,12 +8794,44 @@ void libWoLC_gt_GetLastSuccessfulMissionTrigger_Init () {
 //--------------------------------------------------------------------------------------------------
 bool libWoLC_gt_GetNumberOfMissionsCompletedTrigger_Func (bool testConds, bool runActions) {
     // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libWoLC_gv_numberOfMissionsCompleted = libWoLC_gf_NumberOfMissions(libWoLC_ge_MissionCountOptions_Completed);
     return true;
 }
 
 //--------------------------------------------------------------------------------------------------
 void libWoLC_gt_GetNumberOfMissionsCompletedTrigger_Init () {
     libWoLC_gt_GetNumberOfMissionsCompletedTrigger = TriggerCreate("libWoLC_gt_GetNumberOfMissionsCompletedTrigger_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Update Tech Tree For Army Category Trigger
+//--------------------------------------------------------------------------------------------------
+bool libWoLC_gt_UpdateTechTreeForArmyCategoryTrigger_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((libWoLC_gv_techTreeEnable == true)) {
+        libWoLC_gf_EnableCampaignTechUnit(true, libWoLC_gf_WC_TechUnitOfArmyCategory(libWoLC_gv_techTreeArmyCategory), 1);
+        libWoLC_gf_WC_SetArmyCategoryState(libWoLC_gv_techTreeArmyCategory, c_armyCategoryStateUnlocked);
+    }
+    else {
+        libWoLC_gf_EnableCampaignTechUnit(false, libWoLC_gf_WC_TechUnitOfArmyCategory(libWoLC_gv_techTreeArmyCategory), 1);
+        libWoLC_gf_WC_SetArmyCategoryState(libWoLC_gv_techTreeArmyCategory, c_armyCategoryStateLocked);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libWoLC_gt_UpdateTechTreeForArmyCategoryTrigger_Init () {
+    libWoLC_gt_UpdateTechTreeForArmyCategoryTrigger = TriggerCreate("libWoLC_gt_UpdateTechTreeForArmyCategoryTrigger_Func");
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -9319,6 +9351,7 @@ void libWoLC_InitTriggers () {
     libWoLC_gt_GetCurrentMapTrigger_Init();
     libWoLC_gt_GetLastSuccessfulMissionTrigger_Init();
     libWoLC_gt_GetNumberOfMissionsCompletedTrigger_Init();
+    libWoLC_gt_UpdateTechTreeForArmyCategoryTrigger_Init();
     libWoLC_gt_ConscriptionMissionStartEvent_Init();
     libWoLC_gt_ConscriptionTravelPanelMissionStartEvent_Init();
     libWoLC_gt_ConscriptionVanillaVikingUnlockTrigger_Init();
