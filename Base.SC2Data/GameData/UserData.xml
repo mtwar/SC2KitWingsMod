@@ -44,6 +44,12 @@
             <String String="libWoLC_gt_GetLastSuccessfulMissionTrigger_Func">
                 <Field Id="Get Last Successful Mission Trigger"/>
             </String>
+            <String String="libWoLC_gt_UpdateTechTreeForArmyCategoryTrigger_Func">
+                <Field Id="Update Tech Tree For Army Category Trigger"/>
+            </String>
+            <String String="libWoLC_gt_GetNumberOfMissionsCompletedTrigger_Func">
+                <Field Id="Get Number Of Missions Completed Trigger"/>
+            </String>
         </Instances>
     </CUser>
     <CUser id="Mercenaries">
