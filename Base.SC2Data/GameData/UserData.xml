@@ -6799,9 +6799,6 @@
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
             </Int>
-            <Int Int="1">
-                <Field Id="UnlockInCutscene"/>
-            </Int>
             <String String="WidowMine">
                 <Field Id="TechUnitId"/>
             </String>
@@ -6841,9 +6838,6 @@
         </Instances>
         <Instances Id="ScienceVessel">
             <Int Int="1">
-                <Field Id="UnlockInCutscene"/>
-            </Int>
-            <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
             </Int>
             <String String="ScienceVessel">
@@ -6861,9 +6855,6 @@
         <Instances Id="Raven">
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
-            </Int>
-            <Int Int="1">
-                <Field Id="UnlockInCutscene"/>
             </Int>
             <String String="Raven">
                 <Field Id="TechUnitId"/>
@@ -6920,9 +6911,6 @@
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
             </Int>
-            <Int Int="1">
-                <Field Id="UnlockInCutscene"/>
-            </Int>
             <String String="Thor">
                 <Field Id="TechUnitId"/>
             </String>
@@ -6952,9 +6940,6 @@
         <Instances Id="Hercules">
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
-            </Int>
-            <Int Int="1">
-                <Field Id="UnlockInCutscene"/>
             </Int>
             <String String="Hercules">
                 <Field Id="TechUnitId"/>
@@ -7018,9 +7003,6 @@
         <Instances Id="PerditionTurret">
             <Int Int="1">
                 <Field Id="UnlockWithConscription"/>
-            </Int>
-            <Int Int="1">
-                <Field Id="UnlockInCutscene"/>
             </Int>
             <String String="PerditionTurret">
                 <Field Id="TechUnitId"/>

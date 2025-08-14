@@ -3453,6 +3453,7 @@ Variable/Name/lib_WoLC_EAC9C522=ArmyCategory
 Variable/Name/lib_WoLC_EAE13098=count
 Variable/Name/lib_WoLC_EC123B2D=WC_CampaignLegacyBank
 Variable/Name/lib_WoLC_EE0E1550=AbilityCommand
+Variable/Name/lib_WoLC_EE31E9D0=Army Unit
 Variable/Name/lib_WoLC_F0C2280C=Field
 Variable/Name/lib_WoLC_F23EE928=increase
 Variable/Name/lib_WoLC_F247F034=FullString

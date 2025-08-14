@@ -2956,14 +2956,14 @@ void libWoLC_gf_WC_UpdateArmyCategoryStates (int lp_player) {
         if (CatalogFieldValueGet(c_gameCatalogMap, lv_indexMission, "Kind", 1) == "Mission") {
             if ((libWoLC_gf_MissionStatusCheck(lv_indexMission, libWoLC_ge_MissionStatus_Completed) == true)) {
                 lv_missionCategory = libWoLC_gf_MissionArmyCategoryUnlocked(lv_indexMission);
-                if ((lv_missionCategory != null) && (libConB_gf_ConscriptionIsEnabledForUnit(libWoLC_gf_WC_ArmyCategoryUnitType(lv_missionCategory)) == false)) {
+                if ((lv_missionCategory != null)) {
                     DataTableSetBool(false, (lv_missionCategory), true);
                 }
 
                 lv_index = 1;
                 for ( ; ( (autoC9238A4F_ai >= 0 && lv_index <= autoC9238A4F_ae) || (autoC9238A4F_ai < 0 && lv_index >= autoC9238A4F_ae) ) ; lv_index += autoC9238A4F_ai ) {
                     lv_missionCategoryExtra = UserDataGetGameLink("Maps", libWoLC_gf_WC_MapUserDataInstance(lv_indexMission), "ExtraArmyCategoryUnlock", lv_index);
-                    if ((lv_missionCategoryExtra != null) && (libConB_gf_ConscriptionIsEnabledForUnit(libWoLC_gf_WC_ArmyCategoryUnitType(lv_missionCategoryExtra)) == false)) {
+                    if ((lv_missionCategoryExtra != null)) {
                         DataTableSetBool(false, (lv_missionCategoryExtra), true);
                     }
 
@@ -2981,6 +2981,10 @@ void libWoLC_gf_WC_UpdateArmyCategoryStates (int lp_player) {
             lv_missionCategory2 = UserDataGetGameLink("CampaignPerk", lv_indexPerk, "ArmyCategory", 1);
             if ((lv_missionCategory2 != null)) {
                 DataTableSetBool(false, (lv_missionCategory2), true);
+                if ((libConB_gf_ConscriptionIsEnabledForUnit(libWoLC_gf_WC_ArmyCategoryUnitType(lv_missionCategory2)) == true)) {
+                    libConB_gf_LogDebugIfNotEmpty(libConB_gf_UnlockConscriptionUnit(libWoLC_gf_WC_ArmyCategoryUnitType(lv_missionCategory2)));
+                }
+
             }
 
         }
@@ -3596,7 +3600,10 @@ void libWoLC_gf_WC_ApplyArmyTech (int lp_player) {
         while (auto96AE43B4_ai <= auto96AE43B4_ae) {
             lv_indexUpgrade = CatalogFieldValueGet(c_gameCatalogArmyCategory, lv_indexCategory, "ArmyUpgradeArray["+IntToString(auto96AE43B4_ai-1)+"]", 1);
             auto96AE43B4_ai = auto96AE43B4_ai + 1;
-            libWoLC_gf_EnableCampaignUpgrade(false, lv_indexUpgrade, lp_player);
+            if ((libConB_gf_ConscriptionIsEnabledForUnit(libWoLC_gf_WC_ArmyCategoryUnitType(lv_indexCategory)) == false)) {
+                libWoLC_gf_EnableCampaignUpgrade(false, lv_indexUpgrade, lp_player);
+            }
+
         }
     }
     auto1D234705_ae = CatalogEntryCount(c_gameCatalogArmyCategory);
@@ -3900,22 +3907,34 @@ void libWoLC_gf_WC_MercenaryResetAll () {
 void libWoLC_gf_WC_PerkStateSet (string lp_campaignPerk, int lp_state) {
     // Variable Declarations
     string lv_armyCategory;
+    string lv_armyUnit;
 
     // Automatic Variable Declarations
     int auto59C37893_val;
 
     // Variable Initialization
     lv_armyCategory = UserDataGetGameLink("CampaignPerk", lp_campaignPerk, "ArmyCategory", 1);
+    lv_armyUnit = libWoLC_gf_WC_ArmyCategoryUnitType(lv_armyCategory);
 
     // Implementation
     UserDataSetInt("CampaignPerk", lp_campaignPerk, "State", 1, (lp_state));
     if ((lv_armyCategory != null)) {
-        auto59C37893_val = lp_state;
-        if (auto59C37893_val == libWoLC_ge_WC_PerkState_Active) {
-            libWoLC_gf_WC_SetArmyCategoryState(lv_armyCategory, c_armyCategoryStateUnlocked);
+        if ((libConB_gf_ConscriptionIsEnabledForUnit(lv_armyUnit) == true)) {
+            if ((lp_state == libWoLC_ge_WC_PerkState_Active)) {
+                libConB_gf_LogDebugIfNotEmpty(libConB_gf_UnlockConscriptionUnit(lv_armyUnit));
+            }
+            else {
+                libConB_gf_LogDebugIfNotEmpty(libConB_gf_LockConscriptionUnit(lv_armyUnit));
+            }
         }
         else {
-            libWoLC_gf_WC_SetArmyCategoryState(lv_armyCategory, c_armyCategoryStateLocked);
+            auto59C37893_val = lp_state;
+            if (auto59C37893_val == libWoLC_ge_WC_PerkState_Active) {
+                libWoLC_gf_WC_SetArmyCategoryState(lv_armyCategory, c_armyCategoryStateUnlocked);
+            }
+            else {
+                libWoLC_gf_WC_SetArmyCategoryState(lv_armyCategory, c_armyCategoryStateLocked);
+            }
         }
     }
 
