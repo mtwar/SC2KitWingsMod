@@ -5087,41 +5087,6 @@
         </Instances>
     </CUser>
     <CUser id="TechUnit">
-        <Fields Id="Enabled" Type="Int" Count="16">
-            <Flags index="Modifiable" value="1"/>
-        </Fields>
-        <Fields Id="IsNew" Type="Int">
-            <Flags index="Modifiable" value="1"/>
-        </Fields>
-        <Fields>
-            <Id value="Name"/>
-            <Type value="Text"/>
-            <EditorColumn value="1"/>
-            <EditorText value="Name"/>
-        </Fields>
-        <Fields Id="Suffix" Type="Text" EditorText="Suffix"/>
-        <Fields Id="DescriptionShort" Type="Text" EditorColumn="2"/>
-        <Fields Id="AchievementTermUpgrade" Type="GameLink" GameLinkType="AchievementTerm"/>
-        <Fields Id="Prefix" Type="Text" EditorText="Prefix"/>
-        <Fields Id="StartsLocked" Type="Int"/>
-        <Fields Id="RequiredMission" Type="GameLink" GameLinkType="Map"/>
-        <Fields>
-            <Id value="Group"/>
-            <Type value="User"/>
-            <UserType value="TechGroup"/>
-            <EditorColumn value="3"/>
-        </Fields>
-        <Fields>
-            <Id value="Variants"/>
-            <Type value="Unit"/>
-            <Count value="5"/>
-            <EditorColumn value="4"/>
-        </Fields>
-        <Instances Id="[Default]">
-            <Int Int="1">
-                <Field Id="IsNew"/>
-            </Int>
-        </Instances>
         <Instances Id="Bunker">
             <Text Text="UserData/TechUnit/Bunker_Name">
                 <Field Id="Name"/>
