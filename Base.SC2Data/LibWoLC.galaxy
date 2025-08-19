@@ -4438,7 +4438,7 @@ int libWoLC_gf_WC_CreditsTotalSpent () {
             continue;
         }
         if ((libConB_gf_ConscriptionPurchased(lv_conscription) == true)) {
-            lv_value += libConB_gf_ConscriptionPrice(lv_conscription);
+            lv_value += libConB_gf_GetConscriptionPrice(lv_conscription);
         }
 
     }
