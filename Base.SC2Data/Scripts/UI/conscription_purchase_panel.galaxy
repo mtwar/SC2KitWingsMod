@@ -2,18 +2,18 @@ include "LibWolC_h"
 include "Scripts/UI/utils_h"
 include "Scripts/UI/ui_h"
 
+static trigger UserTrigger;
 static int dialog = -1;
 static int root;
 
+static int credits;
+
 void Kit_UIConscription_Show(trigger exit_trigger) {
-    dialog = DialogCreate(1600, 900, c_anchorCenter, 0, 0, true);
-    DialogSetImageVisible(dialog, false);
-    DialogSetFullscreen(dialog, false);
-    DialogSetVisible(dialog, PlayerGroupAll(), true);
-    
-    root = DialogControlCreateFromTemplate(dialog, c_triggerControlTypePanel, "Kit_Conscription/Test");
+	Kit_UITechPurchase_Show(exit_trigger);
+
 }
 
 void Kit_UIConscription_Hide() {
     DialogSetVisible(dialog, PlayerGroupAll(), false);
+    TriggerExecute(UserTrigger, true, true);
 }

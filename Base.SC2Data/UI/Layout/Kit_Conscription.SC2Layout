@@ -1,7 +1,45 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Desc>
-    <Frame type="Frame" name="Test">
-        <Frame type="Label" name="HelloGGG" template="AlertPanel/AlertPanelTemplate">
+    <Frame type="Frame" name="ConscriptionPanelTemplate">
+        <Width val="1600"/>
+        <Height val="1200"/>
+        <Frame type="Label" name="TitleLabel">
+            <Anchor side="Top" relative="$parent" pos="Min" offset="120"/>
+            <Anchor side="Left" relative="$parent" pos="Min" offset="690"/>
+            <Anchor side="Right" relative="$parent" pos="Max" offset="-330"/>
+            <Style val="CampaignPanelTitle"/>
+            <Alpha val="120"/>
+            <Text val="HelloGGG"/>
+            <Frame type="CashPanel" name="Credits">
+                <Anchor side="Top" relative="$parent" pos="Min" offset="55"/>
+                <Anchor side="Left" relative="$parent/DescriptionBackgroundImage" pos="Max" offset="-15"/>
+                <Anchor side="Right" relative="$parent/MovieBackgroundImage" pos="Min" offset="15"/>
+                <Height val="90"/>
+
+                <Frame type="Image" name="BackgroundFrame">
+                    <Anchor relative="$parent" />
+                    <Texture val="@@UI/CampaignPanelCreditsBackground" layer="0"/>
+                    <TextureType val="Border" layer="0"/>
+                    <LayerColor val="86d7ec" layer="0"/>
+                    <Tiled val="true" layer="0"/>
+                </Frame>
+
+                <Frame type="Label" name="CashLabel">
+                    <Anchor side="Top" relative="$parent" pos="Min" offset="15"/>
+                    <Anchor side="Left" relative="$parent" pos="Min" offset="10"/>
+                    <Anchor side="Right" relative="$parent" pos="Max" offset="-10"/>
+                    <Style val="CampaignPanelSelectionInfoCreditsHeading"/>
+                    <Text val="@UI/CampaignPanelCreditsHeading"/>
+                </Frame>
+
+                <Frame type="CountdownLabel" name="CashAmountLabel">
+                    <Anchor side="Top" relative="$parent/CashLabel" pos="Max" offset="0"/>
+                    <Anchor side="Left" relative="$parent" pos="Min" offset="10"/>
+                    <Anchor side="Right" relative="$parent" pos="Max" offset="-10"/>
+                    <Style val="CampaignPanelSelectionInfoCredits"/>
+                    <Alpha val="170"/>
+                </Frame>
+            </Frame>
         </Frame>
     </Frame>
 </Desc>
