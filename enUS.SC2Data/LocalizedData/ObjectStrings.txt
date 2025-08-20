@@ -1512,6 +1512,7 @@ Footprint/Name/Kit@HiveMindEmulatorPathing=Hive Mind Emulator
 Footprint/Name/Kit@PsiDisruptorPathing=Psi Disrupter
 Light/Name/FemaleCivilian4Portrait=Portrait - Female Civilian 4
 Light/Name/SMHelloOperator_low=Hello Operator
+Light/Name/SMHyperionConscription=Story Mode - Hyperion Conscription
 Loot/Name/TestEffect=Test Effect
 Loot/Name/TestItem=Test Item
 Loot/Name/TestSet=Test Set

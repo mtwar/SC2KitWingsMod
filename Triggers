@@ -169560,7 +169560,7 @@
         </Element>
         <Element Type="CustomScript" Id="816620A5">
             <ScriptCode>
-                include &quot;Scripts/UI/conscription_panel.galaxy&quot;
+                include &quot;Scripts/UI/conscription_purchase_panel.galaxy&quot;
             </ScriptCode>
         </Element>
         <Element Type="FunctionDef" Id="524A745A">

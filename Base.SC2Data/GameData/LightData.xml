@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CLight id="SMHyperionConscription">
+        <ToDInfoArray index="0" Id="NoLight" AmbientColor="0.101961,0.219608,0.400000" OperatorHDR="4">
+            <Param index="HDRExposure" value="1.200000"/>
+            <Param index="HDRBloomThreshold" value="0.350000"/>
+            <Param index="HDRGain" value="0.000000"/>
+            <Param index="HDRScale" value="0.000000"/>
+            <Param index="CreepSpecularExp" value="40.000000"/>
+            <Param index="CreepHDRSpecMultiplier" value="5.900000"/>
+            <Param index="AOOcclusionRadius" value="1.000000"/>
+            <Param index="AONoOcclusion" value="0.900000"/>
+            <Param index="AOOcclusionPower" value="2.000000"/>
+            <Param index="AODetailOcclusionRadius" value="0.010000"/>
+            <Param index="AODetailNoOcclusion" value="0.060000"/>
+            <Param index="AODetailOcclusionPower" value="4.000000"/>
+            <DirectionalLight index="Key">
+                <Color value="0.600000,0.749020,0.882353"/>
+                <ColorMultiplier value="0.200000"/>
+                <SpecularColor value="0.674510,0.811765,0.937255"/>
+                <SpecColorMultiplier value="0.500000"/>
+                <Direction value="0.043577,-0.054471,-0.997564"/>
+            </DirectionalLight>
+            <DirectionalLight index="Fill" Color="0.101961,0.000000,0.235294" ColorMultiplier="0.123000" Direction="-0.316227,0.579760,-0.750919"/>
+            <DirectionalLight index="Back" Color="0.513726,0.501961,0.537255" ColorMultiplier="0.170000" Direction="-0.210848,0.833875,-0.510093"/>
+        </ToDInfoArray>
+    </CLight>
+</Catalog>
