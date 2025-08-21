@@ -1,15 +1,561 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Desc>
+    <Constant name="ConscriptionItemButtonAvailable" val="00ffff"/>
+    <Constant name="ConscriptionItemButtonAvailablePressed" val="00ff00"/>
+
+    <Constant name="ConscriptionItemButtonPurchased" val="4b7c8d"/>
+    <Constant name="ConscriptionItemButtonPurchasedPressed" val="00ff00"/>
+
+    <Constant name="ConscriptionItemButtonInsufficient" val="ab3131"/>
+    <Constant name="ConscriptionItemButtonInsufficientPressed" val="00ff00"/>
+
+    <Constant name="ConscriptionGroupButtonAvailable" val="00ffff"/>
+    <Constant name="ConscriptionGroupButtonAvailablePressed" val="00ff00"/>
+
+    <Constant name="ConscriptionGroupButtonPurchased" val="4b7c8d"/>
+    <Constant name="ConscriptionGroupButtonPurchasedPressed" val="00ff00"/>
+
+    <Constant name="ConscriptionGroupButtonInsufficient" val="ab3131"/>
+    <Constant name="ConscriptionGroupButtonInsufficientPressed" val="00ff00"/>
+
+    <Constant name="ConscriptionGroupTextAvailable" val="3da7a1"/>
+    <Constant name="ConscriptionGroupTextAvailablePressed" val="ffffff"/>
+
+    <Constant name="ConscriptionGroupTextPurchased" val="4b7c8d"/>
+    <Constant name="ConscriptionGroupTextPurchasedPressed" val="ffffff"/>
+
+    <Constant name="ConscriptionGroupTextInsufficient" val="bb2800"/>
+    <Constant name="ConscriptionGroupTextInsufficientPressed" val="ffffff"/>
+    
+    <Constant name="PurchasePanelCostAvailable" val="00fd00"/>
+    <Constant name="PurchasePanelCostPurchased" val="4b7c8d"/>
+    <Constant name="PurchasePanelCostInsufficient" val="ab3131"/>
+
+    <Frame type="Frame" name="ConscriptionItemFrameTemplate">
+        <Height val="300"/>
+        <Width val="300"/>
+
+        <Frame type="Image" name="MaskImage">
+            <Anchor side="Top" relative="$parent" pos="Mid" offset="0"/>
+            <Anchor side="Bottom" relative="$parent" pos="Mid" offset="0"/>
+            <Anchor side="Left" relative="$parent" pos="Mid" offset="0"/>
+            <Anchor side="Right" relative="$parent" pos="Mid" offset="0"/>
+            <Texture val="@@UI/PurchasePanelItemFrameButtonMask" layer="0"/>
+            <TextureType val="HorizontalBorder"/>
+            <Tiled val="true"/>
+            <Width val="70"/>
+            <Height val="70"/>
+        </Frame>
+        
+        <Frame type="Button" name="Button">
+            <Anchor side="Top" relative="$parent" pos="Mid" offset="0"/>
+            <Anchor side="Bottom" relative="$parent" pos="Mid" offset="0"/>
+            <Anchor side="Left" relative="$parent" pos="Mid" offset="0"/>
+            <Anchor side="Right" relative="$parent" pos="Mid" offset="0"/>
+            <Width val="90"/>
+            <Height val="90"/>
+            <NormalImage val="NormalImage"/>
+            <HoverImage val="HoverImage"/>
+            <HighlightOnHover val="true"/>
+            <HighlightOnFocus val="true"/>
+            <ClickSound val="@UI_ActionButtonSelect"/>
+            <TooltipFrame val="PurchasePanelTooltip"/>
+            <AcceptsMouseTooltip val="True"/>
+            
+            <Frame type="Image" name="NormalImage">
+                <Texture val="@@UI/PurchasePanelItemFrameButtonNormal" layer="0"/>
+                <TextureType val="Border" layer="0"/>
+                <Tiled val="true" layer="0"/>
+                <StateCount val="2" layer="0"/>
+                <BlendMode val="Add"/>
+                <DesaturateOnDisable val="False"/>
+                <DisabledAlpha val="100"/>
+                <DescFlags val="Internal"/>
+            </Frame>
+
+            <Frame type="Image" name="HoverImage">
+                <Texture val="@@UI/PurchasePanelItemFrameButtonHover" layer="0"/>
+                <TextureType val="Border" layer="0"/>
+                <Tiled val="true" layer="0"/>
+                <StateCount val="2" layer="0"/>
+                <BlendMode val="Add"/>
+                <DesaturateOnDisable val="False"/>
+                <DisabledAlpha val="100"/>
+                <DescFlags val="Internal"/>
+            </Frame>
+        </Frame>
+
+        <Frame type="Image" name="IconImage">
+            <Anchor side="Top" relative="$parent" pos="Mid" offset="0"/>
+            <Anchor side="Bottom" relative="$parent" pos="Mid" offset="0"/>
+            <Anchor side="Left" relative="$parent" pos="Mid" offset="0"/>
+            <Anchor side="Right" relative="$parent" pos="Mid" offset="0"/>
+            <TextureType val="Normal"/>
+            <DesaturateOnDisable val="False"/>
+            <DisabledAlpha val="100"/>
+            <Desaturated val="True"/>
+        </Frame>
+        
+        <!-- Birth(); Death() -->
+        <Frame type="FlashFrame" name="FlashFrame">
+            <Anchor relative="$parent"/>
+            <File val="UI/Flash/GameUI/TechPurchase_Item.swf"/>
+            <FlashInputEnabled val="False"/>
+            <UseAlternateTime val="false"/> <!-- MSS: Used to be true -->
+        </Frame>
+
+        <StateGroup name="StatusState">
+            <DefaultState val="Available"/>
+        
+            <State name="Insufficient">
+                <When type="AnimationState" StatusState="Insufficient"/>
+                <Action type="SetProperty" frame="$this/MaskImage" Color="#ConscriptionItemButtonInsufficient" />
+                <Action type="SetProperty" frame="$this/IconImage" DesaturationColor="#ConscriptionItemButtonInsufficient" />
+                <Action type="SetProperty" frame="$this/Button" Color="#ConscriptionItemButtonInsufficient" />
+            </State>
+        
+            <State name="Available">
+                <When type="AnimationState" StatusState="Available"/>
+                <Action type="SetProperty" frame="$this/MaskImage" Color="#ConscriptionItemButtonAvailable" />
+                <Action type="SetProperty" frame="$this/IconImage" DesaturationColor="#ConscriptionItemButtonAvailable" />
+                <Action type="SetProperty" frame="$this/Button" Color="#ConscriptionItemButtonAvailable" />
+            </State>
+
+            <State name="Purchased">
+                <When type="AnimationState" StatusState="Purchased"/>
+                <Action type="SetProperty" frame="$this/MaskImage" Color="#ConscriptionItemButtonPurchased" />
+                <Action type="SetProperty" frame="$this/IconImage" DesaturationColor="#ConscriptionItemButtonPurchased" />
+                <Action type="SetProperty" frame="$this/Button" Color="#ConscriptionItemButtonPurchased" />
+            </State>
+        </StateGroup>
+    </Frame>
+
+    <Frame type="Frame" name="ConscriptionGroupFrameTemplate">
+        <Height val="400"/>
+        <Width val="230"/>
+
+        <Frame type="Image" name="BorderImage">
+            <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent" pos="Mid" offset="0"/>
+            <Anchor side="Right" relative="$parent" pos="Mid" offset="0"/>
+            <Texture val="@@UI/PurchasePanelGroupBorder" layer="0"/>
+            <StateCount val="2" layer="0"/>
+            <DisabledAlpha val="100"/>
+            <DesaturateOnDisable val="False"/>
+        </Frame>
+
+        <Frame type="Label" name="NameLabel">
+            <Anchor side="Top" relative="$parent/BorderImage" pos="Min" offset="25"/>
+            <Anchor side="Bottom" relative="$parent/BorderImage" pos="Min" offset="75"/>
+            <Anchor side="Left" relative="$parent/BorderImage" pos="Min" offset="25"/>
+            <Anchor side="Right" relative="$parent/BorderImage" pos="Max" offset="-25"/>
+            <Style val="PurchasePanelGroupName"/>
+            <DisabledAlpha val="100"/>
+            <Text val="Name"/>
+        </Frame>
+        
+        <Frame type="Image" name="IconImage">
+            <Anchor side="Top" relative="$parent/UnitModelFrame" pos="Mid" offset="0"/>
+            <Anchor side="Bottom" relative="$parent/UnitModelFrame" pos="Mid" offset="0"/>
+            <Anchor side="Left" relative="$parent/UnitModelFrame" pos="Mid" offset="0"/>
+            <Anchor side="Right" relative="$parent/UnitModelFrame" pos="Mid" offset="0"/>
+            <TextureType val="Normal"/>
+            <DisabledAlpha val="100"/>
+            <DesaturateOnDisable val="False"/>
+        </Frame>
+
+        <Frame type="UnitModelFrame" name="UnitModelFrame">
+            <Anchor side="Top" relative="$parent" pos="Min" offset="80"/>
+            <Anchor side="Left" relative="$parent" pos="Mid" offset="0"/>
+            <Anchor side="Right" relative="$parent" pos="Mid" offset="0"/>
+            <Height val="212"/>
+            <Width val="198"/>
+            <TurningEnabled val="false"/>
+            <DisabledAlpha val="100"/>
+
+            <Frame type="Model" name="Model">
+                <Anchor relative="$parent"/>
+                <UseAlternateTime val="false"/> <!-- MSS: Used to be true -->
+                <UseAspectScaling val="True"/>
+            </Frame>
+
+            <Animation name="CombatShieldOn">
+                <Event event="CombatShieldOn" action="Reset,Play" frame="$this"/>
+                <Controller type="ActorMsg" end="Pause" frame="$this" ModelFrameName="Model" SendToScope="False">
+                    <Key type="Identifier" time="0.00" value="AnimClearAllBut Stand"/>
+                    <Key type="Identifier" time="0.00" value="AnimPlay Stand Stand PlayForever"/>
+                </Controller>
+            </Animation>
+            <Animation name="CombatShieldOff">
+                <Event event="CombatShieldOff" action="Reset,Play" frame="$this"/>
+                <Controller type="ActorMsg" end="Pause" frame="$this" ModelFrameName="Model" SendToScope="False">
+                    <Key type="Identifier" time="0.00" value="AnimPlay Cover Cover PlayForever"/>
+                </Controller>
+            </Animation>
+        </Frame>
+
+        <Frame type="Frame" name="ConscriptionItemFrame0" template="Kit_Conscription/ConscriptionItemFrameTemplate">
+            <Anchor side="Top" relative="$parent\BorderImage" pos="Min" offset="190"/>
+            <Anchor side="Left" relative="$parent\BorderImage" pos="Min" offset="-70"/>
+        </Frame>
+
+        <Frame type="Frame" name="ConscriptionItemFrame1" template="Kit_Conscription/ConscriptionItemFrameTemplate">
+            <Anchor side="Top" relative="$parent\BorderImage" pos="Min" offset="190"/>
+            <Anchor side="Right" relative="$parent\BorderImage" pos="Max" offset="70"/>
+        </Frame>
+
+        <!-- Birth() -->
+        <Frame type="FlashFrame" name="FlashFrame">
+            <Anchor relative="$parent"/>
+            <File val="UI/Flash/GameUI/TechPurchase_NewItem.swf"/>
+            <FlashInputEnabled val="False"/>
+            <AcceptsMouse val="False"/>
+            <Visible val="false"/>
+            <UseAlternateTime val="false"/> <!-- MSS: Used to be true -->
+        </Frame>
+
+        <Frame type="PlayerFrame" name="PlayerData">
+            <PlayerId val="1"/>
+        </Frame>
+
+        <StateGroup name="StatusState">
+            <DefaultState val="Available"/>
+        
+            <State name="Insufficient">
+                <When type="AnimationState" StatusState="Insufficient"/>
+                <Action type="SetProperty" frame="$this/NameLabel" Color="#ConscriptionGroupTextInsufficient" />
+                <Action type="SetProperty" frame="$this/BorderImage" Color="#ConscriptionGroupButtonInsufficient" />
+                <Action type="SetProperty" frame="$this/IconImage" Color="#ConscriptionGroupButtonInsufficient" />
+                <!-- <Action type="SetProperty" frame="$this/UnitModelFrame" TeamColorIndex="" /> -->
+                <Action type="SetProperty" frame="$this/UnitModelFrame" TeamColor="#ConscriptionGroupButtonInsufficient"/>
+            </State>
+        
+            <State name="Available">
+                <When type="AnimationState" StatusState="Available"/>
+                <Action type="SetProperty" frame="$this/NameLabel" Color="#ConscriptionGroupTextAvailable" />
+                <Action type="SetProperty" frame="$this/BorderImage" Color="#ConscriptionGroupButtonAvailable" />
+                <Action type="SetProperty" frame="$this/IconImage" Color="#ConscriptionGroupButtonAvailable" />
+                <Action type="SetProperty" frame="$this/UnitModelFrame" TeamColor="{$parent/PlayerData/@Color}" />
+            </State>
+
+            <State name="Purchased">
+                <When type="AnimationState" StatusState="Purchased"/>
+                <Action type="SetProperty" frame="$this/NameLabel" Color="#ConscriptionGroupTextPurchased" />
+                <Action type="SetProperty" frame="$this/BorderImage" Color="#ConscriptionGroupButtonPurchased" />
+                <Action type="SetProperty" frame="$this/IconImage" Color="#ConscriptionGroupButtonPurchased" />
+                <Action type="SetProperty" frame="$this/UnitModelFrame" TeamColor="#ConscriptionGroupButtonPurchased" />
+            </State>
+        </StateGroup>
+    </Frame>
+
+    <Frame type="Frame" name="ConscriptionCategoryFrameTemplate">
+        <Height val="120"/>
+        <Width val="350"/>
+
+        <Frame type="Button" name="Button">
+            <Anchor side="Top" relative="$parent" pos="Mid" offset="0"/>
+            <Anchor side="Bottom" relative="$parent" pos="Mid" offset="0"/>
+            <Anchor side="Left" relative="$parent" pos="Mid" offset="0"/>
+            <Anchor side="Right" relative="$parent" pos="Mid" offset="0"/>
+            <Width val="305"/>
+            <Height val="85"/>
+            <NormalImage val="NormalImage"/>
+            <HoverImage val="HoverImage"/>
+            <Label val="ButtonLabel"/>
+            <HighlightOnHover val="true"/>
+            <HighlightOnFocus val="true"/>
+            <ClickOnDown val="True"/>
+            <ClickSound val="@UI_ActionButtonSelect"/>
+
+            
+            <Frame type="Image" name="NormalImage">
+                <Texture val="@@UI/PurchasePanelCategoryFrameButtonNormal" layer="0"/>
+                <TextureType val="Border" layer="0"/>
+                <Tiled val="true" layer="0"/>
+                <StateCount val="2" layer="0"/>
+                <BlendMode val="Add"/>
+                <LayerColor val="7ed3ea" layer="0"/>
+                <DescFlags val="Internal"/>
+            </Frame>
+
+            <Frame type="Image" name="HoverImage">
+                <Texture val="@@UI/PurchasePanelCategoryFrameButtonHover" layer="0"/>
+                <TextureType val="Border" layer="0"/>
+                <Tiled val="true" layer="0"/>
+                <StateCount val="2" layer="0"/>
+                <BlendMode val="Add"/>
+                <LayerColor val="7ed3ea" layer="0"/>
+                <DescFlags val="Internal"/>
+            </Frame>
+
+            <Frame type="Label" name="ButtonLabel">
+                <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+                <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+                <Anchor side="Left" relative="$parent" pos="Min" offset="20"/>
+                <Anchor side="Right" relative="$parent" pos="Max" offset="-20"/>
+                <Style val="PurchasePanelCategoryName"/>
+                <DescFlags val="Internal"/>
+            </Frame>
+        </Frame>
+
+        <!-- Birth() -->
+        <Frame type="FlashFrame" name="FlashFrame">
+            <Anchor relative="$parent"/>
+            <File val="UI/Flash/GameUI/TechPurchase_Tab.swf"/>
+            <FlashInputEnabled val="False"/>
+            <Visible val="False"/>
+            <AcceptsMouse val="False"/>
+            <UseAlternateTime val="false"/> <!-- MSS: Used to be true -->
+        </Frame>
+    </Frame>
+    
     <Frame type="Frame" name="ConscriptionPanelTemplate">
+        <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+        <Anchor side="Left" relative="$parent" pos="Mid" offset="0"/>
+        <Anchor side="Right" relative="$parent" pos="Mid" offset="0"/>
         <Width val="1600"/>
         <Height val="1200"/>
+
+        <Frame type="StandardTooltip" name="PurchasePanelTooltip" template="StandardTooltip/StandardStoryModeTooltipTemplate"/>
+
+        <Frame type="Image" name="BackgroundMaskImage">
+            <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+            <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+            <Anchor side="Left" relative="$parent" pos="Min" offset="0"/>
+            <Anchor side="Right" relative="$parent" pos="Max" offset="0"/>
+            <Texture val="@@UI/PauseScreenDimImage"/>
+            <RenderType val="HDR"/>
+        </Frame>
+
+        <Frame type="Portrait" name="BackgroundPortrait">
+            <Anchor side="Top" relative="$parent" pos="Min" offset="80"/>
+            <Anchor side="Bottom" relative="$parent" pos="Max" offset="-80"/>
+            <Anchor side="Left" relative="$parent" pos="Min" offset="80"/>
+            <Anchor side="Right" relative="$parent" pos="Max" offset="-80"/>
+            <BackgroundImage val="BackgroundPortraitBackgroundImage"/>
+            <BorderImage val="BackgroundPortraitBorderImage"/>
+            <AcceptsMouse val="false"/>
+            <UseTransition val="false"/>
+            <UseAlternateTime val="false"/>
+            <ModelLink val="TechBackDrop"/>
+            
+            <Frame type="Image" name="BackgroundPortraitBorderImage">
+                <Visible val="false"/>
+                <DescFlags val="Internal"/>
+            </Frame>
+
+            <Frame type="Image" name="BackgroundPortraitBackgroundImage">
+                <Visible val="false"/>
+                <DescFlags val="Internal"/>
+            </Frame>
+        </Frame>
+        
         <Frame type="Label" name="TitleLabel">
             <Anchor side="Top" relative="$parent" pos="Min" offset="120"/>
             <Anchor side="Left" relative="$parent" pos="Min" offset="690"/>
             <Anchor side="Right" relative="$parent" pos="Max" offset="-330"/>
             <Style val="CampaignPanelTitle"/>
             <Alpha val="120"/>
-            <Text val="HelloGGG"/>
+            <Text val="@UI/PurchasePanelTitle"/>
+        </Frame>
+        
+        <Frame type="Image" name="CategoryBorderImage">
+            <Anchor side="Top" relative="$parent" pos="Min" offset="180"/>
+            <Anchor side="Right" relative="$parent" pos="Max" offset="-75"/>
+            <Width val="1140"/>
+            <Height val="480"/>
+            <Texture val="@@UI/PurchasePanelCategoryBorder" layer="0"/>
+            <TextureType val="HorizontalBorder" layer="0"/>
+            <Tiled val="true" layer="0"/>
+        </Frame>
+
+        <Frame type="Image" name="SelectUpgradeBorderImage">
+            <Anchor side="Top" relative="$parent/CategoryBorderImage" pos="Min" offset="35"/>
+            <Anchor side="Left" relative="$parent/CategoryBorderImage" pos="Min" offset="30"/>
+            <Anchor side="Right" relative="$parent/CategoryBorderImage" pos="Max" offset="-35"/>
+            <Height val="40"/>
+            <Texture val="@@UI/PurchasePanelSelectUpgradeBorder" layer="0"/>
+            <TextureType val="Border" layer="0"/>
+            <LayerColor val="7ed3ea" layer="0"/>
+            <Tiled val="true" layer="0"/>
+            <BlendMode val="Add"/>
+        </Frame>
+
+        <Frame type="Label" name="SelectUpgradeLabel">
+            <Anchor side="Bottom" relative="$parent/SelectUpgradeBorderImage" pos="Max" offset="-5"/>
+            <Anchor side="Left" relative="$parent/SelectUpgradeBorderImage" pos="Min" offset="20"/>
+            <Style val="PurchasePanelSelectHeading"/>
+            <Text val="@UI/PurchasePanelSelectHeading"/>
+            <Alpha val="50"/>
+        </Frame>
+        
+        <Frame type="Frame" name="ConscriptionCategoryFrame0" template="Kit_Conscription/ConscriptionCategoryFrameTemplate">
+            <Handle val="Kit_Conscription_ConscriptionCategoryFrame0"/>
+            <Anchor side="Top" relative="$parent/CategoryBorderImage" pos="Min" offset="-5"/>
+            <Anchor side="Right" relative="$parent/CategoryBorderImage" pos="Min" offset="40"/>
+        </Frame>
+
+        <Frame type="Frame" name="ConscriptionCategoryFrame1" template="Kit_Conscription/ConscriptionCategoryFrameTemplate">
+            <Handle val="Kit_Conscription_ConscriptionCategoryFrame1"/>
+            <Anchor side="Top" relative="$parent/ConscriptionCategoryFrame0" pos="Max" offset="-45"/>
+            <Anchor side="Right" relative="$parent/ConscriptionCategoryFrame0" pos="Max" offset="0"/>
+        </Frame>
+
+        <Frame type="Frame" name="ConscriptionCategoryFrame2" template="Kit_Conscription/ConscriptionCategoryFrameTemplate">
+            <Handle val="Kit_Conscription_ConscriptionCategoryFrame2"/>
+            <Anchor side="Top" relative="$parent/ConscriptionCategoryFrame1" pos="Max" offset="-45"/>
+            <Anchor side="Right" relative="$parent/ConscriptionCategoryFrame1" pos="Max" offset="0"/>
+        </Frame>
+
+        <Frame type="Frame" name="ConscriptionCategoryFrame3" template="Kit_Conscription/ConscriptionCategoryFrameTemplate">
+            <Handle val="Kit_Conscription_ConscriptionCategoryFrame3"/>
+            <Anchor side="Top" relative="$parent/ConscriptionCategoryFrame2" pos="Max" offset="-45"/>
+            <Anchor side="Right" relative="$parent/ConscriptionCategoryFrame2" pos="Max" offset="0"/>
+        </Frame>
+
+        <Frame type="Frame" name="ConscriptionCategoryFrame4" template="Kit_Conscription/ConscriptionCategoryFrameTemplate">
+            <Handle val="Kit_Conscription_ConscriptionCategoryFrame4"/>
+            <Anchor side="Top" relative="$parent/ConscriptionCategoryFrame3" pos="Max" offset="-45"/>
+            <Anchor side="Right" relative="$parent/ConscriptionCategoryFrame3" pos="Max" offset="0"/>
+        </Frame>
+
+        <Frame type="Frame" name="ConscriptionCategoryFrame5" template="Kit_Conscription/ConscriptionCategoryFrameTemplate">
+            <Handle val="Kit_Conscription_ConscriptionCategoryFrame5"/>
+            <Anchor side="Top" relative="$parent/ConscriptionCategoryFrame4" pos="Max" offset="-45"/>
+            <Anchor side="Right" relative="$parent/ConscriptionCategoryFrame4" pos="Max" offset="0"/>
+        </Frame>
+        
+        <Frame type="Frame" name="ConscriptionGroupFrame0" template="Kit_Conscription/ConscriptionGroupFrameTemplate">
+            <Handle val="Kit_Conscription_ConscriptionGroupFrame0"/>
+            <Anchor side="Top" relative="$parent/SelectUpgradeBorderImage" pos="Max" offset="-15"/>
+            <Anchor side="Left" relative="$parent/SelectUpgradeBorderImage" pos="Min" offset="-13"/>
+        </Frame>
+
+        <Frame type="Frame" name="ConscriptionGroupFrame1" template="Kit_Conscription/ConscriptionGroupFrameTemplate">
+            <Handle val="Kit_Conscription_ConscriptionGroupFrame1"/>
+            <Anchor side="Top" relative="$parent/ConscriptionGroupFrame0" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/ConscriptionGroupFrame0" pos="Max" offset="-12"/>
+        </Frame>
+
+        <Frame type="Frame" name="ConscriptionGroupFrame2" template="Kit_Conscription/ConscriptionGroupFrameTemplate">
+            <Handle val="Kit_Conscription_ConscriptionGroupFrame2"/>
+            <Anchor side="Top" relative="$parent/ConscriptionGroupFrame1" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/ConscriptionGroupFrame1" pos="Max" offset="-12"/>
+        </Frame>
+
+        <Frame type="Frame" name="ConscriptionGroupFrame3" template="Kit_Conscription/ConscriptionGroupFrameTemplate">
+            <Handle val="Kit_Conscription_ConscriptionGroupFrame3"/>
+            <Anchor side="Top" relative="$parent/ConscriptionGroupFrame2" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/ConscriptionGroupFrame2" pos="Max" offset="-12"/>
+        </Frame>
+
+        <Frame type="Frame" name="ConscriptionGroupFrame4" template="Kit_Conscription/ConscriptionGroupFrameTemplate">
+            <Handle val="Kit_ConscriptionePanel_ConscriptionGroupFrame4"/>
+            <Anchor side="Top" relative="$parent/ConscriptionGroupFrame3" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent/ConscriptionGroupFrame3" pos="Max" offset="-12"/>
+        </Frame>
+
+
+        <Frame type="Frame" name="SelectionInfoFrame"> 
+            <Handle val="Kit_Conscription_SelectionInfoFrame"/>
+            <Anchor side="Top" relative="$parent/CategoryBorderImage" pos="Max" offset="50"/>
+            <Anchor side="Bottom" relative="$parent" pos="Max" offset="-65"/>
+            <Anchor side="Left" relative="$parent" pos="Min" offset="50"/>
+            <Anchor side="Right" relative="$parent" pos="Max" offset="-50"/>
+
+            <Frame type="Image" name="DescriptionBackgroundImage">
+                <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+                <Anchor side="Bottom" relative="$parent" pos="Max" offset="-40"/>
+                <Anchor side="Left" relative="$parent" pos="Min" offset="20"/>
+                <Anchor side="Right" relative="$parent" pos="Mid" offset="-132"/>
+                <Texture val="@@UI/CampaignPanelDescriptionBackground" layer="0"/>
+                <TextureType val="HorizontalBorder"/>
+                <Tiled val="true"/>
+            </Frame>
+    
+            <Frame type="Image" name="DescriptionBottomImage">
+                <Anchor side="Top" relative="$parent/DescriptionBackgroundImage" pos="Max" offset="-20"/>
+                <Anchor side="Left" relative="$parent" pos="Min" offset="65"/>
+                <Texture val="@@UI/CampaignPanelDescriptionBottom" layer="0"/>
+                <TextureCoords top="0.0" left="1.0" bottom="1.0" right="0.0"/>
+                <LayerColor val="7ed2e9"/>
+            </Frame> 
+
+            <Frame type="Label" name="NameLabel">
+                <Anchor side="Top" relative="$parent/DescriptionBackgroundImage" pos="Min" offset="30"/>
+                <Anchor side="Left" relative="$parent/DescriptionBackgroundImage" pos="Min" offset="25"/>
+                <Style val="PurchasePanelSelectedPurchaseItemName"/>
+                <Alpha val="170"/>
+                <Text val="Name"/>
+            </Frame>
+    
+            <Frame type="Label" name="DescriptionLabel">
+                <Anchor side="Top" relative="$parent/NameLabel" pos="Max" offset="25"/>
+                <Anchor side="Left" relative="$parent/DescriptionBackgroundImage" pos="Min" offset="25"/>
+                <Anchor side="Right" relative="$parent/DescriptionBackgroundImage" pos="Max" offset="-20"/>
+                <Style val="PurchasePanelSelectedPurchaseItemDescription"/>
+                <Text val="Description"/>
+            </Frame>
+    
+            <Frame type="Label" name="NoSelectionLabel">
+                <Anchor side="Top" relative="$parent/DescriptionBackgroundImage" pos="Min" offset="0"/>
+                <Anchor side="Bottom" relative="$parent/DescriptionBackgroundImage" pos="Max" offset="0"/>
+                <Anchor side="Left" relative="$parent/DescriptionBackgroundImage" pos="Min" offset="20"/>
+                <Anchor side="Right" relative="$parent/DescriptionBackgroundImage" pos="Max" offset="-20"/>
+                <Style val="PurchasePanelNoSelection"/>
+                <Text val="@UI/PurchasePanelNoSelection"/>
+            </Frame>
+            
+            <Frame type="Image" name="MovieBackgroundImage">
+                <Anchor side="Top" relative="$parent/DescriptionBackgroundImage" pos="Min" offset="0"/>
+                <Anchor side="Bottom" relative="$parent" pos="Max" offset="-43"/>
+                <Anchor side="Right" relative="$parent" pos="Max" offset="-20"/>
+                <Anchor side="Left" relative="$parent" pos="Mid" offset="132"/>
+                <Texture val="@@UI/CampaignPanelMovieBackground" layer="0"/>
+                <TextureType val="HorizontalBorder"/>
+                <Tiled val="true"/>
+            </Frame>
+    
+            <Frame type="Image" name="MovieBottomImage">
+                <Anchor side="Top" relative="$parent/DescriptionBackgroundImage" pos="Max" offset="-20"/>
+                <Anchor side="Right" relative="$parent" pos="Max" offset="-65"/>
+                <Texture val="@@UI/CampaignPanelMovieBottom" layer="0"/>
+                <LayerColor val="7ed2e9"/>
+            </Frame>
+
+            <Frame type="MovieFrame" name="MovieFrame" template="CampaignTemplates/CampaignMovieTemplate">
+                <Anchor side="Top" relative="$parent/MovieBackgroundImage" pos="Min" offset="10"/>
+                <Anchor side="Bottom" relative="$parent/MovieBackgroundImage" pos="Max" offset="0"/>
+                <Anchor side="Left" relative="$parent/MovieBackgroundImage" pos="Min" offset="15"/>
+                <Anchor side="Right" relative="$parent/MovieBackgroundImage" pos="Max" offset="-10"/>
+                <RenderPriority val="510"/>
+                <UseAlternateTime val="false"/>
+                <LockAspectRatio val="True"/>
+                <Muted val="True"/>
+            </Frame>
+
+            <Frame type="Image" name="MovieFrameAlternative">
+                <Anchor side="Top" relative="$parent/MovieBackgroundImage" pos="Min" offset="30"/>
+                <Anchor side="Bottom" relative="$parent/MovieBackgroundImage" pos="Max" offset="-20"/>
+                <Anchor side="Left" relative="$parent/MovieBackgroundImage" pos="Min" offset="15"/>
+                <Anchor side="Right" relative="$parent/MovieBackgroundImage" pos="Max" offset="-10"/>
+                <RenderPriority val="510"/>
+                <UseAlternateTime val="false"/>
+                <Visible val="False"/>
+            </Frame>
+
+            <Frame type="Image" name="MovieFrameAlternativeIcon">
+                <Anchor side="Bottom" relative="$parent/MovieFrameAlternative" pos="Max" offset="-4"/>
+                <Anchor side="Left" relative="$parent/MovieFrameAlternative" pos="Min" offset="8"/>
+                <RenderPriority val="510"/>
+                <UseAlternateTime val="false"/>
+                <Width val="24"/>
+                <Height val="24"/>
+                <Texture val="Assets/Textures/ui_wol_icon_image.tga"/>
+                <Visible val="{$parent/MovieFrameAlternative/@Visible}"/>
+                <Alpha val="200"/>
+            </Frame>
+
             <Frame type="CashPanel" name="Credits">
                 <Anchor side="Top" relative="$parent" pos="Min" offset="55"/>
                 <Anchor side="Left" relative="$parent/DescriptionBackgroundImage" pos="Max" offset="-15"/>
@@ -40,6 +586,132 @@
                     <Alpha val="170"/>
                 </Frame>
             </Frame>
+    
+            <Frame type="Image" name="CostBackgroundImage">
+                <Anchor side="Top" relative="$parent/Credits" pos="Max" offset="-15"/>
+                <Anchor side="Left" relative="$parent/DescriptionBackgroundImage" pos="Max" offset="-15"/>
+                <Anchor side="Right" relative="$parent/MovieBackgroundImage" pos="Min" offset="15"/>
+                <Height val="90"/>
+                <Texture val="@@UI/CampaignPanelCostBackground" layer="0"/>
+                <TextureType val="Border" layer="0"/>
+                <Alpha val="170"/>
+                <DisabledAlpha val="100"/>
+                <DesaturateOnDisable val="False"/>
+                <Tiled val="true" layer="0"/>
+            </Frame>
+    
+            <Frame type="Label" name="CostHeadingLabel">
+                <Anchor side="Top" relative="$parent/CostBackgroundImage" pos="Min" offset="15"/>
+                <Anchor side="Left" relative="$parent/CostBackgroundImage" pos="Min" offset="10"/>
+                <Anchor side="Right" relative="$parent/CostBackgroundImage" pos="Max" offset="-10"/>
+                <Style val="CampaignPanelSelectionInfoCostHeading"/>
+                <Text val="@UI/CampaignPanelCostHeading"/>
+                <DisabledAlpha val="100"/>
+            </Frame>
+    
+            <Frame type="Label" name="CostLabel">
+                <Anchor side="Top" relative="$parent/CostHeadingLabel" pos="Max" offset="0"/>
+                <Anchor side="Left" relative="$parent/CostBackgroundImage" pos="Min" offset="10"/>
+                <Anchor side="Right" relative="$parent/CostBackgroundImage" pos="Max" offset="-10"/>
+                <Style val="CampaignPanelSelectionInfoCost"/>
+                <Alpha val="170"/>
+                <DisabledAlpha val="100"/>
+            </Frame>
+
+            <StateGroup name="StatusState">
+                <DefaultState val="Available"/>
+            
+                <State name="Insufficient">
+                    <When type="AnimationState" StatusState="Insufficient" />
+                    <Action type="SetProperty" frame="$this/CostLabel" Color="#PurchasePanelCostInsufficient" />
+                    <!-- <Action type="SetProperty" frame="$this/CostHeadingLabel" Color="#PurchasePanelCostInsufficient" /> -->
+                    <Action type="SetProperty" frame="$this/CostBackgroundImage" Color="#PurchasePanelCostInsufficient" />
+                </State>
+            
+                <State name="Available">
+                    <When type="AnimationState" StatusState="Available" />
+                    <Action type="SetProperty" frame="$this/CostLabel" Color="#PurchasePanelCostAvailable" />
+                    <!-- <Action type="SetProperty" frame="$this/CostHeadingLabel" Color="#PurchasePanelCostAvailable" /> -->
+                    <Action type="SetProperty" frame="$this/CostBackgroundImage" Color="#PurchasePanelCostAvailable" />
+                </State>
+
+                <State name="Purchased">
+                    <When type="AnimationState" StatusState="Purchased" />
+                    <Action type="SetProperty" frame="$this/CostLabel" Color="#PurchasePanelCostPurchased" />
+                    <!-- <Action type="SetProperty" frame="$this/CostHeadingLabel" Color="#PurchasePanelCostPurchased" /> -->
+                    <Action type="SetProperty" frame="$this/CostBackgroundImage" Color="#PurchasePanelCostPurchased" />
+                </State>
+            </StateGroup>
+
+            <StateGroup name="SelectionState">
+                <DefaultState val="Off"/>
+            
+                <State name="On">
+                    <When type="AnimationState" SelectionState="On" />
+
+                    <Action type="SetProperty" frame="$this/CostLabel" Visible="True"/>
+                    <Action type="SetProperty" frame="$this/CostHeadingLabel" Visible="True"/>
+                    <Action type="SetProperty" frame="$this/CostBackgroundImage" Visible="True"/>
+
+                    <Action type="SetProperty" frame="$this/NameLabel" Visible="True"/>
+                    <Action type="SetProperty" frame="$this/DescriptionLabel" Visible="True"/>
+                    <!-- MovieFrame visibility is handled by Triggers -->
+                    <!-- <Action type="SetProperty" frame="$this/MovieFrame" Visible="True"/> -->
+                    <!-- <Action type="SetProperty" frame="$this/MovieFrameAlternative" Visible="True"/> -->
+
+                    <Action type="SetProperty" frame="$this/NoSelectionLabel" Visible="False"/>
+                </State>
+            
+                <State name="Off">
+                    <When type="AnimationState" SelectionState="Off" />
+
+                    <Action type="SetProperty" frame="$this/CostLabel" Visible="False"/>
+                    <Action type="SetProperty" frame="$this/CostHeadingLabel" Visible="False"/>
+                    <Action type="SetProperty" frame="$this/CostBackgroundImage" Visible="False"/>
+
+                    <Action type="SetProperty" frame="$this/NameLabel" Visible="False"/>
+                    <Action type="SetProperty" frame="$this/DescriptionLabel" Visible="False"/>
+                    <Action type="SetProperty" frame="$this/MovieFrame" Visible="False"/>
+                    <Action type="SetProperty" frame="$this/MovieFrameAlternative" Visible="False"/>
+
+                    <Action type="SetProperty" frame="$this/NoSelectionLabel" Visible="True"/>
+                </State>
+            </StateGroup>
+        </Frame>
+
+
+        <Frame type="Image" name="FullscreenBackgroundImage">
+            <Anchor side="Top" relative="$parent" pos="Min" offset="0"/>
+            <Anchor side="Left" relative="$parent" pos="Mid" offset="0"/>
+            <Anchor side="Right" relative="$parent" pos="Mid" offset="0"/>
+            <Texture val="@UI/PurchasePanelBackground" layer="0"/>
+            <Unclipped val="true"/>
+        </Frame>
+        
+        <Frame type="Button" name="CloseButton" template="StandardTemplates/StandardLargePanelRightButtonTemplate">
+            <Handle val="Kit_Conscription_CloseButton"/>
+            <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+            <Anchor side="Right" relative="$parent" pos="Max" offset="-20"/>
+            <Shortcut val="Escape"/>
+            <Shortcut val="@UI/Back_Hotkey"/>
+            <Text val="@UI/Back_Control"/>
+
+            <Frame type="Image" name="BackgroundImage">
+                <Visible val="false"/>
+            </Frame>
+        </Frame>
+
+        <Frame type="Button" name="ResetButton" template="StandardTemplates/StandardLargePanelRightButtonTemplate">
+            <Handle val="Kit_Conscription_ResetButton"/>
+            <Anchor side="Bottom" relative="$parent" pos="Max" offset="0"/>
+            <Anchor side="Right" relative="$parent/CloseButton" pos="Min" offset="158"/>
+            <Shortcut val="@UI/Reset_Hotkey"/>
+            <Text val="@UI/Reset_Control"/>
+
+            <Frame type="Image" name="BackgroundImage">
+                <Visible val="false"/>
+            </Frame>
         </Frame>
     </Frame>
 </Desc>
+

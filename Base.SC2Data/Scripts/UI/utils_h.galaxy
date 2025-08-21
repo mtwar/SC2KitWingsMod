@@ -6,3 +6,35 @@ void Kit_PopulateDifficultyPulldown(int pulldown);
 void Kit_PopulateAllInPulldown(int pulldown);
 
 string Kit_GetUnitActorType(string unit_type);
+
+
+const int categories_count = 6;
+
+
+
+const int tech_items_count = 2;
+
+
+const int groups_count = 5;
+
+
+struct TechCategory {
+    int container;
+    int button;
+    int flash;
+};
+struct TechItem {
+    int container;
+    int mask;
+    int button;
+    int icon;
+    int flash;
+};
+struct TechGroup {
+    int container;
+    int name;
+    int icon;
+    int model;
+    int flash;
+    TechItem[tech_items_count] items;
+};

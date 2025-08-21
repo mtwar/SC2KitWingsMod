@@ -16,35 +16,6 @@ static int tech_cost;
 static int tech_movie;
 static int tech_image;
 
-struct TechCategory {
-    int container;
-    int button;
-    int flash;
-};
-static const int categories_count = 6;
-static TechCategory[categories_count] categories;
-
-struct TechItem {
-    int container;
-    int mask;
-    int button;
-    int icon;
-    int flash;
-};
-static const int items_count = 2;
-
-struct TechGroup {
-    int container;
-    int name;
-    int icon;
-    int model;
-    int flash;
-    TechItem[items_count] items;
-};
-static const int groups_count = 5;
-static TechGroup[groups_count] groups;
-
-
 static trigger CategoryClicked = TriggerCreate("Kit_UITechPurchase_CategoryClicked");
 static trigger UpgradeItemMouseEnter = TriggerCreate("Kit_UITechPurchase_UpgradeItemMouseEnter");
 static trigger UpgradeItemMouseExit = TriggerCreate("Kit_UITechPurchase_UpgradeItemMouseExit");
@@ -57,7 +28,8 @@ static trigger UserTrigger;
 
 static string selected_tech_group;
 static string selected_upgrade;
-
+static TechGroup[groups_count] groups;
+static TechCategory[categories_count] categories;
 
 
 static void Create() {
@@ -303,7 +275,7 @@ static void UpdateArmyCategory() {
         //     DialogControlSetVisible(groups[i].flash, PlayerGroupAll(), false);
         // }
 
-        for (j = 0; j < items_count; j += 1) {
+        for (j = 0; j < tech_items_count; j += 1) {
             item = groups[i].items[j];
 
             army_upgrade = Kit_GetDialogItemCustomValue(item.button, 0);

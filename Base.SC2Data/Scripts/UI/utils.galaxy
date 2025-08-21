@@ -86,3 +86,4 @@ void Kit_PopulateAllInPulldown(int pulldown) {
 
     DialogControlSelectItem(pulldown, PlayerGroupAll(), selected_item);
 }
+
