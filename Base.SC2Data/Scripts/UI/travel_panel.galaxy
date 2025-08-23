@@ -619,7 +619,7 @@ bool Kit_UITravel_ArchivesConscriptionClicked(bool check, bool run) {
     if (!run) { return true; }
 
     DialogSetVisible(dialog, PlayerGroupAll(), false);
-    Kit_UIConscription_Show(ArchivesReturn);
+    libWCUI_gf_DisplayConscriptionPurchase(ArchivesReturn);
 
     return true;
 }

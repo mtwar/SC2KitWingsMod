@@ -107,11 +107,6 @@ void libWCUI_InitVariables () {
 include "Scripts/UI/utils"
 
 //--------------------------------------------------------------------------------------------------
-// Custom Script: WU_ConscriptionPurchaseGalaxy
-//--------------------------------------------------------------------------------------------------
-include "Scripts/UI/conscription_purchase_panel.galaxy"
-
-//--------------------------------------------------------------------------------------------------
 // Custom Script: WU_TechConsoleGalaxy
 //--------------------------------------------------------------------------------------------------
 include "Scripts/UI/tech_purchase_panel.galaxy"
@@ -191,27 +186,13 @@ void libWCUI_gf_ConscriptionPurchasePanelCreditsUpdate () {
     PlayerModifyPropertyInt(1, c_playerPropCredits, c_playerPropOperSetTo, libConB_gf_GetAvailableCredits());
 }
 
-void libWCUI_gf_ConscriptionPurchaseShow (trigger lp_closeTrigger) {
-    // Automatic Variable Declarations
-    // Implementation
-    libWCUI_gv_conscriptionPurchaseCloseTrigger = lp_closeTrigger;
-    libNtve_gf_TriggerExecuteByName(TriggerGetFunction(libWCUI_gt_ConscriptionPurchaseInitialize), true, true);
-    libWCUI_gf_ConscriptionPurchasePanelCreditsUpdate();
-    DialogSetVisible(libWCUI_gv_conscriptionPurchaseDialog, PlayerGroupAll(), true);
-}
-
-void libWCUI_gf_ConscriptionPurchaseHide () {
-    // Automatic Variable Declarations
-    // Implementation
-    TriggerExecute(libWCUI_gv_conscriptionPurchaseCloseTrigger, true, false);
-}
-
 void libWCUI_gf_DisplayConscriptionPurchase (trigger lp_exitTrigger) {
     // Automatic Variable Declarations
     // Implementation
     libWCUI_gv_conscriptionPurchaseExitTrigger = lp_exitTrigger;
     libCamp_gf_HideStoryUI(false, false);
-    libWCUI_gf_ConscriptionPurchaseShow(libWCUI_gt_ConscriptionPurchaseOnClose);
+    libNtve_gf_TriggerExecuteByName(TriggerGetFunction(libWCUI_gt_ConscriptionPurchaseInitialize), true, true);
+    DialogSetVisible(libWCUI_gv_conscriptionPurchaseDialog, PlayerGroupAll(), true);
 }
 
 void libWCUI_gf_DisplayTechConsole (trigger lp_exitTrigger) {
@@ -1981,37 +1962,6 @@ color libWCUI_gf_ProgressColor (int lp_minValue, int lp_maxValue, int lp_progres
 
 // Triggers
 //--------------------------------------------------------------------------------------------------
-// Trigger: Conscription Close Button Clicked Wrapper
-//--------------------------------------------------------------------------------------------------
-bool libWCUI_gt_ConscriptionCloseButtonClickedWrapper_Func (bool testConds, bool runActions) {
-    // Automatic Variable Declarations
-    // Conditions
-    if (testConds) {
-        if (!((libWCUI_gv_conscriptionPurchasePanelClose != c_invalidDialogControlId))) {
-            return false;
-        }
-
-        if (!((EventDialogControl() == libWCUI_gv_conscriptionPurchasePanelClose))) {
-            return false;
-        }
-    }
-
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    libNtve_gf_TriggerExecuteByName(TriggerGetFunction(libWCUI_gt_ConscriptionCloseButtonClicked), true, true);
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void libWCUI_gt_ConscriptionCloseButtonClickedWrapper_Init () {
-    libWCUI_gt_ConscriptionCloseButtonClickedWrapper = TriggerCreate("libWCUI_gt_ConscriptionCloseButtonClickedWrapper_Func");
-    TriggerAddEventDialogControl(libWCUI_gt_ConscriptionCloseButtonClickedWrapper, c_playerAny, c_invalidDialogControlId, c_triggerControlEventTypeClick);
-}
-
-//--------------------------------------------------------------------------------------------------
 // Trigger: Conscription Reset Button Clicked Wrapper
 //--------------------------------------------------------------------------------------------------
 bool libWCUI_gt_ConscriptionResetButtonClickedWrapper_Func (bool testConds, bool runActions) {
@@ -2043,6 +1993,38 @@ void libWCUI_gt_ConscriptionResetButtonClickedWrapper_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
+// Trigger: Conscription Close Button Clicked Wrapper
+//--------------------------------------------------------------------------------------------------
+bool libWCUI_gt_ConscriptionCloseButtonClickedWrapper_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libWCUI_gv_conscriptionPurchasePanelClose != c_invalidDialogControlId))) {
+            return false;
+        }
+
+        if (!((EventDialogControl() == libWCUI_gv_conscriptionPurchasePanelClose))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libNtve_gf_TriggerExecuteByName(TriggerGetFunction(libWCUI_gt_ConscriptionCloseButtonClicked), true, true);
+    libNtve_gf_TriggerExecuteByName(TriggerGetFunction(libWCUI_gt_ConscriptionPurchaseOnClose), true, true);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libWCUI_gt_ConscriptionCloseButtonClickedWrapper_Init () {
+    libWCUI_gt_ConscriptionCloseButtonClickedWrapper = TriggerCreate("libWCUI_gt_ConscriptionCloseButtonClickedWrapper_Func");
+    TriggerAddEventDialogControl(libWCUI_gt_ConscriptionCloseButtonClickedWrapper, c_playerAny, c_invalidDialogControlId, c_triggerControlEventTypeClick);
+}
+
+//--------------------------------------------------------------------------------------------------
 // Trigger: Conscription Purchase Initialize
 //--------------------------------------------------------------------------------------------------
 bool libWCUI_gt_ConscriptionPurchaseInitialize_Func (bool testConds, bool runActions) {
@@ -2062,6 +2044,7 @@ bool libWCUI_gt_ConscriptionPurchaseInitialize_Func (bool testConds, bool runAct
     libWCUI_gv_conscriptionPurchaseDialog = libWCUI_gf_ConscriptionBuildDefaultDialog();
     libWCUI_gv_conscriptionPurchasePanelRoot = libWCUI_gf_ConscriptionBuildDefaultRootPanel(libWCUI_gv_conscriptionPurchaseDialog);
     libWCUI_gv_conscriptionPurchasePanelCredits = libWCUI_gf_ConscriptionBuildDefaultCreditsPanel(libWCUI_gv_conscriptionPurchasePanelRoot);
+    libWCUI_gf_ConscriptionPurchasePanelCreditsUpdate();
     DialogControlSetVisible(libWCUI_gv_conscriptionPurchasePanelCredits, PlayerGroupAll(), true);
     return true;
 }
@@ -2111,26 +2094,6 @@ void libWCUI_gt_ConscriptionPurchaseItemMouseExit_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: Conscription Close Button Clicked
-//--------------------------------------------------------------------------------------------------
-bool libWCUI_gt_ConscriptionCloseButtonClicked_Func (bool testConds, bool runActions) {
-    // Automatic Variable Declarations
-    // Actions
-    if (!runActions) {
-        return true;
-    }
-
-    DialogSetVisible(libWCUI_gv_conscriptionPurchaseDialog, PlayerGroupAll(), false);
-    libNtve_gf_TriggerExecuteByName(TriggerGetFunction(libWCUI_gt_ConscriptionPurchaseOnClose), true, true);
-    return true;
-}
-
-//--------------------------------------------------------------------------------------------------
-void libWCUI_gt_ConscriptionCloseButtonClicked_Init () {
-    libWCUI_gt_ConscriptionCloseButtonClicked = TriggerCreate("libWCUI_gt_ConscriptionCloseButtonClicked_Func");
-}
-
-//--------------------------------------------------------------------------------------------------
 // Trigger: Conscription Reset Button Clicked
 //--------------------------------------------------------------------------------------------------
 bool libWCUI_gt_ConscriptionResetButtonClicked_Func (bool testConds, bool runActions) {
@@ -2144,6 +2107,25 @@ void libWCUI_gt_ConscriptionResetButtonClicked_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
+// Trigger: Conscription Close Button Clicked
+//--------------------------------------------------------------------------------------------------
+bool libWCUI_gt_ConscriptionCloseButtonClicked_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    DialogSetVisible(libWCUI_gv_conscriptionPurchaseDialog, PlayerGroupAll(), false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libWCUI_gt_ConscriptionCloseButtonClicked_Init () {
+    libWCUI_gt_ConscriptionCloseButtonClicked = TriggerCreate("libWCUI_gt_ConscriptionCloseButtonClicked_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
 // Trigger: Conscription Purchase On Close
 //--------------------------------------------------------------------------------------------------
 bool libWCUI_gt_ConscriptionPurchaseOnClose_Func (bool testConds, bool runActions) {
@@ -2154,7 +2136,7 @@ bool libWCUI_gt_ConscriptionPurchaseOnClose_Func (bool testConds, bool runAction
     }
 
     libCamp_gf_HideStoryUI(true, false);
-    TriggerExecute(libWCUI_gv_conscriptionPurchaseExitTrigger, true, false);
+    TriggerExecute(libWCUI_gv_conscriptionPurchaseExitTrigger, true, true);
     return true;
 }
 
@@ -3227,14 +3209,14 @@ void libWCUI_gt_WU_TimerWindowLoadUpdate_Init () {
 }
 
 void libWCUI_InitTriggers () {
-    libWCUI_gt_ConscriptionCloseButtonClickedWrapper_Init();
     libWCUI_gt_ConscriptionResetButtonClickedWrapper_Init();
+    libWCUI_gt_ConscriptionCloseButtonClickedWrapper_Init();
     libWCUI_gt_ConscriptionPurchaseInitialize_Init();
     libWCUI_gt_ConscriptionPurchaseItemClicked_Init();
     libWCUI_gt_ConscriptionPurchaseItemMouseEnter_Init();
     libWCUI_gt_ConscriptionPurchaseItemMouseExit_Init();
-    libWCUI_gt_ConscriptionCloseButtonClicked_Init();
     libWCUI_gt_ConscriptionResetButtonClicked_Init();
+    libWCUI_gt_ConscriptionCloseButtonClicked_Init();
     libWCUI_gt_ConscriptionPurchaseOnClose_Init();
     libWCUI_gt_WU_TechConsoleOnExit_Init();
     libWCUI_gt_WU_MercenaryOnExit_Init();

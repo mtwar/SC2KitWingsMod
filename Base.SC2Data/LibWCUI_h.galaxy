@@ -37,7 +37,6 @@ const fixed libWCUI_gv_pUC_HealthWatchThreshold = 0.3;
 const string libWCUI_gv_wUC_VictoryEventClosed = "WUC_VictoryEventClosed";
 
 // Variable Declarations
-trigger libWCUI_gv_conscriptionPurchaseCloseTrigger;
 trigger libWCUI_gv_conscriptionPurchaseExitTrigger;
 int libWCUI_gv_conscriptionPurchaseDialog;
 int libWCUI_gv_conscriptionPurchasePanelRoot;
@@ -136,8 +135,6 @@ int libWCUI_gf_ConscriptionBuildDefaultCreditsPanel (int lp_parent);
 int libWCUI_gf_ConscriptionBuildDefaultResetButton (int lp_parent);
 int libWCUI_gf_ConscriptionBuildDefaultCloseButton (int lp_parent);
 void libWCUI_gf_ConscriptionPurchasePanelCreditsUpdate ();
-void libWCUI_gf_ConscriptionPurchaseShow (trigger lp_closeTrigger);
-void libWCUI_gf_ConscriptionPurchaseHide ();
 void libWCUI_gf_DisplayConscriptionPurchase (trigger lp_exitTrigger);
 void libWCUI_gf_DisplayTechConsole (trigger lp_exitTrigger);
 void libWCUI_gf_DisplayMercenaryConsole (trigger lp_exitTrigger);
@@ -227,14 +224,14 @@ void libWCUI_gf_WU_VictoryClosed (trigger t);
 color libWCUI_gf_ProgressColor (int lp_minValue, int lp_maxValue, int lp_progress, color lp_color1, color lp_color2, color lp_color3, int lp_steps);
 
 // Trigger Declarations
-trigger libWCUI_gt_ConscriptionCloseButtonClickedWrapper;
 trigger libWCUI_gt_ConscriptionResetButtonClickedWrapper;
+trigger libWCUI_gt_ConscriptionCloseButtonClickedWrapper;
 trigger libWCUI_gt_ConscriptionPurchaseInitialize;
 trigger libWCUI_gt_ConscriptionPurchaseItemClicked;
 trigger libWCUI_gt_ConscriptionPurchaseItemMouseEnter;
 trigger libWCUI_gt_ConscriptionPurchaseItemMouseExit;
-trigger libWCUI_gt_ConscriptionCloseButtonClicked;
 trigger libWCUI_gt_ConscriptionResetButtonClicked;
+trigger libWCUI_gt_ConscriptionCloseButtonClicked;
 trigger libWCUI_gt_ConscriptionPurchaseOnClose;
 trigger libWCUI_gt_WU_TechConsoleOnExit;
 trigger libWCUI_gt_WU_MercenaryOnExit;
