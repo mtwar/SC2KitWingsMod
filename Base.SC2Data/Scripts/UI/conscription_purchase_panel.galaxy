@@ -1,6 +1,35 @@
 include "LibWolC_h"
+include "LibConB_h"
 include "Scripts/UI/utils_h"
 include "Scripts/UI/ui_h"
+
+static const string CONSCRIPTION = "Conscription";
+static const string UNLOCK_WITH_CONSCRIPTION = "UnlockWithConscription";
+static const string STATE = "State";
+static const string PRICE = "Price";
+static const string UNLOCK_MISSION_COUNT = "UnlockMissionCount";
+static const string UNLOCK_MAP = "UnlockMap";
+static const string UNLOCK_TRIGGER_NAME = "UnlockMap";
+
+
+
+//struct ConscriptionStruct {
+//    string id;
+//    int state;
+//    int price;
+//    int unlockMissionCount;
+//    string unlockMap;
+//    string unlockTriggerName;
+//    bool unlockWithConscription;
+//};
+
+typedef libConB_gs_Conscription Conscription;
+typedef Conscription[256] ConscriptionArray;
+
+static ConscriptionArray oldState;
+static ConscriptionArray conscriptions;
+
+static int numEnabledConscriptions = 0;
 
 static int dialog = -1;
 static int root;
@@ -98,6 +127,11 @@ static void Create() {
             // DialogControlInvokeAsString(Groups[i].items[j].flash, PlayerGroupAll(), "Birth", null, null, null, null);
         }
     }
+}
+
+//libConB_gf_
+
+static void InitializeConscriptions() {
 }
 
 static void InitializeTechGroup() {

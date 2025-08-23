@@ -16,14 +16,6 @@ static int tech_cost;
 static int tech_movie;
 static int tech_image;
 
-static trigger CategoryClicked = TriggerCreate("Kit_UITechPurchase_CategoryClicked");
-static trigger UpgradeItemMouseEnter = TriggerCreate("Kit_UITechPurchase_UpgradeItemMouseEnter");
-static trigger UpgradeItemMouseExit = TriggerCreate("Kit_UITechPurchase_UpgradeItemMouseExit");
-static trigger UpgradeItemClicked = TriggerCreate("Kit_UITechPurchase_UpgradeItemClicked");
-
-static trigger ResetButtonClicked = TriggerCreate("Kit_UITechPurchase_ResetButtonClicked");
-static trigger CloseButtonClicked = TriggerCreate("Kit_UITechPurchase_CloseButtonClicked");
-
 static trigger UserTrigger;
 
 static string selected_tech_group;
@@ -31,6 +23,13 @@ static string selected_upgrade;
 static TechGroup[groups_count] groups;
 static TechCategory[categories_count] categories;
 
+static trigger CategoryClicked = TriggerCreate("Kit_UITechPurchase_CategoryClicked");
+static trigger UpgradeItemMouseEnter = TriggerCreate("Kit_UITechPurchase_UpgradeItemMouseEnter");
+static trigger UpgradeItemMouseExit = TriggerCreate("Kit_UITechPurchase_UpgradeItemMouseExit");
+static trigger UpgradeItemClicked = TriggerCreate("Kit_UITechPurchase_UpgradeItemClicked");
+
+static trigger ResetButtonClicked = TriggerCreate("Kit_UITechPurchase_ResetButtonClicked");
+static trigger CloseButtonClicked = TriggerCreate("Kit_UITechPurchase_CloseButtonClicked");
 
 static void Create() {
     int i = 0;

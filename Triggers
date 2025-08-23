@@ -169460,6 +169460,7 @@
         <SharedLib Id="WoLC"/>
         <SharedLib Id="WCMI"/>
         <Root>
+            <Item Type="Category" Library="WCUI" Id="09C341D9"/>
             <Item Type="CustomScript" Library="WCUI" Id="D922F6E5"/>
             <Item Type="Category" Library="WCUI" Id="0D81656A"/>
             <Item Type="Category" Library="WCUI" Id="591CF1E5"/>
@@ -169481,17 +169482,111 @@
             <Item Type="Category" Library="WCUI" Id="5A2154F6"/>
             <Item Type="Category" Library="WCUI" Id="D39D0D1B"/>
         </Root>
+        <Element Type="Category" Id="09C341D9">
+            <Item Type="CustomScript" Library="WCUI" Id="25A9354C"/>
+        </Element>
+        <Element Type="CustomScript" Id="25A9354C">
+            <Disabled/>
+            <ScriptCode>
+                include &quot;Scripts/UI/linked_list&quot;
+            </ScriptCode>
+        </Element>
         <Element Type="CustomScript" Id="D922F6E5">
             <ScriptCode>
                 include &quot;Scripts/UI/utils&quot;
             </ScriptCode>
         </Element>
         <Element Type="Category" Id="0D81656A">
+            <Item Type="Category" Library="WCUI" Id="DB6554AE"/>
             <Item Type="Variable" Library="WCUI" Id="CD1B803A"/>
             <Item Type="FunctionDef" Library="WCUI" Id="FDC27E47"/>
             <Item Type="CustomScript" Library="WCUI" Id="816620A5"/>
             <Item Type="FunctionDef" Library="WCUI" Id="524A745A"/>
             <Item Type="Trigger" Library="WCUI" Id="2D82CC38"/>
+        </Element>
+        <Element Type="Category" Id="DB6554AE">
+            <Item Type="Variable" Library="WCUI" Id="673A6608"/>
+            <Item Type="FunctionDef" Library="WCUI" Id="B4F40CA4"/>
+            <Item Type="FunctionDef" Library="WCUI" Id="1FB834B9"/>
+            <Item Type="Comment" Library="WCUI" Id="0A43F947"/>
+            <Item Type="Trigger" Library="WCUI" Id="DB05985B"/>
+            <Item Type="Trigger" Library="WCUI" Id="3F54A9CA"/>
+            <Item Type="Trigger" Library="WCUI" Id="67D39633"/>
+            <Item Type="Trigger" Library="WCUI" Id="99A6A515"/>
+        </Element>
+        <Element Type="Variable" Id="673A6608">
+            <VariableType>
+                <Type Value="trigger"/>
+            </VariableType>
+            <Value Type="Param" Library="WCUI" Id="ECCE9CA3"/>
+        </Element>
+        <Element Type="Param" Id="ECCE9CA3">
+            <Preset Type="PresetValue" Library="Ntve" Id="00000542"/>
+        </Element>
+        <Element Type="FunctionDef" Id="B4F40CA4">
+            <FlagAction/>
+            <Parameter Type="ParamDef" Library="WCUI" Id="F4B3D9DF"/>
+            <FunctionCall Type="FunctionCall" Library="WCUI" Id="2E5F70B7"/>
+        </Element>
+        <Element Type="ParamDef" Id="F4B3D9DF">
+            <ParameterType>
+                <Type Value="trigger"/>
+            </ParameterType>
+            <Default Type="Param" Library="WCUI" Id="77C28535"/>
+        </Element>
+        <Element Type="Param" Id="77C28535">
+            <Preset Type="PresetValue" Library="Ntve" Id="00000542"/>
+        </Element>
+        <Element Type="FunctionCall" Id="2E5F70B7">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
+            <Parameter Type="Param" Library="WCUI" Id="F16F0DB8"/>
+            <Parameter Type="Param" Library="WCUI" Id="D94FC0F3"/>
+        </Element>
+        <Element Type="Param" Id="F16F0DB8">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
+            <Variable Type="Variable" Library="WCUI" Id="673A6608"/>
+        </Element>
+        <Element Type="Param" Id="D94FC0F3">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
+            <Parameter Type="ParamDef" Library="WCUI" Id="F4B3D9DF"/>
+        </Element>
+        <Element Type="FunctionDef" Id="1FB834B9">
+            <FlagAction/>
+            <FunctionCall Type="FunctionCall" Library="WCUI" Id="D66D6A28"/>
+        </Element>
+        <Element Type="FunctionCall" Id="D66D6A28">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000116"/>
+            <Parameter Type="Param" Library="WCUI" Id="6318D800"/>
+            <Parameter Type="Param" Library="WCUI" Id="BBF146D2"/>
+            <Parameter Type="Param" Library="WCUI" Id="8F8450C1"/>
+        </Element>
+        <Element Type="Param" Id="6318D800">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000183"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="00000065"/>
+        </Element>
+        <Element Type="Param" Id="BBF146D2">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000184"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="00000068"/>
+        </Element>
+        <Element Type="Param" Id="8F8450C1">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000182"/>
+            <Variable Type="Variable" Library="WCUI" Id="673A6608"/>
+        </Element>
+        <Element Type="Comment" Id="0A43F947">
+            <Comment>
+                set all this up in metadata so controllers and templates can be swapped
+                let the base module handle the state and purchase logic
+                figure out what, if anything, is specific to WoL in this section assuming
+                the hooks and templates are configurable in the Conscription Module User Data
+            </Comment>
+        </Element>
+        <Element Type="Trigger" Id="DB05985B">
+        </Element>
+        <Element Type="Trigger" Id="3F54A9CA">
+        </Element>
+        <Element Type="Trigger" Id="67D39633">
+        </Element>
+        <Element Type="Trigger" Id="99A6A515">
         </Element>
         <Element Type="Variable" Id="CD1B803A">
             <Internal/>
@@ -169550,11 +169645,11 @@
         <Element Type="Comment" Id="84CEA16A">
         </Element>
         <Element Type="FunctionCall" Id="2A1BF4F9">
-            <FunctionDef Type="FunctionDef" Library="WCUI" Id="524A745A"/>
-            <Parameter Type="Param" Library="WCUI" Id="56FABC66"/>
+            <FunctionDef Type="FunctionDef" Library="WCUI" Id="B4F40CA4"/>
+            <Parameter Type="Param" Library="WCUI" Id="F654A03D"/>
         </Element>
-        <Element Type="Param" Id="56FABC66">
-            <ParameterDef Type="ParamDef" Library="WCUI" Id="12BCFBB2"/>
+        <Element Type="Param" Id="F654A03D">
+            <ParameterDef Type="ParamDef" Library="WCUI" Id="F4B3D9DF"/>
             <ValueType Type="trigger"/>
             <ValueElement Type="Trigger" Library="WCUI" Id="2D82CC38"/>
         </Element>
