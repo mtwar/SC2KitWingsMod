@@ -169510,6 +169510,11 @@
             <Item Type="Variable" Library="WCUI" Id="F3B207F4"/>
             <Item Type="Variable" Library="WCUI" Id="00A3D98F"/>
             <Item Type="Variable" Library="WCUI" Id="98CEF1C2"/>
+            <Item Type="Variable" Library="WCUI" Id="24047F77"/>
+            <Item Type="Variable" Library="WCUI" Id="F520321A"/>
+            <Item Type="Variable" Library="WCUI" Id="AA2044CD"/>
+            <Item Type="Variable" Library="WCUI" Id="C8F1318D"/>
+            <Item Type="Variable" Library="WCUI" Id="54647092"/>
             <Item Type="Variable" Library="WCUI" Id="A9265F7C"/>
             <Item Type="Variable" Library="WCUI" Id="85B29B35"/>
         </Element>
@@ -169557,6 +169562,51 @@
             <Value Type="Param" Library="WCUI" Id="4670F814"/>
         </Element>
         <Element Type="Param" Id="4670F814">
+            <Preset Type="PresetValue" Library="Ntve" Id="FAC49C47"/>
+        </Element>
+        <Element Type="Variable" Id="24047F77">
+            <VariableType>
+                <Type Value="control"/>
+            </VariableType>
+            <Value Type="Param" Library="WCUI" Id="4C430CE3"/>
+        </Element>
+        <Element Type="Param" Id="4C430CE3">
+            <Preset Type="PresetValue" Library="Ntve" Id="FAC49C47"/>
+        </Element>
+        <Element Type="Variable" Id="F520321A">
+            <VariableType>
+                <Type Value="control"/>
+            </VariableType>
+            <Value Type="Param" Library="WCUI" Id="59CB8131"/>
+        </Element>
+        <Element Type="Param" Id="59CB8131">
+            <Preset Type="PresetValue" Library="Ntve" Id="FAC49C47"/>
+        </Element>
+        <Element Type="Variable" Id="AA2044CD">
+            <VariableType>
+                <Type Value="control"/>
+            </VariableType>
+            <Value Type="Param" Library="WCUI" Id="4F272980"/>
+        </Element>
+        <Element Type="Param" Id="4F272980">
+            <Preset Type="PresetValue" Library="Ntve" Id="FAC49C47"/>
+        </Element>
+        <Element Type="Variable" Id="C8F1318D">
+            <VariableType>
+                <Type Value="control"/>
+            </VariableType>
+            <Value Type="Param" Library="WCUI" Id="E3BE9E22"/>
+        </Element>
+        <Element Type="Param" Id="E3BE9E22">
+            <Preset Type="PresetValue" Library="Ntve" Id="FAC49C47"/>
+        </Element>
+        <Element Type="Variable" Id="54647092">
+            <VariableType>
+                <Type Value="control"/>
+            </VariableType>
+            <Value Type="Param" Library="WCUI" Id="DED655D8"/>
+        </Element>
+        <Element Type="Param" Id="DED655D8">
             <Preset Type="PresetValue" Library="Ntve" Id="FAC49C47"/>
         </Element>
         <Element Type="Variable" Id="A9265F7C">
@@ -169844,14 +169894,11 @@
         <Element Type="Trigger" Id="7E71F624">
             <Condition Type="FunctionCall" Library="WCUI" Id="6F20405E"/>
             <Action Type="FunctionCall" Library="WCUI" Id="8EC0C518"/>
-            <Action Type="FunctionCall" Library="WCUI" Id="412E0FC9"/>
-            <Action Type="FunctionCall" Library="WCUI" Id="8EA0B6A3"/>
-            <Action Type="FunctionCall" Library="WCUI" Id="1E4E5180"/>
-            <Action Type="FunctionCall" Library="WCUI" Id="2C481846"/>
-            <Action Type="FunctionCall" Library="WCUI" Id="A2FB3EDB"/>
-            <Action Type="FunctionCall" Library="WCUI" Id="D581F347"/>
-            <Action Type="FunctionCall" Library="WCUI" Id="D39B823C"/>
-            <Action Type="FunctionCall" Library="WCUI" Id="0D086100"/>
+            <Action Type="FunctionCall" Library="WCUI" Id="D123E4F5"/>
+            <Action Type="FunctionCall" Library="WCUI" Id="DB59867E"/>
+            <Action Type="FunctionCall" Library="WCUI" Id="2914824A"/>
+            <Action Type="FunctionCall" Library="WCUI" Id="67BD6504"/>
+            <Action Type="FunctionCall" Library="WCUI" Id="74C1C2F5"/>
         </Element>
         <Element Type="FunctionCall" Id="6F20405E">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
@@ -169892,150 +169939,40 @@
             <ParameterDef Type="ParamDef" Library="Ntve" Id="78A54B52"/>
             <ValueType Type="text"/>
         </Element>
-        <Element Type="FunctionCall" Id="412E0FC9">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
-            <Parameter Type="Param" Library="WCUI" Id="1E4D3F17"/>
-            <Parameter Type="Param" Library="WCUI" Id="3E4FEC1A"/>
-        </Element>
-        <Element Type="Param" Id="1E4D3F17">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
-            <Variable Type="Variable" Library="WCUI" Id="2A8A57A7"/>
-        </Element>
-        <Element Type="Param" Id="3E4FEC1A">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
-            <FunctionCall Type="FunctionCall" Library="WCUI" Id="F906A27E"/>
-        </Element>
-        <Element Type="FunctionCall" Id="F906A27E">
+        <Element Type="FunctionCall" Id="D123E4F5">
             <FunctionDef Type="FunctionDef" Library="WCUI" Id="8B977986"/>
         </Element>
-        <Element Type="FunctionCall" Id="8EA0B6A3">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
-            <Parameter Type="Param" Library="WCUI" Id="B55BDB5D"/>
-            <Parameter Type="Param" Library="WCUI" Id="8A879F78"/>
-        </Element>
-        <Element Type="Param" Id="B55BDB5D">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
-            <Variable Type="Variable" Library="WCUI" Id="F3B207F4"/>
-        </Element>
-        <Element Type="Param" Id="8A879F78">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
-            <FunctionCall Type="FunctionCall" Library="WCUI" Id="09498C67"/>
-        </Element>
-        <Element Type="FunctionCall" Id="09498C67">
+        <Element Type="FunctionCall" Id="DB59867E">
             <FunctionDef Type="FunctionDef" Library="WCUI" Id="B536E518"/>
-            <Parameter Type="Param" Library="WCUI" Id="1504A64B"/>
+            <Parameter Type="Param" Library="WCUI" Id="A900D054"/>
         </Element>
-        <Element Type="Param" Id="1504A64B">
+        <Element Type="Param" Id="A900D054">
             <ParameterDef Type="ParamDef" Library="WCUI" Id="37ECA801"/>
             <Variable Type="Variable" Library="WCUI" Id="2A8A57A7"/>
         </Element>
-        <Element Type="FunctionCall" Id="1E4E5180">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
-            <Parameter Type="Param" Library="WCUI" Id="8661DADC"/>
-            <Parameter Type="Param" Library="WCUI" Id="61149942"/>
-        </Element>
-        <Element Type="Param" Id="8661DADC">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
-            <Variable Type="Variable" Library="WCUI" Id="00A3D98F"/>
-        </Element>
-        <Element Type="Param" Id="61149942">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
-            <FunctionCall Type="FunctionCall" Library="WCUI" Id="D75FE7D0"/>
-        </Element>
-        <Element Type="FunctionCall" Id="D75FE7D0">
+        <Element Type="FunctionCall" Id="2914824A">
             <FunctionDef Type="FunctionDef" Library="WCUI" Id="971C4A9F"/>
-            <Parameter Type="Param" Library="WCUI" Id="C59A2E71"/>
+            <Parameter Type="Param" Library="WCUI" Id="5DB2B5FB"/>
         </Element>
-        <Element Type="Param" Id="C59A2E71">
+        <Element Type="Param" Id="5DB2B5FB">
             <ParameterDef Type="ParamDef" Library="WCUI" Id="3266076C"/>
             <Variable Type="Variable" Library="WCUI" Id="F3B207F4"/>
         </Element>
-        <Element Type="FunctionCall" Id="2C481846">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
-            <Parameter Type="Param" Library="WCUI" Id="31CB717C"/>
-            <Parameter Type="Param" Library="WCUI" Id="8710A4E0"/>
-        </Element>
-        <Element Type="Param" Id="31CB717C">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
-            <Variable Type="Variable" Library="WCUI" Id="98CEF1C2"/>
-        </Element>
-        <Element Type="Param" Id="8710A4E0">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
-            <FunctionCall Type="FunctionCall" Library="WCUI" Id="0B2E1DD8"/>
-        </Element>
-        <Element Type="FunctionCall" Id="0B2E1DD8">
-            <FunctionDef Type="FunctionDef" Library="WCUI" Id="04988FB7"/>
-            <Parameter Type="Param" Library="WCUI" Id="30935558"/>
-        </Element>
-        <Element Type="Param" Id="30935558">
-            <ParameterDef Type="ParamDef" Library="WCUI" Id="FF9F6871"/>
-            <Variable Type="Variable" Library="WCUI" Id="00A3D98F"/>
-        </Element>
-        <Element Type="FunctionCall" Id="A2FB3EDB">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="E37ACA0E"/>
-            <Parameter Type="Param" Library="WCUI" Id="900B6054"/>
-            <Parameter Type="Param" Library="WCUI" Id="41EB292C"/>
-            <Parameter Type="Param" Library="WCUI" Id="2E8C0F2F"/>
-        </Element>
-        <Element Type="Param" Id="900B6054">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="21F36F40"/>
-            <Variable Type="Variable" Library="WCUI" Id="98CEF1C2"/>
-        </Element>
-        <Element Type="Param" Id="41EB292C">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="0EAACCBD"/>
-            <FunctionCall Type="FunctionCall" Library="WCUI" Id="C3DDA21E"/>
-        </Element>
-        <Element Type="FunctionCall" Id="C3DDA21E">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000192"/>
-        </Element>
-        <Element Type="Param" Id="2E8C0F2F">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="3A302059"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="00000120"/>
-        </Element>
-        <Element Type="FunctionCall" Id="D581F347">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
-            <Parameter Type="Param" Library="WCUI" Id="9D92F800"/>
-            <Parameter Type="Param" Library="WCUI" Id="0DEC0773"/>
-        </Element>
-        <Element Type="Param" Id="9D92F800">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
-            <Variable Type="Variable" Library="WCUI" Id="85B29B35"/>
-        </Element>
-        <Element Type="Param" Id="0DEC0773">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
-            <FunctionCall Type="FunctionCall" Library="WCUI" Id="A0A37056"/>
-        </Element>
-        <Element Type="FunctionCall" Id="A0A37056">
-            <FunctionDef Type="FunctionDef" Library="WCUI" Id="90B354A6"/>
-            <Parameter Type="Param" Library="WCUI" Id="CC5E662A"/>
-        </Element>
-        <Element Type="Param" Id="CC5E662A">
-            <ParameterDef Type="ParamDef" Library="WCUI" Id="FF1C1C4F"/>
-            <Variable Type="Variable" Library="WCUI" Id="F3B207F4"/>
-        </Element>
-        <Element Type="FunctionCall" Id="D39B823C">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
-            <Parameter Type="Param" Library="WCUI" Id="66855F45"/>
-            <Parameter Type="Param" Library="WCUI" Id="80CAC2A8"/>
-        </Element>
-        <Element Type="Param" Id="66855F45">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
-            <Variable Type="Variable" Library="WCUI" Id="A9265F7C"/>
-        </Element>
-        <Element Type="Param" Id="80CAC2A8">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
-            <FunctionCall Type="FunctionCall" Library="WCUI" Id="EC013290"/>
-        </Element>
-        <Element Type="FunctionCall" Id="EC013290">
+        <Element Type="FunctionCall" Id="67BD6504">
             <FunctionDef Type="FunctionDef" Library="WCUI" Id="D62B4DC9"/>
-            <Parameter Type="Param" Library="WCUI" Id="C9D216C6"/>
+            <Parameter Type="Param" Library="WCUI" Id="FCA67A73"/>
         </Element>
-        <Element Type="Param" Id="C9D216C6">
+        <Element Type="Param" Id="FCA67A73">
             <ParameterDef Type="ParamDef" Library="WCUI" Id="3F3A07F7"/>
             <Variable Type="Variable" Library="WCUI" Id="F3B207F4"/>
         </Element>
-        <Element Type="FunctionCall" Id="0D086100">
-            <FunctionDef Type="FunctionDef" Library="WCUI" Id="60B7C380"/>
+        <Element Type="FunctionCall" Id="74C1C2F5">
+            <FunctionDef Type="FunctionDef" Library="WCUI" Id="90B354A6"/>
+            <Parameter Type="Param" Library="WCUI" Id="D9F5FD04"/>
+        </Element>
+        <Element Type="Param" Id="D9F5FD04">
+            <ParameterDef Type="ParamDef" Library="WCUI" Id="FF1C1C4F"/>
+            <Variable Type="Variable" Library="WCUI" Id="F3B207F4"/>
         </Element>
         <Element Type="Trigger" Id="DB05985B">
         </Element>
@@ -170070,17 +170007,14 @@
             <Preset Type="PresetValue" Library="Ntve" Id="00000121"/>
         </Element>
         <Element Type="FunctionDef" Id="8B977986">
-            <FlagCall/>
-            <ReturnType>
-                <Type Value="dialog"/>
-            </ReturnType>
+            <FlagAction/>
             <FunctionCall Type="Comment" Library="WCUI" Id="E586D368"/>
             <FunctionCall Type="FunctionCall" Library="WCUI" Id="6E57934C"/>
+            <FunctionCall Type="FunctionCall" Library="WCUI" Id="2451678A"/>
             <FunctionCall Type="FunctionCall" Library="WCUI" Id="480BB4A0"/>
             <FunctionCall Type="FunctionCall" Library="WCUI" Id="133DE272"/>
             <FunctionCall Type="FunctionCall" Library="WCUI" Id="BE30C406"/>
             <FunctionCall Type="FunctionCall" Library="WCUI" Id="B2D63AC5"/>
-            <FunctionCall Type="FunctionCall" Library="WCUI" Id="FD731419"/>
         </Element>
         <Element Type="Comment" Id="E586D368">
             <Comment>
@@ -170123,6 +170057,22 @@
         <Element Type="Param" Id="F7C2EAFD">
             <ParameterDef Type="ParamDef" Library="Ntve" Id="AB235258"/>
             <Preset Type="PresetValue" Library="Ntve" Id="440EEF91"/>
+        </Element>
+        <Element Type="FunctionCall" Id="2451678A">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
+            <Parameter Type="Param" Library="WCUI" Id="AC88836E"/>
+            <Parameter Type="Param" Library="WCUI" Id="A4A368E6"/>
+        </Element>
+        <Element Type="Param" Id="AC88836E">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
+            <Variable Type="Variable" Library="WCUI" Id="2A8A57A7"/>
+        </Element>
+        <Element Type="Param" Id="A4A368E6">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
+            <FunctionCall Type="FunctionCall" Library="WCUI" Id="D50CA7EB"/>
+        </Element>
+        <Element Type="FunctionCall" Id="D50CA7EB">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="20E3B9BE"/>
         </Element>
         <Element Type="FunctionCall" Id="480BB4A0">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="9C391799"/>
@@ -170202,26 +170152,12 @@
             <ParameterDef Type="ParamDef" Library="Ntve" Id="78A54B52"/>
             <ValueType Type="text"/>
         </Element>
-        <Element Type="FunctionCall" Id="FD731419">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000097"/>
-            <Parameter Type="Param" Library="WCUI" Id="04F2D8F9"/>
-        </Element>
-        <Element Type="Param" Id="04F2D8F9">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000488"/>
-            <FunctionCall Type="FunctionCall" Library="WCUI" Id="841106FC"/>
-        </Element>
-        <Element Type="FunctionCall" Id="841106FC">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="20E3B9BE"/>
-        </Element>
         <Element Type="FunctionDef" Id="B536E518">
-            <FlagCall/>
-            <ReturnType>
-                <Type Value="control"/>
-            </ReturnType>
+            <FlagAction/>
             <Parameter Type="ParamDef" Library="WCUI" Id="37ECA801"/>
             <FunctionCall Type="FunctionCall" Library="WCUI" Id="7F2B02B6"/>
+            <FunctionCall Type="FunctionCall" Library="WCUI" Id="B4F3C7C3"/>
             <FunctionCall Type="FunctionCall" Library="WCUI" Id="C8B936D4"/>
-            <FunctionCall Type="FunctionCall" Library="WCUI" Id="DD972AE9"/>
         </Element>
         <Element Type="ParamDef" Id="37ECA801">
             <ParameterType>
@@ -170251,6 +170187,22 @@
             <ParameterDef Type="ParamDef" Library="Ntve" Id="E9FC58F5"/>
             <Parameter Type="ParamDef" Library="WCUI" Id="37ECA801"/>
         </Element>
+        <Element Type="FunctionCall" Id="B4F3C7C3">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
+            <Parameter Type="Param" Library="WCUI" Id="F63D798D"/>
+            <Parameter Type="Param" Library="WCUI" Id="6E5F018B"/>
+        </Element>
+        <Element Type="Param" Id="F63D798D">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
+            <Variable Type="Variable" Library="WCUI" Id="F3B207F4"/>
+        </Element>
+        <Element Type="Param" Id="6E5F018B">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
+            <FunctionCall Type="FunctionCall" Library="WCUI" Id="35A3D611"/>
+        </Element>
+        <Element Type="FunctionCall" Id="35A3D611">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="4AB42F83"/>
+        </Element>
         <Element Type="FunctionCall" Id="C8B936D4">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="0366EE04"/>
             <Parameter Type="Param" Library="WCUI" Id="386CE264"/>
@@ -170272,26 +170224,25 @@
             <ParameterDef Type="ParamDef" Library="Ntve" Id="78A54B52"/>
             <ValueType Type="text"/>
         </Element>
-        <Element Type="FunctionCall" Id="DD972AE9">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000097"/>
-            <Parameter Type="Param" Library="WCUI" Id="C7D1E541"/>
-        </Element>
-        <Element Type="Param" Id="C7D1E541">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000488"/>
-            <FunctionCall Type="FunctionCall" Library="WCUI" Id="517446CF"/>
-        </Element>
-        <Element Type="FunctionCall" Id="517446CF">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="4AB42F83"/>
-        </Element>
         <Element Type="FunctionDef" Id="971C4A9F">
-            <FlagCall/>
-            <ReturnType>
-                <Type Value="control"/>
-            </ReturnType>
+            <FlagAction/>
             <Parameter Type="ParamDef" Library="WCUI" Id="3266076C"/>
             <FunctionCall Type="FunctionCall" Library="WCUI" Id="1B625845"/>
+            <FunctionCall Type="FunctionCall" Library="WCUI" Id="BE7C5CB8"/>
+            <FunctionCall Type="FunctionCall" Library="WCUI" Id="66EFA5E3"/>
+            <FunctionCall Type="FunctionCall" Library="WCUI" Id="0D086100"/>
+            <FunctionCall Type="FunctionCall" Library="WCUI" Id="A2FB3EDB"/>
+            <FunctionCall Type="FunctionCall" Library="WCUI" Id="D060B468"/>
+            <FunctionCall Type="FunctionCall" Library="WCUI" Id="09AB3F72"/>
+            <FunctionCall Type="FunctionCall" Library="WCUI" Id="BC643E57"/>
+            <FunctionCall Type="FunctionCall" Library="WCUI" Id="E6710F72"/>
+            <FunctionCall Type="FunctionCall" Library="WCUI" Id="DA78EFC2"/>
+            <FunctionCall Type="FunctionCall" Library="WCUI" Id="6AB4045B"/>
+            <FunctionCall Type="FunctionCall" Library="WCUI" Id="8DA06D23"/>
+            <FunctionCall Type="FunctionCall" Library="WCUI" Id="455777A3"/>
+            <FunctionCall Type="FunctionCall" Library="WCUI" Id="1259516E"/>
+            <FunctionCall Type="FunctionCall" Library="WCUI" Id="3F9F2C30"/>
             <FunctionCall Type="FunctionCall" Library="WCUI" Id="CF271035"/>
-            <FunctionCall Type="FunctionCall" Library="WCUI" Id="5C95C16A"/>
         </Element>
         <Element Type="ParamDef" Id="3266076C">
             <ParameterType>
@@ -170321,6 +170272,229 @@
             <Value>Kit_Conscription/ConscriptionPanelTemplate/SelectionInfoFrame</Value>
             <ValueType Type="layoutframe"/>
         </Element>
+        <Element Type="FunctionCall" Id="BE7C5CB8">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
+            <Parameter Type="Param" Library="WCUI" Id="89B0FDB7"/>
+            <Parameter Type="Param" Library="WCUI" Id="6C756669"/>
+        </Element>
+        <Element Type="Param" Id="89B0FDB7">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
+            <Variable Type="Variable" Library="WCUI" Id="00A3D98F"/>
+        </Element>
+        <Element Type="Param" Id="6C756669">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
+            <FunctionCall Type="FunctionCall" Library="WCUI" Id="F3A09BD9"/>
+        </Element>
+        <Element Type="FunctionCall" Id="F3A09BD9">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="4AB42F83"/>
+        </Element>
+        <Element Type="FunctionCall" Id="66EFA5E3">
+            <FunctionDef Type="FunctionDef" Library="WCUI" Id="04988FB7"/>
+            <Parameter Type="Param" Library="WCUI" Id="24F9C48D"/>
+        </Element>
+        <Element Type="Param" Id="24F9C48D">
+            <ParameterDef Type="ParamDef" Library="WCUI" Id="FF9F6871"/>
+            <Variable Type="Variable" Library="WCUI" Id="00A3D98F"/>
+        </Element>
+        <Element Type="FunctionCall" Id="0D086100">
+            <FunctionDef Type="FunctionDef" Library="WCUI" Id="60B7C380"/>
+        </Element>
+        <Element Type="FunctionCall" Id="A2FB3EDB">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="E37ACA0E"/>
+            <Parameter Type="Param" Library="WCUI" Id="900B6054"/>
+            <Parameter Type="Param" Library="WCUI" Id="41EB292C"/>
+            <Parameter Type="Param" Library="WCUI" Id="2E8C0F2F"/>
+        </Element>
+        <Element Type="Param" Id="900B6054">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="21F36F40"/>
+            <Variable Type="Variable" Library="WCUI" Id="98CEF1C2"/>
+        </Element>
+        <Element Type="Param" Id="41EB292C">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="0EAACCBD"/>
+            <FunctionCall Type="FunctionCall" Library="WCUI" Id="C3DDA21E"/>
+        </Element>
+        <Element Type="FunctionCall" Id="C3DDA21E">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000192"/>
+        </Element>
+        <Element Type="Param" Id="2E8C0F2F">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="3A302059"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="00000120"/>
+        </Element>
+        <Element Type="FunctionCall" Id="D060B468">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="7319128A"/>
+            <Parameter Type="Param" Library="WCUI" Id="CDF908FD"/>
+            <Parameter Type="Param" Library="WCUI" Id="7A0683A7"/>
+            <Parameter Type="Param" Library="WCUI" Id="79233345"/>
+        </Element>
+        <Element Type="Param" Id="CDF908FD">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="4E0FFAAF"/>
+            <Variable Type="Variable" Library="WCUI" Id="00A3D98F"/>
+        </Element>
+        <Element Type="Param" Id="7A0683A7">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="CB1229F2"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="C4F1C285"/>
+        </Element>
+        <Element Type="Param" Id="79233345">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="3CC77352"/>
+            <Value>Kit_Conscription/ConscriptionPanelTemplate/SelectionInfoFrame/NameLabel</Value>
+            <ValueType Type="layoutframe"/>
+        </Element>
+        <Element Type="FunctionCall" Id="09AB3F72">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
+            <Parameter Type="Param" Library="WCUI" Id="16DF887E"/>
+            <Parameter Type="Param" Library="WCUI" Id="B69C322A"/>
+        </Element>
+        <Element Type="Param" Id="16DF887E">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
+            <Variable Type="Variable" Library="WCUI" Id="24047F77"/>
+        </Element>
+        <Element Type="Param" Id="B69C322A">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
+            <FunctionCall Type="FunctionCall" Library="WCUI" Id="46007AD8"/>
+        </Element>
+        <Element Type="FunctionCall" Id="46007AD8">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="4AB42F83"/>
+        </Element>
+        <Element Type="FunctionCall" Id="BC643E57">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="7319128A"/>
+            <Parameter Type="Param" Library="WCUI" Id="9807649B"/>
+            <Parameter Type="Param" Library="WCUI" Id="D197B5BD"/>
+            <Parameter Type="Param" Library="WCUI" Id="87E116F1"/>
+        </Element>
+        <Element Type="Param" Id="9807649B">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="4E0FFAAF"/>
+            <Variable Type="Variable" Library="WCUI" Id="00A3D98F"/>
+        </Element>
+        <Element Type="Param" Id="D197B5BD">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="CB1229F2"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="C4F1C285"/>
+        </Element>
+        <Element Type="Param" Id="87E116F1">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="3CC77352"/>
+            <Value>Kit_Conscription/ConscriptionPanelTemplate/SelectionInfoFrame/DescriptionLabel</Value>
+            <ValueType Type="layoutframe"/>
+        </Element>
+        <Element Type="FunctionCall" Id="E6710F72">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
+            <Parameter Type="Param" Library="WCUI" Id="8EB6B015"/>
+            <Parameter Type="Param" Library="WCUI" Id="C6085586"/>
+        </Element>
+        <Element Type="Param" Id="8EB6B015">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
+            <Variable Type="Variable" Library="WCUI" Id="F520321A"/>
+        </Element>
+        <Element Type="Param" Id="C6085586">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
+            <FunctionCall Type="FunctionCall" Library="WCUI" Id="B52C0871"/>
+        </Element>
+        <Element Type="FunctionCall" Id="B52C0871">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="4AB42F83"/>
+        </Element>
+        <Element Type="FunctionCall" Id="DA78EFC2">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="7319128A"/>
+            <Parameter Type="Param" Library="WCUI" Id="450FB084"/>
+            <Parameter Type="Param" Library="WCUI" Id="49F8FB90"/>
+            <Parameter Type="Param" Library="WCUI" Id="A02AC862"/>
+        </Element>
+        <Element Type="Param" Id="450FB084">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="4E0FFAAF"/>
+            <Variable Type="Variable" Library="WCUI" Id="00A3D98F"/>
+        </Element>
+        <Element Type="Param" Id="49F8FB90">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="CB1229F2"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="C4F1C285"/>
+        </Element>
+        <Element Type="Param" Id="A02AC862">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="3CC77352"/>
+            <Value>Kit_Conscription/ConscriptionPanelTemplate/SelectionInfoFrame/CostLabel</Value>
+            <ValueType Type="layoutframe"/>
+        </Element>
+        <Element Type="FunctionCall" Id="6AB4045B">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
+            <Parameter Type="Param" Library="WCUI" Id="CE1290AD"/>
+            <Parameter Type="Param" Library="WCUI" Id="2CE811B8"/>
+        </Element>
+        <Element Type="Param" Id="CE1290AD">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
+            <Variable Type="Variable" Library="WCUI" Id="AA2044CD"/>
+        </Element>
+        <Element Type="Param" Id="2CE811B8">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
+            <FunctionCall Type="FunctionCall" Library="WCUI" Id="9D0E0971"/>
+        </Element>
+        <Element Type="FunctionCall" Id="9D0E0971">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="4AB42F83"/>
+        </Element>
+        <Element Type="FunctionCall" Id="8DA06D23">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="7319128A"/>
+            <Parameter Type="Param" Library="WCUI" Id="C6BC3042"/>
+            <Parameter Type="Param" Library="WCUI" Id="D4EA10AC"/>
+            <Parameter Type="Param" Library="WCUI" Id="B0D02278"/>
+        </Element>
+        <Element Type="Param" Id="C6BC3042">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="4E0FFAAF"/>
+            <Variable Type="Variable" Library="WCUI" Id="00A3D98F"/>
+        </Element>
+        <Element Type="Param" Id="D4EA10AC">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="CB1229F2"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="D21CA0E9"/>
+        </Element>
+        <Element Type="Param" Id="B0D02278">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="3CC77352"/>
+            <Value>Kit_Conscription/ConscriptionPanelTemplate/SelectionInfoFrame/MovieFrame</Value>
+            <ValueType Type="layoutframe"/>
+        </Element>
+        <Element Type="FunctionCall" Id="455777A3">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
+            <Parameter Type="Param" Library="WCUI" Id="A8CC7D6D"/>
+            <Parameter Type="Param" Library="WCUI" Id="52D33163"/>
+        </Element>
+        <Element Type="Param" Id="A8CC7D6D">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
+            <Variable Type="Variable" Library="WCUI" Id="C8F1318D"/>
+        </Element>
+        <Element Type="Param" Id="52D33163">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
+            <FunctionCall Type="FunctionCall" Library="WCUI" Id="83CC473F"/>
+        </Element>
+        <Element Type="FunctionCall" Id="83CC473F">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="4AB42F83"/>
+        </Element>
+        <Element Type="FunctionCall" Id="1259516E">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="7319128A"/>
+            <Parameter Type="Param" Library="WCUI" Id="BC486136"/>
+            <Parameter Type="Param" Library="WCUI" Id="22C3A80F"/>
+            <Parameter Type="Param" Library="WCUI" Id="B44A6FD5"/>
+        </Element>
+        <Element Type="Param" Id="BC486136">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="4E0FFAAF"/>
+            <Variable Type="Variable" Library="WCUI" Id="00A3D98F"/>
+        </Element>
+        <Element Type="Param" Id="22C3A80F">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="CB1229F2"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="79B4987E"/>
+        </Element>
+        <Element Type="Param" Id="B44A6FD5">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="3CC77352"/>
+            <Value>Kit_Conscription/ConscriptionPanelTemplate/SelectionInfoFrame/MovieFrameAlternative</Value>
+            <ValueType Type="layoutframe"/>
+        </Element>
+        <Element Type="FunctionCall" Id="3F9F2C30">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
+            <Parameter Type="Param" Library="WCUI" Id="F86556C7"/>
+            <Parameter Type="Param" Library="WCUI" Id="9E4CC417"/>
+        </Element>
+        <Element Type="Param" Id="F86556C7">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
+            <Variable Type="Variable" Library="WCUI" Id="54647092"/>
+        </Element>
+        <Element Type="Param" Id="9E4CC417">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
+            <FunctionCall Type="FunctionCall" Library="WCUI" Id="79BCC407"/>
+        </Element>
+        <Element Type="FunctionCall" Id="79BCC407">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="4AB42F83"/>
+        </Element>
         <Element Type="FunctionCall" Id="CF271035">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="0366EE04"/>
             <Parameter Type="Param" Library="WCUI" Id="FBD44E72"/>
@@ -170342,26 +170516,12 @@
             <ParameterDef Type="ParamDef" Library="Ntve" Id="78A54B52"/>
             <ValueType Type="text"/>
         </Element>
-        <Element Type="FunctionCall" Id="5C95C16A">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000097"/>
-            <Parameter Type="Param" Library="WCUI" Id="41D86B71"/>
-        </Element>
-        <Element Type="Param" Id="41D86B71">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000488"/>
-            <FunctionCall Type="FunctionCall" Library="WCUI" Id="45E765C8"/>
-        </Element>
-        <Element Type="FunctionCall" Id="45E765C8">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="4AB42F83"/>
-        </Element>
         <Element Type="FunctionDef" Id="04988FB7">
-            <FlagCall/>
-            <ReturnType>
-                <Type Value="control"/>
-            </ReturnType>
+            <FlagAction/>
             <Parameter Type="ParamDef" Library="WCUI" Id="FF9F6871"/>
             <FunctionCall Type="FunctionCall" Library="WCUI" Id="1D67233C"/>
+            <FunctionCall Type="FunctionCall" Library="WCUI" Id="39DF2956"/>
             <FunctionCall Type="FunctionCall" Library="WCUI" Id="505222FF"/>
-            <FunctionCall Type="FunctionCall" Library="WCUI" Id="5D45E384"/>
         </Element>
         <Element Type="ParamDef" Id="FF9F6871">
             <ParameterType>
@@ -170391,6 +170551,22 @@
             <Value>Kit_Conscription/ConscriptionPanelTemplate/SelectionInfoFrame/Credits</Value>
             <ValueType Type="layoutframe"/>
         </Element>
+        <Element Type="FunctionCall" Id="39DF2956">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
+            <Parameter Type="Param" Library="WCUI" Id="648FC2C4"/>
+            <Parameter Type="Param" Library="WCUI" Id="2B1B72DB"/>
+        </Element>
+        <Element Type="Param" Id="648FC2C4">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
+            <Variable Type="Variable" Library="WCUI" Id="98CEF1C2"/>
+        </Element>
+        <Element Type="Param" Id="2B1B72DB">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
+            <FunctionCall Type="FunctionCall" Library="WCUI" Id="4ECEAF2F"/>
+        </Element>
+        <Element Type="FunctionCall" Id="4ECEAF2F">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="4AB42F83"/>
+        </Element>
         <Element Type="FunctionCall" Id="505222FF">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="0366EE04"/>
             <Parameter Type="Param" Library="WCUI" Id="B63EF602"/>
@@ -170412,27 +170588,12 @@
             <ParameterDef Type="ParamDef" Library="Ntve" Id="78A54B52"/>
             <ValueType Type="text"/>
         </Element>
-        <Element Type="FunctionCall" Id="5D45E384">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000097"/>
-            <Parameter Type="Param" Library="WCUI" Id="2E338F97"/>
-        </Element>
-        <Element Type="Param" Id="2E338F97">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000488"/>
-            <FunctionCall Type="FunctionCall" Library="WCUI" Id="DC9570EA"/>
-        </Element>
-        <Element Type="FunctionCall" Id="DC9570EA">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="4AB42F83"/>
-        </Element>
         <Element Type="FunctionDef" Id="D62B4DC9">
-            <FlagCall/>
-            <ReturnType>
-                <Type Value="control"/>
-            </ReturnType>
+            <FlagAction/>
             <Parameter Type="ParamDef" Library="WCUI" Id="3F3A07F7"/>
             <FunctionCall Type="FunctionCall" Library="WCUI" Id="0BD2FA87"/>
-            <FunctionCall Type="FunctionCall" Library="WCUI" Id="675A7DEA"/>
+            <FunctionCall Type="FunctionCall" Library="WCUI" Id="D39B823C"/>
             <FunctionCall Type="FunctionCall" Library="WCUI" Id="325CD150"/>
-            <FunctionCall Type="FunctionCall" Library="WCUI" Id="8F07F16B"/>
         </Element>
         <Element Type="ParamDef" Id="3F3A07F7">
             <ParameterType>
@@ -170462,25 +170623,21 @@
             <Value>Kit_Conscription/ConscriptionPanelTemplate/ResetButton</Value>
             <ValueType Type="layoutframe"/>
         </Element>
-        <Element Type="FunctionCall" Id="675A7DEA">
-            <Disabled/>
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="397B15D6"/>
-            <Parameter Type="Param" Library="WCUI" Id="5DE3FD87"/>
-            <Parameter Type="Param" Library="WCUI" Id="041B12BE"/>
-            <Parameter Type="Param" Library="WCUI" Id="72BE55AE"/>
+        <Element Type="FunctionCall" Id="D39B823C">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
+            <Parameter Type="Param" Library="WCUI" Id="66855F45"/>
+            <Parameter Type="Param" Library="WCUI" Id="8C16403E"/>
         </Element>
-        <Element Type="Param" Id="5DE3FD87">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="4CA13C57"/>
-            <Parameter Type="ParamDef" Library="WCUI" Id="3F3A07F7"/>
+        <Element Type="Param" Id="66855F45">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
+            <Variable Type="Variable" Library="WCUI" Id="A9265F7C"/>
         </Element>
-        <Element Type="Param" Id="041B12BE">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="ACAA7C6B"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="67A829E2"/>
+        <Element Type="Param" Id="8C16403E">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
+            <FunctionCall Type="FunctionCall" Library="WCUI" Id="7C56EAAC"/>
         </Element>
-        <Element Type="Param" Id="72BE55AE">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="2147B27F"/>
-            <Value>Kit_Conscription/ConscriptionPanelTemplate/ResetButton</Value>
-            <ValueType Type="layoutframerel"/>
+        <Element Type="FunctionCall" Id="7C56EAAC">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="4AB42F83"/>
         </Element>
         <Element Type="FunctionCall" Id="325CD150">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="0366EE04"/>
@@ -170503,27 +170660,12 @@
             <ParameterDef Type="ParamDef" Library="Ntve" Id="78A54B52"/>
             <ValueType Type="text"/>
         </Element>
-        <Element Type="FunctionCall" Id="8F07F16B">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000097"/>
-            <Parameter Type="Param" Library="WCUI" Id="A1603FC4"/>
-        </Element>
-        <Element Type="Param" Id="A1603FC4">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000488"/>
-            <FunctionCall Type="FunctionCall" Library="WCUI" Id="698D840D"/>
-        </Element>
-        <Element Type="FunctionCall" Id="698D840D">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="4AB42F83"/>
-        </Element>
         <Element Type="FunctionDef" Id="90B354A6">
-            <FlagCall/>
-            <ReturnType>
-                <Type Value="control"/>
-            </ReturnType>
+            <FlagAction/>
             <Parameter Type="ParamDef" Library="WCUI" Id="FF1C1C4F"/>
             <FunctionCall Type="FunctionCall" Library="WCUI" Id="D64E1B58"/>
-            <FunctionCall Type="FunctionCall" Library="WCUI" Id="F60CED1C"/>
+            <FunctionCall Type="FunctionCall" Library="WCUI" Id="61DA6AB5"/>
             <FunctionCall Type="FunctionCall" Library="WCUI" Id="355094CF"/>
-            <FunctionCall Type="FunctionCall" Library="WCUI" Id="70E54AB4"/>
         </Element>
         <Element Type="ParamDef" Id="FF1C1C4F">
             <ParameterType>
@@ -170553,25 +170695,21 @@
             <Value>Kit_Conscription/ConscriptionPanelTemplate/CloseButton</Value>
             <ValueType Type="layoutframe"/>
         </Element>
-        <Element Type="FunctionCall" Id="F60CED1C">
-            <Disabled/>
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="397B15D6"/>
-            <Parameter Type="Param" Library="WCUI" Id="4EA47D61"/>
-            <Parameter Type="Param" Library="WCUI" Id="B6519E51"/>
-            <Parameter Type="Param" Library="WCUI" Id="7F0B5F96"/>
+        <Element Type="FunctionCall" Id="61DA6AB5">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
+            <Parameter Type="Param" Library="WCUI" Id="F77E952F"/>
+            <Parameter Type="Param" Library="WCUI" Id="302B35CE"/>
         </Element>
-        <Element Type="Param" Id="4EA47D61">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="4CA13C57"/>
-            <Parameter Type="ParamDef" Library="WCUI" Id="FF1C1C4F"/>
+        <Element Type="Param" Id="F77E952F">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
+            <Variable Type="Variable" Library="WCUI" Id="85B29B35"/>
         </Element>
-        <Element Type="Param" Id="B6519E51">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="ACAA7C6B"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="67A829E2"/>
+        <Element Type="Param" Id="302B35CE">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
+            <FunctionCall Type="FunctionCall" Library="WCUI" Id="63B22127"/>
         </Element>
-        <Element Type="Param" Id="7F0B5F96">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="2147B27F"/>
-            <Value>Kit_Conscription/ConscriptionPanelTemplate/CloseButton</Value>
-            <ValueType Type="layoutframerel"/>
+        <Element Type="FunctionCall" Id="63B22127">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="4AB42F83"/>
         </Element>
         <Element Type="FunctionCall" Id="355094CF">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="0366EE04"/>
@@ -170593,17 +170731,6 @@
         <Element Type="Param" Id="5D9BC4AD">
             <ParameterDef Type="ParamDef" Library="Ntve" Id="78A54B52"/>
             <ValueType Type="text"/>
-        </Element>
-        <Element Type="FunctionCall" Id="70E54AB4">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000097"/>
-            <Parameter Type="Param" Library="WCUI" Id="BA687A32"/>
-        </Element>
-        <Element Type="Param" Id="BA687A32">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000488"/>
-            <FunctionCall Type="FunctionCall" Library="WCUI" Id="11EF7A58"/>
-        </Element>
-        <Element Type="FunctionCall" Id="11EF7A58">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="4AB42F83"/>
         </Element>
         <Element Type="Category" Id="F50D5BDB">
             <Item Type="FunctionDef" Library="WCUI" Id="60B7C380"/>

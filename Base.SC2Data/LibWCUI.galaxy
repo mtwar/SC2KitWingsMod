@@ -35,6 +35,11 @@ void libWCUI_InitVariables () {
     libWCUI_gv_conscriptionPurchasePanelRoot = c_invalidDialogControlId;
     libWCUI_gv_conscriptionPurchasePanelSelectionInfo = c_invalidDialogControlId;
     libWCUI_gv_conscriptionPurchasePanelCredits = c_invalidDialogControlId;
+    libWCUI_gv_conscriptionPurchasePanelUnitName = c_invalidDialogControlId;
+    libWCUI_gv_conscriptionPurchasePanelUnitDescription = c_invalidDialogControlId;
+    libWCUI_gv_conscriptionPurchasePanelUnitCost = c_invalidDialogControlId;
+    libWCUI_gv_conscriptionPurchasePanelUnitMovie = c_invalidDialogControlId;
+    libWCUI_gv_conscriptionPurchasePanelUnitImage = c_invalidDialogControlId;
     libWCUI_gv_conscriptionPurchasePanelReset = c_invalidDialogControlId;
     libWCUI_gv_conscriptionPurchasePanelClose = c_invalidDialogControlId;
     libWCUI_gv_wU_ArchivesPanel = c_invalidDialogControlId;
@@ -143,55 +148,68 @@ void libWCUI_InitCustomScript () {
 
 // Presets
 // Functions
-int libWCUI_gf_ConscriptionBuildDefaultDialog () {
+void libWCUI_gf_ConscriptionBuildDefaultDialog () {
     // Automatic Variable Declarations
     // Implementation
     DialogCreate(1920, 1080, c_anchorCenter, 0, 0, true);
+    libWCUI_gv_conscriptionPurchaseDialog = DialogLastCreated();
     DialogSetImageVisible(DialogLastCreated(), false);
     DialogSetFullscreen(DialogLastCreated(), true);
     DialogSetVisible(DialogLastCreated(), PlayerGroupAll(), false);
     UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, StringExternal("Param/Value/lib_WCUI_DFF84600"));
-    return DialogLastCreated();
 }
 
-int libWCUI_gf_ConscriptionBuildDefaultRootPanel (int lp_dialog) {
+void libWCUI_gf_ConscriptionBuildDefaultRootPanel (int lp_dialog) {
     // Automatic Variable Declarations
     // Implementation
     DialogControlCreateFromTemplate(lp_dialog, c_triggerControlTypePanel, "Kit_Conscription/ConscriptionPanelTemplate");
+    libWCUI_gv_conscriptionPurchasePanelRoot = DialogControlLastCreated();
     UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, StringExternal("Param/Value/lib_WCUI_E7D0D698"));
-    return DialogControlLastCreated();
 }
 
-int libWCUI_gf_ConscriptionBuildDefaultSelectionInfoPanel (int lp_parent) {
+void libWCUI_gf_ConscriptionBuildDefaultSelectionInfoPanel (int lp_parent) {
     // Automatic Variable Declarations
     // Implementation
     DialogControlCreateInPanelFromTemplate(lp_parent, c_triggerControlTypePanel, "Kit_Conscription/ConscriptionPanelTemplate/SelectionInfoFrame");
+    libWCUI_gv_conscriptionPurchasePanelSelectionInfo = DialogControlLastCreated();
+    libWCUI_gf_ConscriptionBuildDefaultCreditsPanel(libWCUI_gv_conscriptionPurchasePanelSelectionInfo);
+    libWCUI_gf_ConscriptionPurchasePanelCreditsUpdate();
+    DialogControlSetVisible(libWCUI_gv_conscriptionPurchasePanelCredits, PlayerGroupAll(), true);
+    DialogControlCreateInPanelFromTemplate(libWCUI_gv_conscriptionPurchasePanelSelectionInfo, c_triggerControlTypeLabel, "Kit_Conscription/ConscriptionPanelTemplate/SelectionInfoFrame/NameLabel");
+    libWCUI_gv_conscriptionPurchasePanelUnitName = DialogControlLastCreated();
+    DialogControlCreateInPanelFromTemplate(libWCUI_gv_conscriptionPurchasePanelSelectionInfo, c_triggerControlTypeLabel, "Kit_Conscription/ConscriptionPanelTemplate/SelectionInfoFrame/DescriptionLabel");
+    libWCUI_gv_conscriptionPurchasePanelUnitDescription = DialogControlLastCreated();
+    DialogControlCreateInPanelFromTemplate(libWCUI_gv_conscriptionPurchasePanelSelectionInfo, c_triggerControlTypeLabel, "Kit_Conscription/ConscriptionPanelTemplate/SelectionInfoFrame/CostLabel");
+    libWCUI_gv_conscriptionPurchasePanelUnitCost = DialogControlLastCreated();
+    DialogControlCreateInPanelFromTemplate(libWCUI_gv_conscriptionPurchasePanelSelectionInfo, c_triggerControlTypeMovie, "Kit_Conscription/ConscriptionPanelTemplate/SelectionInfoFrame/MovieFrame");
+    libWCUI_gv_conscriptionPurchasePanelUnitMovie = DialogControlLastCreated();
+    DialogControlCreateInPanelFromTemplate(libWCUI_gv_conscriptionPurchasePanelSelectionInfo, c_triggerControlTypeImage, "Kit_Conscription/ConscriptionPanelTemplate/SelectionInfoFrame/MovieFrameAlternative");
+    libWCUI_gv_conscriptionPurchasePanelUnitImage = DialogControlLastCreated();
     UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, StringExternal("Param/Value/lib_WCUI_9CA374AF"));
-    return DialogControlLastCreated();
 }
 
-int libWCUI_gf_ConscriptionBuildDefaultCreditsPanel (int lp_parent) {
+void libWCUI_gf_ConscriptionBuildDefaultCreditsPanel (int lp_parent) {
     // Automatic Variable Declarations
     // Implementation
     DialogControlCreateInPanelFromTemplate(lp_parent, c_triggerControlTypePanel, "Kit_Conscription/ConscriptionPanelTemplate/SelectionInfoFrame/Credits");
+    libWCUI_gv_conscriptionPurchasePanelCredits = DialogControlLastCreated();
     UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, StringExternal("Param/Value/lib_WCUI_EFBF5C11"));
-    return DialogControlLastCreated();
 }
 
-int libWCUI_gf_ConscriptionBuildDefaultResetButton (int lp_parent) {
+void libWCUI_gf_ConscriptionBuildDefaultResetButton (int lp_parent) {
     // Automatic Variable Declarations
     // Implementation
     DialogControlCreateInPanelFromTemplate(lp_parent, c_triggerControlTypeButton, "Kit_Conscription/ConscriptionPanelTemplate/ResetButton");
+    libWCUI_gv_conscriptionPurchasePanelReset = DialogControlLastCreated();
     UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, StringExternal("Param/Value/lib_WCUI_40BDC90C"));
-    return DialogControlLastCreated();
 }
 
-int libWCUI_gf_ConscriptionBuildDefaultCloseButton (int lp_parent) {
+void libWCUI_gf_ConscriptionBuildDefaultCloseButton (int lp_parent) {
     // Automatic Variable Declarations
     // Implementation
     DialogControlCreateInPanelFromTemplate(lp_parent, c_triggerControlTypeButton, "Kit_Conscription/ConscriptionPanelTemplate/CloseButton");
+    libWCUI_gv_conscriptionPurchasePanelClose = DialogControlLastCreated();
     UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, StringExternal("Param/Value/lib_WCUI_5D9BC4AD"));
-    return DialogControlLastCreated();
 }
 
 void libWCUI_gf_ConscriptionPurchasePanelCreditsUpdate () {
@@ -2058,14 +2076,11 @@ bool libWCUI_gt_ConscriptionPurchaseInitialize_Func (bool testConds, bool runAct
     }
 
     UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, StringExternal("Param/Value/lib_WCUI_0B2C1C7A"));
-    libWCUI_gv_conscriptionPurchaseDialog = libWCUI_gf_ConscriptionBuildDefaultDialog();
-    libWCUI_gv_conscriptionPurchasePanelRoot = libWCUI_gf_ConscriptionBuildDefaultRootPanel(libWCUI_gv_conscriptionPurchaseDialog);
-    libWCUI_gv_conscriptionPurchasePanelSelectionInfo = libWCUI_gf_ConscriptionBuildDefaultSelectionInfoPanel(libWCUI_gv_conscriptionPurchasePanelRoot);
-    libWCUI_gv_conscriptionPurchasePanelCredits = libWCUI_gf_ConscriptionBuildDefaultCreditsPanel(libWCUI_gv_conscriptionPurchasePanelSelectionInfo);
-    DialogControlSetVisible(libWCUI_gv_conscriptionPurchasePanelCredits, PlayerGroupAll(), true);
-    libWCUI_gv_conscriptionPurchasePanelClose = libWCUI_gf_ConscriptionBuildDefaultCloseButton(libWCUI_gv_conscriptionPurchasePanelRoot);
-    libWCUI_gv_conscriptionPurchasePanelReset = libWCUI_gf_ConscriptionBuildDefaultResetButton(libWCUI_gv_conscriptionPurchasePanelRoot);
-    libWCUI_gf_ConscriptionPurchasePanelCreditsUpdate();
+    libWCUI_gf_ConscriptionBuildDefaultDialog();
+    libWCUI_gf_ConscriptionBuildDefaultRootPanel(libWCUI_gv_conscriptionPurchaseDialog);
+    libWCUI_gf_ConscriptionBuildDefaultSelectionInfoPanel(libWCUI_gv_conscriptionPurchasePanelRoot);
+    libWCUI_gf_ConscriptionBuildDefaultResetButton(libWCUI_gv_conscriptionPurchasePanelRoot);
+    libWCUI_gf_ConscriptionBuildDefaultCloseButton(libWCUI_gv_conscriptionPurchasePanelRoot);
     return true;
 }
 
