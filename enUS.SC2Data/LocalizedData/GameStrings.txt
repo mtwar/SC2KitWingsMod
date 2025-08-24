@@ -7315,15 +7315,24 @@ Param/Value/lib_WCMI_F72DF09B=~CURRENT~
 Param/Value/lib_WCMI_F9C95DE7=[%3%]
 Param/Value/lib_WCUI_0260CCF2=<s val="ModLeftSize16Bold">Respawns In:</s>
 Param/Value/lib_WCUI_034F4713=Select All Armies (F2)
+Param/Value/lib_WCUI_0B2C1C7A=initialize called
 Param/Value/lib_WCUI_1B09ADE8=Select All Armies (F2)
+Param/Value/lib_WCUI_40BDC90C=reset built
 Param/Value/lib_WCUI_5A02F843=Select All Armies (F2)
+Param/Value/lib_WCUI_5D9BC4AD=close built
 Param/Value/lib_WCUI_8DFE4298=Loading data...
+Param/Value/lib_WCUI_9CA374AF=selection info built
 Param/Value/lib_WCUI_A8DB4967=/
 Param/Value/lib_WCUI_ACEB0C45=Boss
 Param/Value/lib_WCUI_B4347E4E=Select All Armies (F2)
 Param/Value/lib_WCUI_BD8BE4BB=<s val="ModLeftSize16Bold">Respawns In:</s>
 Param/Value/lib_WCUI_D3588EDE=Incomplete
+Param/Value/lib_WCUI_DEC07BCC=close called
+Param/Value/lib_WCUI_DFF84600=dialog built
+Param/Value/lib_WCUI_E6854582=reset called
+Param/Value/lib_WCUI_E7D0D698=panel built
 Param/Value/lib_WCUI_ED15A899=Select All Armies (F2)
+Param/Value/lib_WCUI_EFBF5C11=credits built
 Param/Value/lib_WCUI_F2711687=Select All Armies (F2)
 Param/Value/lib_WCUI_FB61F536=Warning: Only one Bar may be created per Unit. Original bar has been deleted.
 Param/Value/lib_WoLC_07D42BE8=Enable

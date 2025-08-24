@@ -40,6 +40,7 @@ const string libWCUI_gv_wUC_VictoryEventClosed = "WUC_VictoryEventClosed";
 trigger libWCUI_gv_conscriptionPurchaseExitTrigger;
 int libWCUI_gv_conscriptionPurchaseDialog;
 int libWCUI_gv_conscriptionPurchasePanelRoot;
+int libWCUI_gv_conscriptionPurchasePanelSelectionInfo;
 int libWCUI_gv_conscriptionPurchasePanelCredits;
 int libWCUI_gv_conscriptionPurchasePanelReset;
 int libWCUI_gv_conscriptionPurchasePanelClose;
@@ -131,6 +132,7 @@ int libWCUI_gv_wU_CounterWindowValue;
 // Function Declarations
 int libWCUI_gf_ConscriptionBuildDefaultDialog ();
 int libWCUI_gf_ConscriptionBuildDefaultRootPanel (int lp_dialog);
+int libWCUI_gf_ConscriptionBuildDefaultSelectionInfoPanel (int lp_parent);
 int libWCUI_gf_ConscriptionBuildDefaultCreditsPanel (int lp_parent);
 int libWCUI_gf_ConscriptionBuildDefaultResetButton (int lp_parent);
 int libWCUI_gf_ConscriptionBuildDefaultCloseButton (int lp_parent);
